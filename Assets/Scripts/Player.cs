@@ -61,7 +61,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		rotationInput = context.ReadValue<Vector2>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
 		GameObject collidedObject = collision.gameObject;
 		if (collidedObject.CompareTag("Enemy"))
