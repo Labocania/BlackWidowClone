@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 
 public class Insect : MonoBehaviour
-{
-    protected InsectPool insectPool;
-
+{  
     public int movementSpeed;
     public int score;
 

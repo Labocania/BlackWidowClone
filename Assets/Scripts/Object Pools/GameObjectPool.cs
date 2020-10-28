@@ -13,14 +13,14 @@ public class GameObjectPool<T> : MonoBehaviour where T : MonoBehaviour
     [Tooltip("Maximum size of this object pool")]
     public int maximumSize = 2;
 
-    //GameObject organizer;
+    GameObject organizer;
 
     private void Awake()
     {
-        //organizer = new GameObject();
-        //organizer.transform.position = Vector2.zero;
-        //organizer.transform.rotation = Quaternion.identity;
-        //organizer.name = $"{prefab.name} Pool";
+        organizer = new GameObject();
+        organizer.transform.position = Vector2.zero;
+        organizer.transform.rotation = Quaternion.identity;
+        organizer.name = $"{prefab.name} Pool";
 
         if (prefab == null)
         {
@@ -40,7 +40,7 @@ public class GameObjectPool<T> : MonoBehaviour where T : MonoBehaviour
     {
         T newObject = Instantiate(prefab);
 
-        //newObject.transform.SetParent(organizer.transform);
+        newObject.transform.SetParent(organizer.transform);
         newObject.gameObject.SetActive(false);
 
         gameObjs.Add(newObject);

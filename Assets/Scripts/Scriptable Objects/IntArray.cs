@@ -11,11 +11,5 @@ public class IndexColorMap
     public ColorNames color;
 }
 
-public enum Enemies
-{
-    Mosquito, Beetle, Hornet, Egg, Steak, Spoiler, Grenade, Rocket, Thunderbug,
-    Slayer
-}
-
 [System.Serializable]
-public class EnemyDictionary : SerializableDictionaryBase<Enemies, int> { }
+public class EnemyDictionary : SerializableDictionaryBase<string, int> { }

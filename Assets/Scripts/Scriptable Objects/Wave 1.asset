@@ -67,8 +67,11 @@ MonoBehaviour:
       elementNameProperty: 
       elementNameOverride: 
       elementIcon: {fileID: 0}
-    reqReferences: {fileID: 0}
+    reqReferences: {fileID: 11400000, guid: 3d6785e46e940b843aa5fbe4ca729d60, type: 2}
     isExpanded: 1
-    _keyValues: 09000000000000000200000001000000
-    _keys: 09000000000000000200000001000000
-    _values: 01000000050000000500000005000000
+    _keyValues:
+    - Mosquito
+    _keys:
+    - Mosquito
+    _values: 05000000
+  waveNumber: 1

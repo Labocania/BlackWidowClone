@@ -1,52 +1,56 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour 
 {
     public WaveData wave;
-
-    InsectPool mosquitoPool;
+    public string insectName;
     UnityAction enemyDeath;
-    int enemyCount;
+    InsectPool insectPool;
+    Insect insect;
+    int insectCount;
 
     void Awake()
     {
-        mosquitoPool = GetComponent<InsectPool>();
-        enemyCount = wave.enemyQuantity[Enemies.Mosquito];
-        mosquitoPool.initialSize = enemyCount;
-        mosquitoPool.maximumSize = enemyCount;
+        insectPool = GetComponent<InsectPool>();
+        ReadWaveData();
         enemyDeath += onEnemyDeath;
     }
 
     void Start()
     {
-        mosquitoPool.GetObject().Spawn(GetRandomSpawnPoint(), Quaternion.identity);
+        insectPool.GetObject().Spawn(GetRandomSpawnPoint(), Quaternion.identity);
         EventBroker.StartListening("Enemy Death", enemyDeath);
     }
 
+    void ReadWaveData()
+    {
+        insectPool.maximumSize = wave.enemyQuantity[insectName];
+        insectCount = wave.enemyQuantity[insectName]; 
+    }
 
     Vector2 GetRandomSpawnPoint()
     {
         int[] firstPoint = { -4, 4, 6, -6 };
-        int decider = Random.Range(0, 1);
+        int decider = 0;
 
         if (decider == 0)
         {
-            return new Vector2(Random.Range(-6, 6), firstPoint[Random.Range(0, 1)]);
+            decider = 1;
+            return new Vector2(UnityEngine.Random.Range(-6, 7), firstPoint[UnityEngine.Random.Range(0, 2)]);
         }
         else
         {
-            return new Vector2(firstPoint[Random.Range(2, 3)], Random.Range(-4, 4));
+            decider = 0;
+            return new Vector2(firstPoint[UnityEngine.Random.Range(2, 4)], UnityEngine.Random.Range(-4, 5));
         }
 
     }
 
     void onEnemyDeath()
     {
-        enemyCount--;
+        insectCount--;
     }
-
-
 
     void OnDisable()
     {

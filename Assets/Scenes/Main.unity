@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 783017087}
   - component: {fileID: 783017085}
   m_Layer: 0
-  m_Name: Enemy Spawner
+  m_Name: Mosquito Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,6 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wave: {fileID: 11400000, guid: b8be1fba3ff4e9e4eb3827f8ee16c0d8, type: 2}
+  insectName: Mosquito
 --- !u!4 &783017086
 Transform:
   m_ObjectHideFlags: 0
@@ -283,36 +284,6 @@ MonoBehaviour:
   prefab: {fileID: -5095389262906211994, guid: 969cd9064899906418b57d1b1032e7a0, type: 3}
   initialSize: 2
   maximumSize: 2
---- !u!1 &1000658198
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1000658199}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1000658199
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000658198}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.41718984, y: 0.64987546, z: -7.0846705}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!850595691 &1825202363
 LightingSettings:
   m_ObjectHideFlags: 0
