@@ -1,4 +1,5 @@
 ﻿using RotaryHeart.Lib.SerializableDictionary;
+using UnityEngine;
 
 // Base Types for
 [System.Serializable]
@@ -12,4 +13,4 @@ public class IndexColorMap
 }
 
 [System.Serializable]
-public class EnemyDictionary : SerializableDictionaryBase<string, int> { }
+public class EnemyDictionary : SerializableDictionaryBase<GameObject, int> { }

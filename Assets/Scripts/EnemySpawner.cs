@@ -1,32 +1,34 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class EnemySpawner : MonoBehaviour 
 {
     public WaveData wave;
-    public string insectName;
     UnityAction enemyDeath;
-    InsectPool insectPool;
-    Insect insect;
     int insectCount;
+    List<GameObjectPool> pools = new List<GameObjectPool>();
 
     void Awake()
     {
-        insectPool = GetComponent<InsectPool>();
         ReadWaveData();
         enemyDeath += onEnemyDeath;
     }
 
     void Start()
     {
-        insectPool.GetObject().Spawn(GetRandomSpawnPoint(), Quaternion.identity);
+        pools[0].GetObject().transform.position = GetRandomSpawnPoint();
         EventBroker.StartListening("Enemy Death", enemyDeath);
     }
 
     void ReadWaveData()
     {
-        insectPool.maximumSize = wave.enemyQuantity[insectName];
-        insectCount = wave.enemyQuantity[insectName]; 
+        foreach (var enemy in wave.enemyQuantity)
+        {
+            GameObjectPool pool = gameObject.AddComponent<GameObjectPool>();
+            pools.Add(pool);
+            pool.prefab = enemy.Key;
+        }
     }
 
     Vector2 GetRandomSpawnPoint()

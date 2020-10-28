@@ -3,24 +3,19 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 	public float projectileSpeed;
-
-	// If the shooter fired this projectile we assign him here so we can subtract from
-	// his active projectile count when the projectile is destroyed.
-	[HideInInspector]
-	public ShootingComponent shooter;
-
-
 	SpriteRenderer sprite;
+    Rigidbody2D rb;
 
     void OnBecameInvisible()
     {
-		shooter.activeProjectiles--;
-		gameObject.SetActive(false);
-	}
+        gameObject.SetActive(false);
+        EventBroker.TriggerEvent("Projectile Hit");
+    }
 
     void Start()
     {
-		sprite = GetComponent<SpriteRenderer>();   
+		sprite = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
@@ -28,7 +23,8 @@ public class Projectile : MonoBehaviour
         if (gameObject.activeSelf)
         {
 			sprite.color = ColorList.RandomColor();
-		}    
+            rb.velocity = transform.up * projectileSpeed;
+        }    
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -41,11 +37,7 @@ public class Projectile : MonoBehaviour
 
     public void Hit() 
 	{
-		// Subtracts from shooter active projectiles.
-		if (shooter != null) 
-		{
-			shooter.activeProjectiles--;
-			gameObject.SetActive(false);
-		}
-	}
+        gameObject.SetActive(false);
+        EventBroker.TriggerEvent("Projectile Hit");
+    }
 }

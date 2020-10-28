@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 208239943}
   - component: {fileID: 338036125011990070}
   - component: {fileID: 1715217724}
-  - component: {fileID: 1929132436}
+  - component: {fileID: 5115627411607513415}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -374,7 +374,7 @@ MonoBehaviour:
   activeProjectilesAtOnce: 4
   activeProjectiles: 0
   shotsPerSecond: 10
---- !u!114 &1929132436
+--- !u!114 &5115627411607513415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -383,12 +383,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8118aff35d985b64d950e2e8a9d76f53, type: 3}
+  m_Script: {fileID: 11500000, guid: a2629789f92adcc4a8a3e9b1568daea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1398336639227360279, guid: ebb45a2ca0b8af34dbf76afa1ea0724a, type: 3}
-  initialSize: 4
-  maximumSize: 6
+  prefab: {fileID: 100000, guid: ebb45a2ca0b8af34dbf76afa1ea0724a, type: 3}
+  initialSize: 2
+  maximumSize: 4
 --- !u!1 &1592904055
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,33 +1,37 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class GameObjectPool<T> : MonoBehaviour where T : MonoBehaviour
+public class GameObjectPool : MonoBehaviour 
 {
     [Tooltip("Prefab for this object pool")]
-    public T prefab;
+    public GameObject prefab;
 
-    private List<T> gameObjs = new List<T>();
+    private List<GameObject> gameObjs = new List<GameObject>();
 
     [Tooltip("Size of this object pool")]
     public int initialSize = 2;
     [Tooltip("Maximum size of this object pool")]
     public int maximumSize = 2;
 
-    GameObject organizer;
+    UnityEngine.GameObject organizer;
 
-    private void Awake()
+    void Awake()
     {
-        organizer = new GameObject();
+        organizer = new UnityEngine.GameObject();
         organizer.transform.position = Vector2.zero;
         organizer.transform.rotation = Quaternion.identity;
-        organizer.name = $"{prefab.name} Pool";
-
-        if (prefab == null)
+        if (prefab != null)
         {
-            Debug.LogError("Need a reference to the object prefab");
+            organizer.name = $"{prefab.name} Pool";
         }
+        else
+        {
+            organizer.name = $"Pool";
+        }
+    }
 
-
+    void Start()
+    {
         //Instantiate new objects and put them in a list for later use
         for (int i = 0; i < initialSize; i++)
         {
@@ -38,7 +42,7 @@ public class GameObjectPool<T> : MonoBehaviour where T : MonoBehaviour
     //Generate a single new object and put it in the list
     private void GenerateObject()
     {
-        T newObject = Instantiate(prefab);
+        GameObject newObject = Instantiate(prefab);
 
         newObject.transform.SetParent(organizer.transform);
         newObject.gameObject.SetActive(false);
@@ -46,12 +50,12 @@ public class GameObjectPool<T> : MonoBehaviour where T : MonoBehaviour
         gameObjs.Add(newObject);
     }
 
-    public T GetObject()
+    public GameObject GetObject()
     {
         //Try to find an inactive bullet
         for (int i = 0; i < gameObjs.Count; i++)
         {
-            T thisObject = gameObjs[i];
+            GameObject thisObject = gameObjs[i];
 
             if (!thisObject.gameObject.activeInHierarchy)
             {
@@ -66,7 +70,7 @@ public class GameObjectPool<T> : MonoBehaviour where T : MonoBehaviour
             GenerateObject();
 
             //The new object is last in the list so get it
-            T lastObject = gameObjs[gameObjs.Count - 1];
+            GameObject lastObject = gameObjs[gameObjs.Count - 1];
 
             lastObject.gameObject.SetActive(true);
             return lastObject;

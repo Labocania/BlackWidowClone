@@ -232,7 +232,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 783017086}
-  - component: {fileID: 783017087}
   - component: {fileID: 783017085}
   m_Layer: 0
   m_Name: Mosquito Spawner
@@ -254,7 +253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wave: {fileID: 11400000, guid: b8be1fba3ff4e9e4eb3827f8ee16c0d8, type: 2}
-  insectName: Mosquito
 --- !u!4 &783017086
 Transform:
   m_ObjectHideFlags: 0
@@ -269,21 +267,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &783017087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 783017084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7116ae45431c78548ba36a4261ac7d67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: -5095389262906211994, guid: 969cd9064899906418b57d1b1032e7a0, type: 3}
-  initialSize: 2
-  maximumSize: 2
 --- !u!850595691 &1825202363
 LightingSettings:
   m_ObjectHideFlags: 0

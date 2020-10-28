@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
-[RequireComponent(typeof(ProjectilePool))]
 public class ShootingComponent : MonoBehaviour
 {
     // Object Pool for projectiles
-    ProjectilePool projectilePool;
+    GameObjectPool projectilePool;
+    UnityAction projectileHit;
+
     public Transform shootingSpot;
 
     // The number of projectiles we can have in the air at once.
@@ -23,15 +25,26 @@ public class ShootingComponent : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        projectilePool = GetComponent<ProjectilePool>();
+        projectilePool = GetComponent<GameObjectPool>();
+        projectileHit += onProjectileHit;
         // Setup Fire rate
         fireRate = 1 / shotsPerSecond;
+    }
+
+    void Start()
+    {
+        EventBroker.StartListening("Projectile Hit", projectileHit);
     }
 
     // Update is called once per frame
     void Update()
     {
         nextFire += Time.deltaTime;
+    }
+
+    void OnEnable()
+    {
+        EventBroker.StopListening("Projectile Hit", projectileHit);
     }
 
     public void Shoot()
@@ -44,19 +57,19 @@ public class ShootingComponent : MonoBehaviour
 
         if (nextFire > fireRate)
         {
-            Projectile projectile = projectilePool.GetObject();
+            GameObject projectile = projectilePool.GetObject();
             projectile.transform.position = shootingSpot.position;
-            projectile.GetComponent<Rigidbody2D>().velocity = transform.up * projectile.projectileSpeed;
-
-            if (projectile.shooter == null)
-            {
-                projectile.shooter = this;
-            }
+            projectile.transform.up = transform.up;
 
             nextFire = 0;
             activeProjectiles++;
         }
 
         //AudioSource.PlayClipAtPoint(manager.shootClip, Camera.main.transform.position);
+    }
+
+    void onProjectileHit()
+    {
+        activeProjectiles--;
     }
 }

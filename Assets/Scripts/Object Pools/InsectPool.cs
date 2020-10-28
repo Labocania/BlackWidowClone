@@ -1,5 +1,7 @@
 ﻿
-public class InsectPool : GameObjectPool<Insect>
+using UnityEngine;
+
+public class InsectPool : MonoBehaviour
 {
 
 }
