@@ -12,6 +12,8 @@ public class GameObjectPool : MonoBehaviour
     public int initialSize = 1;
     [Tooltip("Maximum size of this object pool")]
     public int maximumSize = 1;
+    [HideInInspector]
+    public int spawnCounter = 0;
 
     UnityEngine.GameObject organizer;
 
@@ -45,6 +47,11 @@ public class GameObjectPool : MonoBehaviour
 
     public GameObject GetObject()
     {
+        if (spawnCounter > 0)
+        {
+            spawnCounter--;
+        }
+
         //Try to find an inactive bullet
         for (int i = 0; i < gameObjs.Count; i++)
         {

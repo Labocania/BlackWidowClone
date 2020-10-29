@@ -8,8 +8,7 @@ public class EnemySpawner : MonoBehaviour
     int enemiesOnScreen;
     public WaveData wave;
     UnityAction enemyDeath;
-    GameObjectPool[] pools;
-    Dictionary<GameObject, int> spawnDictionary = new Dictionary<GameObject, int>();
+    Dictionary<GameObject, GameObjectPool> spawnDictionary = new Dictionary<GameObject, GameObjectPool>();
 
     void Awake()
     {
@@ -18,7 +17,6 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        pools = gameObject.GetComponents<GameObjectPool>();
         ReadComponentData();
         ReadWaveData();
         EventBroker.StartListening("Enemy Death", enemyDeath);
@@ -26,9 +24,9 @@ public class EnemySpawner : MonoBehaviour
 
     void ReadComponentData()
     {
-        foreach (var component in pools)
+        foreach (var component in gameObject.GetComponents<GameObjectPool>())
         {
-            spawnDictionary.Add(component.prefab, 0);
+            spawnDictionary.Add(component.prefab, component);
         }
     }
 
@@ -36,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (var enemy in wave.enemyQuantity)
         {
-            spawnDictionary[enemy.Key] = enemy.Value;
+            spawnDictionary[enemy.Key].spawnCounter = enemy.Value;
         }
     }
 
