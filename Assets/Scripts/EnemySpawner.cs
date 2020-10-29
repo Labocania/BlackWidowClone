@@ -4,32 +4,47 @@ using UnityEngine.Events;
 
 public class EnemySpawner : MonoBehaviour 
 {
+    const int MAX_ENEMIES = 11;
+    int enemiesOnScreen;
     public WaveData wave;
     UnityAction enemyDeath;
-    int insectCount;
-    List<GameObjectPool> pools = new List<GameObjectPool>();
+    GameObjectPool[] pools;
+    Dictionary<GameObject, int> spawnDictionary = new Dictionary<GameObject, int>();
 
     void Awake()
     {
-        ReadWaveData();
         enemyDeath += onEnemyDeath;
     }
 
     void Start()
     {
-        pools[0].GetObject().transform.position = GetRandomSpawnPoint();
+        pools = gameObject.GetComponents<GameObjectPool>();
+        ReadComponentData();
+        ReadWaveData();
         EventBroker.StartListening("Enemy Death", enemyDeath);
+    }
+
+    void ReadComponentData()
+    {
+        foreach (var component in pools)
+        {
+            spawnDictionary.Add(component.prefab, 0);
+        }
     }
 
     void ReadWaveData()
     {
         foreach (var enemy in wave.enemyQuantity)
         {
-            GameObjectPool pool = gameObject.AddComponent<GameObjectPool>();
-            pools.Add(pool);
-            pool.prefab = enemy.Key;
+            spawnDictionary[enemy.Key] = enemy.Value;
         }
     }
+
+    void SpawnEnemies()
+    {
+
+    }
+
 
     Vector2 GetRandomSpawnPoint()
     {
@@ -51,7 +66,7 @@ public class EnemySpawner : MonoBehaviour
 
     void onEnemyDeath()
     {
-        insectCount--;
+        //insectCount--;
     }
 
     void OnDisable()

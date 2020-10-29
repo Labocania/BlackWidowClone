@@ -9,9 +9,9 @@ public class GameObjectPool : MonoBehaviour
     private List<GameObject> gameObjs = new List<GameObject>();
 
     [Tooltip("Size of this object pool")]
-    public int initialSize = 2;
+    public int initialSize = 1;
     [Tooltip("Maximum size of this object pool")]
-    public int maximumSize = 2;
+    public int maximumSize = 1;
 
     UnityEngine.GameObject organizer;
 
@@ -20,14 +20,7 @@ public class GameObjectPool : MonoBehaviour
         organizer = new UnityEngine.GameObject();
         organizer.transform.position = Vector2.zero;
         organizer.transform.rotation = Quaternion.identity;
-        if (prefab != null)
-        {
-            organizer.name = $"{prefab.name} Pool";
-        }
-        else
-        {
-            organizer.name = $"Pool";
-        }
+        organizer.name = $"{prefab.name} Pool";
     }
 
     void Start()
