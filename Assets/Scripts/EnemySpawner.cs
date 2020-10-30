@@ -1,14 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class EnemySpawner : MonoBehaviour 
 {
-    const int MAX_ENEMIES_ON_SCREEN = 11;
-    int enemiesOnScreen = 0;
     public WaveData wave;
+    public WaitForSeconds spawnInterval = new WaitForSeconds(1f);
+
+    const int MAX_ENEMIES_ON_SCREEN = 10;
+    int enemiesOnScreen = 0;
     UnityAction enemyDeath;
     List<GameObjectPool> objectPoolComponents;
+    GameObjectPool currentPool;
     System.Random random = new System.Random();
     Dictionary<GameObject, GameObjectPool> spawnDictionary = new Dictionary<GameObject, GameObjectPool>();
 
@@ -17,17 +21,8 @@ public class EnemySpawner : MonoBehaviour
         ReadWaveData();
         enemyDeath += onEnemyDeath;
         EventBroker.StartListening("Enemy Death", enemyDeath);
-        SpawnEnemies();
+        StartCoroutine(StartSpawningRoutine());
     }
-
-    void Update()
-    {
-        if (objectPoolComponents.Count > 0 && enemiesOnScreen <= MAX_ENEMIES_ON_SCREEN)
-        {
-            SpawnEnemies();
-        }
-    }
-
 
     void ReadWaveData()
     {
@@ -49,17 +44,25 @@ public class EnemySpawner : MonoBehaviour
         objectPoolComponents = new List<GameObjectPool>(gameObject.GetComponents<GameObjectPool>());
     }
 
-    void SpawnEnemies()
+    IEnumerator StartSpawningRoutine()
     {
-        GameObjectPool pool = objectPoolComponents[random.Next(objectPoolComponents.Count)];
-        if (pool.spawnCounter > 0)
+        while (objectPoolComponents.Count > 0 && enemiesOnScreen <= MAX_ENEMIES_ON_SCREEN)
         {
-            pool.GetObject().transform.position = GetRandomSpawnPoint();
+            SpawnEnemy();
+            yield return spawnInterval;
+        }
+    }
+    void SpawnEnemy()
+    {
+        currentPool = objectPoolComponents[random.Next(objectPoolComponents.Count)];
+        if (currentPool.spawnCounter > 0)
+        {
+            currentPool.GetObject().transform.position = GetRandomSpawnPoint();
             enemiesOnScreen++;
         }
         else
         {
-            objectPoolComponents.Remove(pool);
+            objectPoolComponents.Remove(currentPool);
         }
     }
 
@@ -84,7 +87,10 @@ public class EnemySpawner : MonoBehaviour
 
     void onEnemyDeath()
     {
-        enemiesOnScreen--;
+        if (enemiesOnScreen > 0)
+        {
+            enemiesOnScreen--;
+        }
     }
 
     void OnDisable()
