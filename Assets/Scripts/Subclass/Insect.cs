@@ -5,10 +5,6 @@ public class Insect : MonoBehaviour
     public int movementSpeed;
     public int score;
 
-    public virtual void Spawn(Vector3 position, Quaternion rotation)
-    {
-
-    }
 
     public virtual void Die()
     {

@@ -14,7 +14,7 @@ public class ShootingComponent : MonoBehaviour
 
     // The number of projectiles currently in the air. Public so the projectiles can subtract from it.
     [HideInInspector]
-    public int activeProjectiles;
+    public int activeProjectiles = 1;
 
     // The number of projectiles we can shoot per second.
     public float shotsPerSecond;
@@ -42,14 +42,13 @@ public class ShootingComponent : MonoBehaviour
         nextFire += Time.deltaTime;
     }
 
-    void OnEnable()
+    void OnDisable()
     {
         EventBroker.StopListening("Projectile Hit", projectileHit);
     }
 
     public void Shoot()
     {
-
         if (activeProjectilesAtOnce > 0 && activeProjectiles >= activeProjectilesAtOnce)
         {
             return;
@@ -58,18 +57,25 @@ public class ShootingComponent : MonoBehaviour
         if (nextFire > fireRate)
         {
             GameObject projectile = projectilePool.GetObject();
+
+            if (projectile == null)
+            {
+                return;
+            }
+
             projectile.transform.position = shootingSpot.position;
             projectile.transform.up = transform.up;
-
             nextFire = 0;
             activeProjectiles++;
         }
-
         //AudioSource.PlayClipAtPoint(manager.shootClip, Camera.main.transform.position);
     }
 
     void onProjectileHit()
     {
-        activeProjectiles--;
+        if (activeProjectiles > 0)
+        {
+            activeProjectiles--;
+        }
     }
 }

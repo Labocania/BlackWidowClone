@@ -11,7 +11,7 @@ public class GameObjectPool : MonoBehaviour
     [Tooltip("Size of this object pool")]
     public int initialSize = 1;
     [Tooltip("Maximum size of this object pool")]
-    public int maximumSize = 1;
+    public int maximumSize;
     [HideInInspector]
     public int spawnCounter = 0;
 
@@ -22,11 +22,12 @@ public class GameObjectPool : MonoBehaviour
         organizer = new UnityEngine.GameObject();
         organizer.transform.position = Vector2.zero;
         organizer.transform.rotation = Quaternion.identity;
-        organizer.name = $"{prefab.name} Pool";
     }
 
     void Start()
     {
+        organizer.name = $"{prefab.name} Pool";
+
         //Instantiate new objects and put them in a list for later use
         for (int i = 0; i < initialSize; i++)
         {

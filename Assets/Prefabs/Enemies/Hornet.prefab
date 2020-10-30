@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 9098345495091288662}
   - component: {fileID: 6859606728262200756}
   - component: {fileID: 2331043089444788897}
-  m_Layer: 0
-  m_Name: Test
-  m_TagString: Untagged
+  m_Layer: 10
+  m_Name: Hornet
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
