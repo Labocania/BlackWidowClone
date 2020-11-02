@@ -10,4 +10,5 @@ public class WaveData : ScriptableObject
     [Header("Enemy data")]
     public EnemyDictionary enemyQuantity;
     public int waveNumber;
+    public float spawingSpeed;
 }
