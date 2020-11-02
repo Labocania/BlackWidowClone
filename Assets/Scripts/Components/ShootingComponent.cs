@@ -5,7 +5,6 @@ public class ShootingComponent : MonoBehaviour
 {
     // Object Pool for projectiles
     GameObjectPool projectilePool;
-    UnityAction projectileHit;
 
     public Transform shootingSpot;
 
@@ -26,14 +25,14 @@ public class ShootingComponent : MonoBehaviour
     void Awake()
     {
         projectilePool = GetComponent<GameObjectPool>();
-        projectileHit += onProjectileHit;
+        EventList.projectileHit += onProjectileHit;
         // Setup Fire rate
         fireRate = 1 / shotsPerSecond;
     }
 
     void Start()
     {
-        EventBroker.StartListening("Projectile Hit", projectileHit);
+        EventBroker.StartListening("Projectile Hit", EventList.projectileHit);
     }
 
     // Update is called once per frame
@@ -44,7 +43,7 @@ public class ShootingComponent : MonoBehaviour
 
     void OnDisable()
     {
-        EventBroker.StopListening("Projectile Hit", projectileHit);
+        EventBroker.StopListening("Projectile Hit", EventList.projectileHit);
     }
 
     public void Shoot()

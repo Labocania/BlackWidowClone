@@ -6,23 +6,24 @@ using UnityEngine.Events;
 public class EnemySpawner : MonoBehaviour 
 {
     public WaveData wave;
-    public WaitForSeconds spawnInterval;
 
+    WaitForSeconds spawnInterval;
     const int MAX_ENEMIES_ON_SCREEN = 10;
     int enemiesOnScreen = 0;
     bool spawing;
-    UnityAction enemyDeath;
+
     List<GameObjectPool> objectPoolComponents;
     GameObjectPool currentPool;
-    System.Random random = new System.Random();
     Dictionary<GameObject, GameObjectPool> spawnDictionary = new Dictionary<GameObject, GameObjectPool>();
+
+    System.Random random = new System.Random();
 
     void Start()
     {
         ReadWaveData();
         spawnInterval = new WaitForSeconds(wave.spawingSpeed);
-        enemyDeath += onEnemyDeath;
-        EventBroker.StartListening("Enemy Death", enemyDeath);
+        EventList.enemyDeath += onEnemyDeath;
+        EventBroker.StartListening("Enemy Death", EventList.enemyDeath);
         StartCoroutine(StartSpawningRoutine());
     }
 
@@ -107,7 +108,7 @@ public class EnemySpawner : MonoBehaviour
 
     void OnDisable()
     {
-        EventBroker.StopListening("Enemy Death", enemyDeath);
+        EventBroker.StopListening("Enemy Death", EventList.enemyDeath);
     }
 
 }

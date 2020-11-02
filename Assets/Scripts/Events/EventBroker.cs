@@ -72,3 +72,10 @@ public class EventBroker : MonoBehaviour
         }
     }
 }
+
+public class EventList
+{
+    public static UnityAction enemyDeath;
+    public static UnityAction projectileHit;
+    public static UnityAction<int> mosquitoDeath;
+}
