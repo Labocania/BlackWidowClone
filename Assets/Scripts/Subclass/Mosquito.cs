@@ -13,7 +13,7 @@ public class Mosquito : Insect
     public override void Die()
     {
         gameObject.SetActive(false);
-        EventBroker.TriggerEvent("Enemy Death");
+        EventBroker.TriggerEvent("Enemy Death", 250);
     }
 
 }

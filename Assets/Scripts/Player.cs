@@ -6,8 +6,10 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 {
 	// The number of lives.
 	public int lives;
-	// Initial position.
-	Vector2 initialPosition;
+	int score;
+
+    // Initial position.
+    Vector2 initialPosition;
 	// Flag for executing animations.
 	bool inAnimation;
 
@@ -25,8 +27,10 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 	Vector2 movementInput;
 	Vector2 rotationInput;
 
-	// Unity event functions section.
-	void Awake()
+
+
+    // Unity event functions section.
+    void Awake()
 	{
 		lerpAnimations = GetComponent<LerpComponent>();
 		shootComponent = GetComponent<ShootingComponent>();
@@ -35,6 +39,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		swapper = GetComponent<ColorSwapper>();
 		mainActions = new MainActions();
 		mainActions.Player.SetCallbacks(this);
+		EventList.enemyDeath += PlayerOnEnemyDeath;
 		//manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 	}
 
@@ -45,6 +50,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		inAnimation = true;
 		StartCoroutine(StartInitialAnimation(Vector2.zero));
 	}
+
 	public void Disable()
 	{
 		mainActions.Player.Disable();
@@ -137,5 +143,10 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		}
 		*/
 	}
+
+	void PlayerOnEnemyDeath(int score)
+    {
+		this.score += score;
+    }
 
 }

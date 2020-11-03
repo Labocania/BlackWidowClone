@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class EnemySpawner : MonoBehaviour 
 {
@@ -18,12 +17,15 @@ public class EnemySpawner : MonoBehaviour
 
     System.Random random = new System.Random();
 
+    void Awake()
+    {
+        EventList.enemyDeath += onEnemyDeath;
+    }
+
     void Start()
     {
         ReadWaveData();
         spawnInterval = new WaitForSeconds(wave.spawingSpeed);
-        EventList.enemyDeath += onEnemyDeath;
-        EventBroker.StartListening("Enemy Death", EventList.enemyDeath);
         StartCoroutine(StartSpawningRoutine());
     }
 
@@ -98,17 +100,11 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    void onEnemyDeath()
+    void onEnemyDeath(int score)
     {
         if (enemiesOnScreen > 0)
         {
             enemiesOnScreen--;
         }
     }
-
-    void OnDisable()
-    {
-        EventBroker.StopListening("Enemy Death", EventList.enemyDeath);
-    }
-
 }
