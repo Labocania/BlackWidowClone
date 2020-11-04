@@ -96,7 +96,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 	{
 		if (rotationInput.magnitude > 0.1f)
 		{
-			moveComponent.TransformRotate(rotationInput);
+			moveComponent.TransformSnapRotate(rotationInput);
 			shootComponent.Shoot();
 		}
 	}

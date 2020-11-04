@@ -46,13 +46,13 @@ public class MovementComponent : MonoBehaviour
         }
     }
 
-    public void TransformRotate(Vector2 direction)
+    public void TransformSnapRotate(Vector2 direction)
     {
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    public IEnumerator TransformRotate(Vector2 direction, float timeToRotate)
+    public IEnumerator TransformRotate(Vector3 direction, float timeToRotate)
     {
         float currentTime = 0;
         while (currentTime < timeToRotate)

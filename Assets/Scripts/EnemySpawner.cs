@@ -80,7 +80,11 @@ public class EnemySpawner : MonoBehaviour
         currentPool = objectPoolComponents[random.Next(objectPoolComponents.Count)];
         if (currentPool.spawnCounter > 0)
         {
-            currentPool.GetObject().transform.position = GetRandomSpawnPoint(); 
+            GameObject obj = currentPool.GetObject();
+
+            obj.transform.position = GetRandomSpawnPoint();
+            obj.transform.up = Vector3.zero - obj.transform.position;
+
             enemiesOnScreen++;
 
             if (currentPool.prefab.CompareTag("KillableEnemy"))
