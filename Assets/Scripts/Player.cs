@@ -81,7 +81,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 			return;
         }
 
-		moveComponent.Move(movementInput);
+		moveComponent.TransformMove(movementInput);
 		RotateAndFire();
 
 		/*
@@ -96,7 +96,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 	{
 		if (rotationInput.magnitude > 0.1f)
 		{
-			moveComponent.Rotate(rotationInput);
+			moveComponent.TransformRotate(rotationInput);
 			shootComponent.Shoot();
 		}
 	}
