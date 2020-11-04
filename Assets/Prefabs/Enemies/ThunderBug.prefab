@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 239341556928006923}
   - component: {fileID: 2459995762670271721}
   - component: {fileID: 6721650704339143676}
-  m_Layer: 0
-  m_Name: Spoiler 1
-  m_TagString: Untagged
+  m_Layer: 10
+  m_Name: ThunderBug
+  m_TagString: KillableEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

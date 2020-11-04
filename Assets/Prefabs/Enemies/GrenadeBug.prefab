@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 9199057600297636831}
   - component: {fileID: 6834345312641524797}
   - component: {fileID: 2428505029973660456}
-  m_Layer: 0
-  m_Name: Spoiler 1
-  m_TagString: Untagged
+  m_Layer: 10
+  m_Name: GrenadeBug
+  m_TagString: KillableEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

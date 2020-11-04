@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4842001955746384139}
   - component: {fileID: 7080742611899727593}
   - component: {fileID: 2101045004642273788}
-  m_Layer: 0
-  m_Name: Spoiler 1
-  m_TagString: Untagged
+  m_Layer: 10
+  m_Name: BugSlayer
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

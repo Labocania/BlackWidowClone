@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7786100222855276439}
   - component: {fileID: 5583388329361231989}
   - component: {fileID: 3609528128066398048}
-  m_Layer: 0
-  m_Name: Spoiler 1
-  m_TagString: Untagged
+  m_Layer: 10
+  m_Name: RocketBug
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

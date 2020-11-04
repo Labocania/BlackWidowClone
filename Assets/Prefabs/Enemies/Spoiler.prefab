@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7082451247426338625}
   - component: {fileID: 4843635824347957411}
   - component: {fileID: 4347026636421676982}
-  m_Layer: 0
-  m_Name: Egg 1
-  m_TagString: Untagged
+  m_Layer: 10
+  m_Name: Spoiler
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

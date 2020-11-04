@@ -278,7 +278,7 @@ public class GameManager : MonoBehaviour {
 		paused = false;
 
 		// The game manager draws player's lives.
-		lives = player.lives;
+		lives = player.Lives;
 		livesGameObject = new GameObject();
 		DrawLives();
 		

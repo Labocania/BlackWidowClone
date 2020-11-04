@@ -5,11 +5,10 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour, MainActions.IPlayerActions
 {
 	// The number of lives.
-	public int lives;
-	int score;
-
-    // Initial position.
-    Vector2 initialPosition;
+	public int Lives { get; private set; }
+	public int Score { get; private set; }
+	// Initial position.
+	Vector2 initialPosition;
 	// Flag for executing animations.
 	bool inAnimation;
 
@@ -27,8 +26,6 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 	Vector2 movementInput;
 	Vector2 rotationInput;
 
-
-
     // Unity event functions section.
     void Awake()
 	{
@@ -45,6 +42,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 
 	void Start()
 	{
+		Lives = 3;
 		initialPosition = new Vector2(-2.47f, 4.4f);
 		swapper.ToggleObjectsColor(ColorNames.Green);			
 		inAnimation = true;
@@ -70,7 +68,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
     void OnTriggerEnter2D(Collider2D collision)
     {
 		GameObject collidedObject = collision.gameObject;
-		if (collidedObject.CompareTag("Enemy"))
+		if (collidedObject.CompareTag("Enemy") || collidedObject.CompareTag("KillableEnemy"))
 		{
 			StartCoroutine(Death());
 		}
@@ -127,7 +125,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		// Disabling object.
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 		mainActions.Player.Disable();
-		lives -= 1;
+		Lives -= 1;
 
 		// Death Animation
 		StartCoroutine(swapper.IterateColors());
@@ -146,7 +144,8 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 
 	void PlayerOnEnemyDeath(int score)
     {
-		this.score += score;
+		this.Score += score;
+		Debug.Log(score);
     }
 
 }

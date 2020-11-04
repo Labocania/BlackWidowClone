@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2151610134813196080}
   m_Layer: 10
   m_Name: Mosquito
-  m_TagString: Enemy
+  m_TagString: KillableEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,8 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09fd6b996cd73e4d961da82e6b43f0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0
-  score: 0
 --- !u!50 &2151610134813196080
 Rigidbody2D:
   serializedVersion: 4

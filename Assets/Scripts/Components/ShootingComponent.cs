@@ -30,20 +30,10 @@ public class ShootingComponent : MonoBehaviour
         fireRate = 1 / shotsPerSecond;
     }
 
-    void Start()
-    {
-        EventBroker.StartListening("Projectile Hit", EventList.projectileHit);
-    }
-
     // Update is called once per frame
     void Update()
     {
         nextFire += Time.deltaTime;
-    }
-
-    void OnDisable()
-    {
-        EventBroker.StopListening("Projectile Hit", EventList.projectileHit);
     }
 
     public void Shoot()

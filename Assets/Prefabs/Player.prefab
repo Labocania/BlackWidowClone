@@ -317,7 +317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd2a7ceb48aacd45affa602efb6b40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lives: 3
 --- !u!114 &1715217723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,6 +388,7 @@ MonoBehaviour:
   prefab: {fileID: 100000, guid: ebb45a2ca0b8af34dbf76afa1ea0724a, type: 3}
   initialSize: 2
   maximumSize: 4
+  spawnCounter: 0
 --- !u!1 &1592904055
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,9 +2,8 @@
 
 public class Insect : MonoBehaviour
 {  
-    public int movementSpeed;
-    public int score;
-
+    protected int movementSpeed;
+    protected int score;
 
     public virtual void Die()
     {

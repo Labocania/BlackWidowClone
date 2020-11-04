@@ -6,11 +6,11 @@ TagManager:
   tags:
   - GameManager
   - Projectile
-  - Menu
   - WebLine
   - Enemy
   - Center
   - ShootingSpot
+  - KillableEnemy
   layers:
   - Default
   - TransparentFX

@@ -8,7 +8,8 @@ public class EnemySpawner : MonoBehaviour
 
     WaitForSeconds spawnInterval;
     const int MAX_ENEMIES_ON_SCREEN = 10;
-    int enemiesOnScreen = 0;
+    int enemiesOnScreen;
+    int killableEnemiesOnScreen;
     bool spawing;
 
     List<GameObjectPool> objectPoolComponents;
@@ -35,6 +36,12 @@ public class EnemySpawner : MonoBehaviour
         {
             StartCoroutine(StartSpawningRoutine());
         }
+
+        if (killableEnemiesOnScreen == 0)
+        {
+            // Start remaining enemies exit routine
+            // Trigger Wave Change event
+        }
     }
 
     void ReadWaveData()
@@ -46,7 +53,8 @@ public class EnemySpawner : MonoBehaviour
                 spawnDictionary[enemy.Key] = gameObject.AddComponent<GameObjectPool>();
                 spawnDictionary[enemy.Key].prefab = enemy.Key;
                 spawnDictionary[enemy.Key].spawnCounter = enemy.Value;
-                spawnDictionary[enemy.Key].maximumSize = enemy.Value;
+                spawnDictionary[enemy.Key].maximumSize = 11;
+
             }
             else
             {
@@ -72,8 +80,13 @@ public class EnemySpawner : MonoBehaviour
         currentPool = objectPoolComponents[random.Next(objectPoolComponents.Count)];
         if (currentPool.spawnCounter > 0)
         {
-            currentPool.GetObject().transform.position = GetRandomSpawnPoint();
+            currentPool.GetObject().transform.position = GetRandomSpawnPoint(); 
             enemiesOnScreen++;
+
+            if (currentPool.prefab.CompareTag("KillableEnemy"))
+            {
+                killableEnemiesOnScreen++;
+            }
         }
         else
         {
@@ -102,9 +115,10 @@ public class EnemySpawner : MonoBehaviour
 
     void onEnemyDeath(int score)
     {
-        if (enemiesOnScreen > 0)
+        if (enemiesOnScreen > 0 || killableEnemiesOnScreen > 0)
         {
             enemiesOnScreen--;
+            killableEnemiesOnScreen--;
         }
     }
 }
