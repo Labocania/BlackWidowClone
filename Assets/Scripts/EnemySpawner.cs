@@ -21,13 +21,13 @@ public class EnemySpawner : MonoBehaviour
     void Awake()
     {
         EventList.enemyDeath += onEnemyDeath;
+        EventList.animationFinished += onAnimationFinished;
     }
 
     void Start()
     {
         ReadWaveData();
         spawnInterval = new WaitForSeconds(wave.spawingSpeed);
-        StartCoroutine(StartSpawningRoutine());
     }
 
     void Update()
@@ -124,5 +124,10 @@ public class EnemySpawner : MonoBehaviour
             enemiesOnScreen--;
             killableEnemiesOnScreen--;
         }
+    }
+
+    void onAnimationFinished()
+    {
+        StartCoroutine(StartSpawningRoutine());
     }
 }

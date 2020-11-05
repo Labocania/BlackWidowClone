@@ -10,17 +10,21 @@ public class BackgroundController : MonoBehaviour
     void Awake()
     {
         childObjects = gameObject.GetChildren();
+        EventList.animationFinished += onAnimationFinished;
     }
 
-    IEnumerator Start()
+    void Start()
     {
         foreach (GameObject obj in childObjects)
         {
            StartCoroutine(obj.GetComponent<ColorSwapper>().StartBackgroundAnimation());
         }
 
-        yield return new WaitForSeconds(1.7f);
+        //yield return new WaitForSeconds(1.7f);
+    }
 
+    void onAnimationFinished()
+    {
         foreach (GameObject obj in childObjects)
         {
             obj.GetComponent<ColorSwapper>().ToggleObjectsColor(ColorNames.Blue);
