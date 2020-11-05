@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     const int MAX_ENEMIES_ON_SCREEN = 10;
     int enemiesOnScreen;
     int killableEnemiesOnScreen;
-    bool spawing;
+    bool spawing = true;
 
     List<GameObjectPool> objectPoolComponents;
     GameObjectPool currentPool;

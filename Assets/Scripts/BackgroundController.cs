@@ -10,27 +10,25 @@ public class BackgroundController : MonoBehaviour
     void Awake()
     {
         childObjects = gameObject.GetChildren();
-        EventList.animationFinished += onAnimationFinished;
     }
 
-    void Start()
+    IEnumerator Start()
     {
         foreach (GameObject obj in childObjects)
         {
            StartCoroutine(obj.GetComponent<ColorSwapper>().StartBackgroundAnimation());
         }
 
-        //yield return new WaitForSeconds(1.7f);
-    }
+        yield return new WaitForSeconds(1.7f);
 
-    void onAnimationFinished()
-    {
         foreach (GameObject obj in childObjects)
         {
             obj.GetComponent<ColorSwapper>().ToggleObjectsColor(ColorNames.Blue);
         }
 
         PlaceWebColliders(waveData.webColliders);
+
+        EventBroker.TriggerEvent("AnimationFinished");
     }
 
     public void PlaceWebColliders(WebDictionary webDictionary)

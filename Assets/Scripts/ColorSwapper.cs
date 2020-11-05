@@ -15,14 +15,12 @@ public class ColorSwapper : MonoBehaviour
     public IEnumerator StartBackgroundAnimation()
     {
         yield return IterateColors();
-        EventBroker.TriggerEvent("AnimationFinished");
     }
 
     public IEnumerator StartBackgroundAnimations()
     {
         yield return IterateColors();
         yield return WebColorRotation();
-        EventBroker.TriggerEvent("AnimationFinished");
     }
 
     public IEnumerator IterateColors()
