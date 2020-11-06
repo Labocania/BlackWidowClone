@@ -36,7 +36,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		swapper = GetComponent<ColorSwapper>();
 		mainActions = new MainActions();
 		mainActions.Player.SetCallbacks(this);
-		EventList.enemyDeath += PlayerOnEnemyDeath;
+		EventList.enemyDeath += onEnemyDeath;
 		//manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 	}
 
@@ -65,23 +65,24 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		rotationInput = context.ReadValue<Vector2>();
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
 		GameObject collidedObject = collision.gameObject;
 		if (collidedObject.CompareTag("Enemy") || collidedObject.CompareTag("KillableEnemy"))
 		{
+			EventBroker.TriggerEvent("Player Death");
 			StartCoroutine(Death());
 		}
 	}
 
-	void FixedUpdate()
+    void FixedUpdate()
 	{
         if (inAnimation)
         {
 			return;
         }
 
-		moveComponent.TransformMove(movementInput);
+        moveComponent.TransformMove(movementInput);
 		RotateAndFire();
 
 		/*
@@ -96,8 +97,8 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 	{
 		if (rotationInput.magnitude > 0.1f)
 		{
-			moveComponent.TransformSnapRotate(rotationInput);
-			shootComponent.Shoot();
+            moveComponent.TransformSnapRotate(rotationInput);
+            shootComponent.Shoot();
 		}
 	}
 
@@ -123,7 +124,6 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 	{
 		inAnimation = true;
 		// Disabling object.
-		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 		mainActions.Player.Disable();
 		Lives -= 1;
 
@@ -142,9 +142,9 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		*/
 	}
 
-	void PlayerOnEnemyDeath(int score)
+	void onEnemyDeath(int score)
     {
-		this.Score += score;
+		Score += score;
 		Debug.Log(score);
     }
 

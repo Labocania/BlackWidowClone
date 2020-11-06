@@ -10,18 +10,20 @@ public class EnemySpawner : MonoBehaviour
     const int MAX_ENEMIES_ON_SCREEN = 10;
     int enemiesOnScreen;
     int killableEnemiesOnScreen;
-    bool spawing = true;
+    bool spawing = false;
 
     List<GameObjectPool> objectPoolComponents;
     GameObjectPool currentPool;
     Dictionary<GameObject, GameObjectPool> spawnDictionary = new Dictionary<GameObject, GameObjectPool>();
 
     System.Random random = new System.Random();
+    Coroutine spawingRoutine;
 
     void Awake()
     {
         EventList.enemyDeath += onEnemyDeath;
         EventList.animationFinished += onAnimationFinished;
+        EventList.playerDeath += onPlayerDeath;
     }
 
     void Start()
@@ -32,9 +34,9 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (spawing == false && objectPoolComponents.Count > 0 && enemiesOnScreen <= MAX_ENEMIES_ON_SCREEN)
+        if (spawing == true)
         {
-            StartCoroutine(StartSpawningRoutine());
+            spawingRoutine = StartCoroutine(StartSpawningRoutine());
         }
 
         if (killableEnemiesOnScreen == 0)
@@ -67,13 +69,12 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator StartSpawningRoutine()
     {
-        spawing = true;
+        spawing = false;
         while (objectPoolComponents.Count > 0 && enemiesOnScreen <= MAX_ENEMIES_ON_SCREEN)
         {
             SpawnEnemy();
             yield return spawnInterval;
-        }
-        spawing = false;
+        }      
     }
     void SpawnEnemy()
     {
@@ -124,10 +125,18 @@ public class EnemySpawner : MonoBehaviour
             enemiesOnScreen--;
             killableEnemiesOnScreen--;
         }
+
+        //spawing = true;
     }
 
     void onAnimationFinished()
     {
-        StartCoroutine(StartSpawningRoutine());
+        spawing = true;
+    }
+
+    void onPlayerDeath()
+    {
+        spawing = false;
+        StopCoroutine(spawingRoutine);
     }
 }

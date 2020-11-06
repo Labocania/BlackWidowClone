@@ -73,6 +73,6 @@ MonoBehaviour:
     - {fileID: 3247838676555587249, guid: 969cd9064899906418b57d1b1032e7a0, type: 3}
     _keys:
     - {fileID: 3247838676555587249, guid: 969cd9064899906418b57d1b1032e7a0, type: 3}
-    _values: 19000000
+    _values: 14000000
   waveNumber: 1
   spawingSpeed: 2
