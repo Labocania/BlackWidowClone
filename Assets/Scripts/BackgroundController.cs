@@ -28,7 +28,7 @@ public class BackgroundController : MonoBehaviour
 
         PlaceWebColliders(waveData.webColliders);
 
-        EventBroker.TriggerEvent("AnimationFinished");
+        //EventBroker.TriggerEvent("Wave Started");
     }
 
     public void PlaceWebColliders(WebDictionary webDictionary)

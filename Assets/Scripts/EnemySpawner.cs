@@ -7,10 +7,12 @@ public class EnemySpawner : MonoBehaviour
     public WaveData wave;
 
     WaitForSeconds spawnInterval;
-    const int MAX_ENEMIES_ON_SCREEN = 10;
+    WaitUntil waveStartCondition;
+
+    const int MAX_ENEMIES_ON_SCREEN = 11;
     int enemiesOnScreen;
     int killableEnemiesOnScreen;
-    bool spawing = false;
+    bool isSpawing = false;
 
     List<GameObjectPool> objectPoolComponents;
     GameObjectPool currentPool;
@@ -21,24 +23,21 @@ public class EnemySpawner : MonoBehaviour
 
     void Awake()
     {
-        EventList.enemyDeath += onEnemyDeath;
-        EventList.animationFinished += onAnimationFinished;
-        EventList.playerDeath += onPlayerDeath;
+        EventList.waveStarted += EnemySpawn_OnWaveStarted;
+        EventList.enemyDeath += EnemySpawn_OnEnemyDeath;
+        EventList.playerDeath += EnemySpawn_OnPlayerDeath;
+        EventList.enemyLeft += EnemySpawn_OnEnemyLeft;
     }
 
     void Start()
     {
         ReadWaveData();
         spawnInterval = new WaitForSeconds(wave.spawingSpeed);
+        waveStartCondition = new WaitUntil(() => enemiesOnScreen == 0 && killableEnemiesOnScreen == 0);
     }
 
     void Update()
     {
-        if (spawing == true)
-        {
-            spawingRoutine = StartCoroutine(StartSpawningRoutine());
-        }
-
         if (killableEnemiesOnScreen == 0)
         {
             // Start remaining enemies exit routine
@@ -55,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
                 spawnDictionary[enemy.Key] = gameObject.AddComponent<GameObjectPool>();
                 spawnDictionary[enemy.Key].prefab = enemy.Key;
                 spawnDictionary[enemy.Key].spawnCounter = enemy.Value;
-                spawnDictionary[enemy.Key].maximumSize = 11;
+                spawnDictionary[enemy.Key].maximumSize = MAX_ENEMIES_ON_SCREEN;
 
             }
             else
@@ -69,13 +68,25 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator StartSpawningRoutine()
     {
-        spawing = false;
-        while (objectPoolComponents.Count > 0 && enemiesOnScreen <= MAX_ENEMIES_ON_SCREEN)
+        while (isSpawing)
         {
-            SpawnEnemy();
-            yield return spawnInterval;
-        }      
+            if (objectPoolComponents.Count > 0 && enemiesOnScreen < MAX_ENEMIES_ON_SCREEN)
+            {
+                yield return spawnInterval;
+                SpawnEnemy();
+
+                if (enemiesOnScreen == MAX_ENEMIES_ON_SCREEN)
+                {
+                    isSpawing = false;
+                }
+            }
+            else
+            {
+                isSpawing = false;
+            }
+        }
     }
+
     void SpawnEnemy()
     {
         currentPool = objectPoolComponents[random.Next(objectPoolComponents.Count)];
@@ -118,7 +129,7 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    void onEnemyDeath(int score)
+    void EnemySpawn_OnEnemyDeath(int score)
     {
         if (enemiesOnScreen > 0 || killableEnemiesOnScreen > 0)
         {
@@ -126,17 +137,39 @@ public class EnemySpawner : MonoBehaviour
             killableEnemiesOnScreen--;
         }
 
-        //spawing = true;
+        if (!isSpawing)
+        {
+            isSpawing = true;
+            spawingRoutine = StartCoroutine(StartSpawningRoutine());
+        }
+
     }
 
-    void onAnimationFinished()
+    IEnumerator WaveStartRoutine()
     {
-        spawing = true;
+        yield return waveStartCondition;
+        isSpawing = true;
+        spawingRoutine = StartCoroutine(StartSpawningRoutine());
     }
 
-    void onPlayerDeath()
+    void EnemySpawn_OnWaveStarted()
     {
-        spawing = false;
-        StopCoroutine(spawingRoutine);
+        StartCoroutine(WaveStartRoutine());
+    }
+
+    void EnemySpawn_OnPlayerDeath()
+    {
+        if (isSpawing)
+        {
+            isSpawing = false;
+            StopCoroutine(spawingRoutine);
+        }     
+    }
+
+    void EnemySpawn_OnEnemyLeft()
+    {
+        currentPool.spawnCounter++;
+        enemiesOnScreen--;
+        killableEnemiesOnScreen--;
     }
 }

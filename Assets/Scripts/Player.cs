@@ -70,8 +70,8 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		GameObject collidedObject = collision.gameObject;
 		if (collidedObject.CompareTag("Enemy") || collidedObject.CompareTag("KillableEnemy"))
 		{
-			EventBroker.TriggerEvent("Player Death");
 			StartCoroutine(Death());
+			EventBroker.TriggerEvent("Player Death");
 		}
 	}
 
@@ -104,8 +104,11 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 
 	IEnumerator StartInitialAnimation(Vector2 targetPosition)
     {
-		// Disables collider;
-		polyCollider.enabled = false;
+        if (polyCollider.enabled)
+        {
+			// Disables collider;
+			polyCollider.enabled = false;
+		}
 		// Starts rotation animation.
 		yield return lerpAnimations.LerpPosition(initialPosition, targetPosition);
 		// Changes sprite color.
@@ -117,11 +120,13 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		polyCollider.enabled = true;
 		// Resets animation flag.
 		inAnimation = false;
+		EventBroker.TriggerEvent("Wave Started");
 	}
 
 	// Fix later
 	IEnumerator Death() 
 	{
+		polyCollider.enabled = false;
 		inAnimation = true;
 		// Disabling object.
 		mainActions.Player.Disable();
@@ -145,7 +150,6 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 	void onEnemyDeath(int score)
     {
 		Score += score;
-		Debug.Log(score);
     }
 
 }

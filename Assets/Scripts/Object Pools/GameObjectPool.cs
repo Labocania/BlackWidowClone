@@ -5,8 +5,7 @@ public class GameObjectPool : MonoBehaviour
 {
     [Tooltip("Prefab for this object pool")]
     public GameObject prefab;
-
-    private List<GameObject> gameObjs = new List<GameObject>();
+    public List<GameObject> GameObjs { get; private set; } = new List<GameObject>();
 
     [Tooltip("Size of this object pool")]
     public int initialSize = 1;
@@ -43,7 +42,7 @@ public class GameObjectPool : MonoBehaviour
         newObject.transform.SetParent(organizer.transform);
         newObject.gameObject.SetActive(false);
 
-        gameObjs.Add(newObject);
+        GameObjs.Add(newObject);
     }
 
     public GameObject GetObject()
@@ -54,9 +53,9 @@ public class GameObjectPool : MonoBehaviour
         }
 
         //Try to find an inactive bullet
-        for (int i = 0; i < gameObjs.Count; i++)
+        for (int i = 0; i < GameObjs.Count; i++)
         {
-            GameObject thisObject = gameObjs[i];
+            GameObject thisObject = GameObjs[i];
 
             if (!thisObject.gameObject.activeInHierarchy)
             {
@@ -66,12 +65,12 @@ public class GameObjectPool : MonoBehaviour
         }
 
         //We are out of objects so we have to instantiate another bullet (if we can)
-        if (gameObjs.Count < maximumSize)
+        if (GameObjs.Count < maximumSize)
         {
             GenerateObject();
 
             //The new object is last in the list so get it
-            GameObject lastObject = gameObjs[gameObjs.Count - 1];
+            GameObject lastObject = GameObjs[GameObjs.Count - 1];
 
             lastObject.gameObject.SetActive(true);
             return lastObject;

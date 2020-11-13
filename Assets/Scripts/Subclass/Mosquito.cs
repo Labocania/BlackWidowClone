@@ -12,6 +12,8 @@ public class Mosquito : Insect
     System.Random randomIndex = new System.Random();
     Coroutine movementRoutine;
     bool animating = false;
+    bool wasShot;
+    float speed;
 
     void Awake()
     {
@@ -23,6 +25,7 @@ public class Mosquito : Insect
         {
             collider = GetComponentInChildren<PolygonCollider2D>();
         }
+        speed = moveComponent.moveSpeed;
 
         //Left rotation
         rotationAngles.Add(new Vector3(0f, 0f, 45f));
@@ -49,8 +52,8 @@ public class Mosquito : Insect
 
     void OnEnable()
     {
-        EventBroker.StartListening("Player Death", EventList.playerDeath);
         movementRoutine = StartCoroutine(StartMovementRoutine());
+        EventBroker.StartListening("Player Death", EventList.playerDeath);
     }
 
     void OnDisable()
@@ -72,6 +75,7 @@ public class Mosquito : Insect
     {
         if (collision.gameObject.CompareTag("Projectile"))
         {
+            wasShot = true;
             Die();
         }
     }
@@ -81,7 +85,14 @@ public class Mosquito : Insect
         gameObject.SetActive(false);
         collider.enabled = true;
         animating = false;
-        moveComponent.moveSpeed -= 2;
+        moveComponent.moveSpeed = speed;
+
+        if (!wasShot)
+        {
+            EventBroker.TriggerEvent("Enemy Left");
+        }
+
+        wasShot = false;
     }
 
     public override void Die()
@@ -101,7 +112,7 @@ public class Mosquito : Insect
         Quaternion rotation = Quaternion.LookRotation(-direction);
         Vector3 eulerAngles = rotation.eulerAngles;
         moveComponent.TransformRotate(eulerAngles, 0.2f);
-        moveComponent.moveSpeed += 2;
+        moveComponent.moveSpeed += 3;
     }
 
 }

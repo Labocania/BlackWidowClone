@@ -93,6 +93,11 @@ public class EventBroker : MonoBehaviour
 
     public static void TriggerEvent(string eventName)
     {
+        if (eventName != "Projectile Hit")
+        {
+            Debug.Log($"Event: {eventName}");
+        }
+
         UnityEvent thisEvent = null;
         if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
         {
@@ -102,6 +107,11 @@ public class EventBroker : MonoBehaviour
 
     public static void TriggerEvent(string eventName, int argument)
     {
+        if (eventName != "Projectile Hit")
+        {
+            Debug.Log($"Event: {eventName}");
+        }
+
         UnityEvent<int> thisEvent = null;
         if (instance.eventArgDictionary.TryGetValue(eventName, out thisEvent))
         {
