@@ -46,7 +46,7 @@ MonoBehaviour:
       color: 1
     - IntArray: 00000000010000000200000004000000050000000600000007000000080000000a0000000b000000
       color: 1
-  enemyQuantity:
+  totalQuantity:
     reorderableList:
       canAdd: 1
       canRemove: 1
@@ -67,12 +67,12 @@ MonoBehaviour:
       elementNameProperty: 
       elementNameOverride: 
       elementIcon: {fileID: 0}
-    reqReferences: {fileID: 11400000, guid: 3d6785e46e940b843aa5fbe4ca729d60, type: 2}
+    reqReferences: {fileID: 0}
     isExpanded: 1
     _keyValues:
     - {fileID: 3247838676555587249, guid: 969cd9064899906418b57d1b1032e7a0, type: 3}
     _keys:
     - {fileID: 3247838676555587249, guid: 969cd9064899906418b57d1b1032e7a0, type: 3}
-    _values: 14000000
+    _values: 0f000000
   waveNumber: 1
   spawingSpeed: 2

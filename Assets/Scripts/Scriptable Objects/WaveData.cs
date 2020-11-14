@@ -8,7 +8,7 @@ public class WaveData : ScriptableObject
     public WebDictionary webColliders;
 
     [Header("Enemy data")]
-    public EnemyDictionary enemyQuantity;
+    public EnemyDictionary totalQuantity;
     public int waveNumber;
     public float spawingSpeed;
 }

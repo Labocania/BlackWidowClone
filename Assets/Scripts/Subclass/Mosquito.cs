@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mosquito : Insect
 {
+
     MovementComponent moveComponent;
     PolygonCollider2D collider;
 
@@ -52,6 +53,7 @@ public class Mosquito : Insect
 
     void OnEnable()
     {
+        
         movementRoutine = StartCoroutine(StartMovementRoutine());
         EventBroker.StartListening("Player Death", EventList.playerDeath);
     }
@@ -91,8 +93,10 @@ public class Mosquito : Insect
         {
             EventBroker.TriggerEvent("Enemy Left");
         }
-
-        wasShot = false;
+        else
+        {
+            wasShot = false;
+        }
     }
 
     public override void Die()

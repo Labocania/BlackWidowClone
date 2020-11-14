@@ -47,19 +47,19 @@ public class EnemySpawner : MonoBehaviour
 
     void ReadWaveData()
     {
-        foreach (KeyValuePair<GameObject, int> enemy in wave.enemyQuantity)
+        foreach (KeyValuePair<GameObject, int> enemy in wave.totalQuantity)
         {
             if (!spawnDictionary.ContainsKey(enemy.Key))
             {
                 spawnDictionary[enemy.Key] = gameObject.AddComponent<GameObjectPool>();
                 spawnDictionary[enemy.Key].prefab = enemy.Key;
-                spawnDictionary[enemy.Key].spawnCounter = enemy.Value;
+                spawnDictionary[enemy.Key].spawnTotal = enemy.Value;
                 spawnDictionary[enemy.Key].maximumSize = MAX_ENEMIES_ON_SCREEN;
 
             }
             else
             {
-                spawnDictionary[enemy.Key].spawnCounter = enemy.Value;
+                spawnDictionary[enemy.Key].spawnTotal = enemy.Value;
             }
         }
 
@@ -90,7 +90,7 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         currentPool = objectPoolComponents[random.Next(objectPoolComponents.Count)];
-        if (currentPool.spawnCounter > 0)
+        if (currentPool.spawnTotal > 0)
         {
             GameObject obj = currentPool.GetObject();
 
@@ -168,7 +168,7 @@ public class EnemySpawner : MonoBehaviour
 
     void EnemySpawn_OnEnemyLeft()
     {
-        currentPool.spawnCounter++;
+        currentPool.spawnTotal++;
         enemiesOnScreen--;
         killableEnemiesOnScreen--;
     }
