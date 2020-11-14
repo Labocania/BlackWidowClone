@@ -91,7 +91,6 @@ public class EnemySpawner : MonoBehaviour
     {
         string randomKey = keyList[random.Next(keyList.Count)];
         currentPool = spawnDictionary[randomKey];
-
         GameObject obj = currentPool.GetObject();
 
         obj.transform.position = GetRandomSpawnPoint();

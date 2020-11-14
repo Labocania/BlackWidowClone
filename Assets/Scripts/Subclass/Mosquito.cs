@@ -4,29 +4,13 @@ using UnityEngine;
 
 public class Mosquito : Insect
 {
-
-    MovementComponent moveComponent;
-    PolygonCollider2D collider;
-
     List<Vector3> rotationAngles = new List<Vector3>();
     List<WaitForSeconds> waitTimes = new List<WaitForSeconds>();
     System.Random randomIndex = new System.Random();
-    Coroutine movementRoutine;
-    bool animating = false;
-    bool wasShot;
-    float speed;
 
-    void Awake()
+    protected override void Awake()
     {
-        EventList.playerDeath += onPlayerDeath;
-
-        moveComponent = GetComponent<MovementComponent>();
-        collider = GetComponent<PolygonCollider2D>();
-        if (collider == null)
-        {
-            collider = GetComponentInChildren<PolygonCollider2D>();
-        }
-        speed = moveComponent.moveSpeed;
+        base.Awake();
 
         //Left rotation
         rotationAngles.Add(new Vector3(0f, 0f, 45f));
@@ -43,6 +27,10 @@ public class Mosquito : Insect
         waitTimes.Add(new WaitForSeconds(8f));
     }
 
+    protected override void OnEnable() => base.OnEnable();
+    protected override void OnDisable() => base.OnDisable();
+    protected override void OnBecameInvisible() => base.OnBecameInvisible();
+
     void FixedUpdate()
     {
         if (gameObject.activeSelf == true)
@@ -51,20 +39,7 @@ public class Mosquito : Insect
         }
     }
 
-    void OnEnable()
-    {
-        
-        movementRoutine = StartCoroutine(StartMovementRoutine());
-        EventBroker.StartListening("Player Death", EventList.playerDeath);
-    }
-
-    void OnDisable()
-    {
-        StopCoroutine(movementRoutine);
-        EventBroker.StopListening("Player Death", EventList.playerDeath);
-    }
-
-    IEnumerator StartMovementRoutine()
+    protected override IEnumerator StartMovementRoutine()
     {
         while (gameObject.activeSelf == true && animating == false)
         {
@@ -77,47 +52,8 @@ public class Mosquito : Insect
     {
         if (collision.gameObject.CompareTag("Projectile"))
         {
-            wasShot = true;
-            Die();
+            base.Die();
         }
-    }
-
-    void OnBecameInvisible()
-    {
-        gameObject.SetActive(false);
-        collider.enabled = true;
-        animating = false;
-        moveComponent.moveSpeed = speed;
-
-        if (!wasShot)
-        {
-            string name = gameObject.name.Replace("(Clone)", "");
-            EventList.enemyLeft.Invoke(name);
-        }
-        else
-        {
-            wasShot = false;
-        }
-    }
-
-    public override void Die()
-    {
-        gameObject.SetActive(false);
-        EventBroker.TriggerEvent("Enemy Death", score);
-    }
-
-    void onPlayerDeath()
-    {
-        collider.enabled = false;
-        animating = true;
-
-        StopCoroutine(movementRoutine);
-
-        Vector3 direction = transform.position - Vector3.zero;
-        Quaternion rotation = Quaternion.LookRotation(-direction);
-        Vector3 eulerAngles = rotation.eulerAngles;
-        moveComponent.TransformRotate(eulerAngles, 0.2f);
-        moveComponent.moveSpeed += 3;
     }
 
 }
