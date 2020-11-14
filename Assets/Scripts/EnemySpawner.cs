@@ -14,9 +14,9 @@ public class EnemySpawner : MonoBehaviour
     int killableEnemiesOnScreen;
     bool isSpawing = false;
 
-    List<GameObjectPool> objectPoolComponents;
+    List<string> keyList;
     GameObjectPool currentPool;
-    Dictionary<GameObject, GameObjectPool> spawnDictionary = new Dictionary<GameObject, GameObjectPool>();
+    Dictionary<string, GameObjectPool> spawnDictionary = new Dictionary<string, GameObjectPool>();
 
     System.Random random = new System.Random();
     Coroutine spawingRoutine;
@@ -49,28 +49,28 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (KeyValuePair<GameObject, int> enemy in wave.totalQuantity)
         {
-            if (!spawnDictionary.ContainsKey(enemy.Key))
+            if (!spawnDictionary.ContainsKey(enemy.Key.name))
             {
-                spawnDictionary[enemy.Key] = gameObject.AddComponent<GameObjectPool>();
-                spawnDictionary[enemy.Key].prefab = enemy.Key;
-                spawnDictionary[enemy.Key].spawnTotal = enemy.Value;
-                spawnDictionary[enemy.Key].maximumSize = MAX_ENEMIES_ON_SCREEN;
+                spawnDictionary[enemy.Key.name] = gameObject.AddComponent<GameObjectPool>();
+                spawnDictionary[enemy.Key.name].prefab = enemy.Key;
+                spawnDictionary[enemy.Key.name].spawnTotal = enemy.Value;
+                spawnDictionary[enemy.Key.name].maximumSize = MAX_ENEMIES_ON_SCREEN;
 
             }
             else
             {
-                spawnDictionary[enemy.Key].spawnTotal = enemy.Value;
+                spawnDictionary[enemy.Key.name].spawnTotal = enemy.Value;
             }
         }
 
-        objectPoolComponents = new List<GameObjectPool>(gameObject.GetComponents<GameObjectPool>());
+        keyList = new List<string>(spawnDictionary.Keys);
     }
 
     IEnumerator StartSpawningRoutine()
     {
         while (isSpawing)
         {
-            if (objectPoolComponents.Count > 0 && enemiesOnScreen < MAX_ENEMIES_ON_SCREEN)
+            if (keyList.Count > 0 && enemiesOnScreen < MAX_ENEMIES_ON_SCREEN)
             {
                 yield return spawnInterval;
                 SpawnEnemy();
@@ -89,24 +89,24 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        currentPool = objectPoolComponents[random.Next(objectPoolComponents.Count)];
-        if (currentPool.spawnTotal > 0)
+        string randomKey = keyList[random.Next(keyList.Count)];
+        currentPool = spawnDictionary[randomKey];
+
+        GameObject obj = currentPool.GetObject();
+
+        obj.transform.position = GetRandomSpawnPoint();
+        obj.transform.up = Vector3.zero - obj.transform.position;
+
+        enemiesOnScreen++;
+
+        if (currentPool.prefab.CompareTag("KillableEnemy"))
         {
-            GameObject obj = currentPool.GetObject();
-
-            obj.transform.position = GetRandomSpawnPoint();
-            obj.transform.up = Vector3.zero - obj.transform.position;
-
-            enemiesOnScreen++;
-
-            if (currentPool.prefab.CompareTag("KillableEnemy"))
-            {
-                killableEnemiesOnScreen++;
-            }
+            killableEnemiesOnScreen++;
         }
-        else
+
+        if (currentPool.spawnTotal == 0)
         {
-            objectPoolComponents.Remove(currentPool);
+            keyList.Remove(randomKey);
         }
     }
 
@@ -166,9 +166,9 @@ public class EnemySpawner : MonoBehaviour
         }     
     }
 
-    void EnemySpawn_OnEnemyLeft()
+    void EnemySpawn_OnEnemyLeft(string enemy)
     {
-        currentPool.spawnTotal++;
+        spawnDictionary[enemy].spawnTotal++;
         enemiesOnScreen--;
         killableEnemiesOnScreen--;
     }

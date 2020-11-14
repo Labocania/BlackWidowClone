@@ -91,7 +91,8 @@ public class Mosquito : Insect
 
         if (!wasShot)
         {
-            EventBroker.TriggerEvent("Enemy Left");
+            string name = gameObject.name.Replace("(Clone)", "");
+            EventList.enemyLeft.Invoke(name);
         }
         else
         {
