@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour 
 {
-    public WaveData wave;
-
+    WaveData wave;
     WaitForSeconds spawnInterval;
     WaitUntil waveStartCondition;
 
     const int MAX_ENEMIES_ON_SCREEN = 11;
     int enemiesOnScreen;
     int killableEnemiesOnScreen;
+    int killableEnemies;
     bool isSpawing = false;
 
     List<string> keyList;
@@ -23,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Awake()
     {
+        LoadWaveData();
         EventList.waveStarted += EnemySpawn_OnWaveStarted;
         EventList.enemyDeath += EnemySpawn_OnEnemyDeath;
         EventList.playerDeath += EnemySpawn_OnPlayerDeath;
@@ -31,18 +32,20 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        ReadWaveData();
         spawnInterval = new WaitForSeconds(wave.spawingSpeed);
         waveStartCondition = new WaitUntil(() => enemiesOnScreen == 0 && killableEnemiesOnScreen == 0);
     }
 
-    void Update()
+    void LoadWaveData()
     {
-        if (killableEnemiesOnScreen == 0)
-        {
-            // Start remaining enemies exit routine
-            // Trigger Wave Change event
-        }
+        wave = DataReader.instance.LoadWaveData();
+        ReadWaveData();
+    }
+
+    void ReloadWaveData()
+    {
+        wave = DataReader.instance.LoadWaveData();
+        ReadWaveData();
     }
 
     void ReadWaveData()
@@ -53,12 +56,20 @@ public class EnemySpawner : MonoBehaviour
             {
                 spawnDictionary[enemy.Key.name] = gameObject.AddComponent<GameObjectPool>();
                 spawnDictionary[enemy.Key.name].prefab = enemy.Key;
+                if (enemy.Key.CompareTag("KillableEnemy"))
+                {
+                    killableEnemies += enemy.Value;
+                }
                 spawnDictionary[enemy.Key.name].spawnTotal = enemy.Value;
                 spawnDictionary[enemy.Key.name].maximumSize = MAX_ENEMIES_ON_SCREEN;
 
             }
             else
             {
+                if (enemy.Key.CompareTag("KillableEnemy"))
+                {
+                    killableEnemies += enemy.Value;
+                }
                 spawnDictionary[enemy.Key.name].spawnTotal = enemy.Value;
             }
         }
@@ -68,17 +79,18 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator StartSpawningRoutine()
     {
-        while (isSpawing)
+        while (isSpawing == true)
         {
             if (keyList.Count > 0 && enemiesOnScreen < MAX_ENEMIES_ON_SCREEN)
             {
-                yield return spawnInterval;
-                SpawnEnemy();
-
                 if (enemiesOnScreen == MAX_ENEMIES_ON_SCREEN)
                 {
                     isSpawing = false;
                 }
+
+                yield return spawnInterval;
+                SpawnEnemy();
+
             }
             else
             {
@@ -134,6 +146,17 @@ public class EnemySpawner : MonoBehaviour
         {
             enemiesOnScreen--;
             killableEnemiesOnScreen--;
+            killableEnemies--;
+        }
+
+        if (killableEnemies == 0)
+        {
+            // TO DO: Running away logic from non killable enemies.
+            isSpawing = false;
+            StopAllCoroutines();
+            EventBroker.TriggerEvent("Wave Changed");
+            ReloadWaveData();
+            return;
         }
 
         if (!isSpawing)

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41cd6f0118bb8de4a90bce560382290c, type: 3}
-  m_Name: Wave 2
+  m_Name: Wave2
   m_EditorClassIdentifier: 
   webColliders:
     reorderableList:
@@ -36,17 +36,33 @@ MonoBehaviour:
     reqReferences: {fileID: 0}
     isExpanded: 1
     _keyValues:
+    - Web2
+    - Web3
     - Web4
     - Web5
+    - Web6
+    - Web7
     _keys:
+    - Web2
+    - Web3
     - Web4
     - Web5
+    - Web6
+    - Web7
     _values:
+    - IntArray: 06000000
+      color: 1
+    - IntArray: 0500000007000000
+      color: 1
+    - IntArray: 0400000008000000
+      color: 1
     - IntArray: 0300000009000000
-      color: 4
-    - IntArray: 00000000010000000200000004000000050000000600000007000000080000000a0000000b000000
-      color: 5
-  enemyQuantity:
+      color: 1
+    - IntArray: 020000000a000000
+      color: 1
+    - IntArray: 00000000010000000b000000
+      color: 1
+  totalQuantity:
     reorderableList:
       canAdd: 1
       canRemove: 1
@@ -67,12 +83,12 @@ MonoBehaviour:
       elementNameProperty: 
       elementNameOverride: 
       elementIcon: {fileID: 0}
-    reqReferences: {fileID: 11400000, guid: 3d6785e46e940b843aa5fbe4ca729d60, type: 2}
+    reqReferences: {fileID: 0}
     isExpanded: 1
     _keyValues:
     - {fileID: 3247838676555587249, guid: 969cd9064899906418b57d1b1032e7a0, type: 3}
     _keys:
     - {fileID: 3247838676555587249, guid: 969cd9064899906418b57d1b1032e7a0, type: 3}
-    _values: 0f000000
+    _values: 14000000
   waveNumber: 2
   spawingSpeed: 1

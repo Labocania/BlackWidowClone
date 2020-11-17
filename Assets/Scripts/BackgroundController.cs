@@ -5,30 +5,50 @@ using UnityEngine;
 public class BackgroundController : MonoBehaviour
 {
     List<GameObject> childObjects;
-    public WaveData waveData;
+    WaitForSeconds animationInterval;
+    WaveData waveData;
 
     void Awake()
     {
         childObjects = gameObject.GetChildren();
+        animationInterval = new WaitForSeconds(1.7f);
+        waveData = DataReader.instance.LoadWaveData();
+        EventList.waveChanged += Background_OnWaveChanged;
     }
 
-    IEnumerator Start()
+    private void Background_OnWaveChanged()
+    {
+        DataReader.instance.NextWave();
+        waveData = DataReader.instance.LoadWaveData();
+        ClearWebColliders(waveData.webColliders);
+        StartCoroutine(WaveChangeRoutine());
+    }
+
+    void Start()
+    {
+        StartCoroutine(WaveChangeRoutine());
+    }
+
+    IEnumerator WaveChangeRoutine()
+    {
+        yield return BackgroundAnimation();
+        PlaceWebColliders(waveData.webColliders);
+        EventBroker.TriggerEvent("Wave Started");
+    }
+
+    IEnumerator BackgroundAnimation()
     {
         foreach (GameObject obj in childObjects)
         {
-           StartCoroutine(obj.GetComponent<ColorSwapper>().StartBackgroundAnimation());
+            StartCoroutine(obj.GetComponent<ColorSwapper>().StartBackgroundAnimation());
         }
 
-        yield return new WaitForSeconds(1.7f);
+        yield return animationInterval;
 
         foreach (GameObject obj in childObjects)
         {
             obj.GetComponent<ColorSwapper>().ToggleObjectsColor(ColorNames.Blue);
         }
-
-        PlaceWebColliders(waveData.webColliders);
-
-        //EventBroker.TriggerEvent("Wave Started");
     }
 
     public void PlaceWebColliders(WebDictionary webDictionary)

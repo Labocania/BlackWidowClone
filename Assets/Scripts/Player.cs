@@ -120,7 +120,6 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		polyCollider.enabled = true;
 		// Resets animation flag.
 		inAnimation = false;
-		EventBroker.TriggerEvent("Wave Started");
 	}
 
 	// Fix later
@@ -137,6 +136,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		yield return lerpAnimations.LerpRotation(1080f);
 		// Restart Animation
 		yield return StartInitialAnimation(transform.position);
+		EventBroker.TriggerEvent("Wave Started");
 
 		/*
 		if (lives <= 0) 

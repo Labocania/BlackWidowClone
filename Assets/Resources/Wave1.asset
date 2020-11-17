@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41cd6f0118bb8de4a90bce560382290c, type: 3}
-  m_Name: Wave 1
+  m_Name: Wave1
   m_EditorClassIdentifier: 
   webColliders:
     reorderableList:
@@ -71,10 +71,8 @@ MonoBehaviour:
     isExpanded: 1
     _keyValues:
     - {fileID: 3247838676555587249, guid: 969cd9064899906418b57d1b1032e7a0, type: 3}
-    - {fileID: 3491423322712598242, guid: 6cc5949c00bf77c40b44ee03b5f78b78, type: 3}
     _keys:
     - {fileID: 3247838676555587249, guid: 969cd9064899906418b57d1b1032e7a0, type: 3}
-    - {fileID: 3491423322712598242, guid: 6cc5949c00bf77c40b44ee03b5f78b78, type: 3}
-    _values: 0f00000005000000
+    _values: 0f000000
   waveNumber: 1
   spawingSpeed: 2

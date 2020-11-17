@@ -386,6 +386,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 1812337215849245481, guid: 7934b8cf80e10094789c8786fa51195f,
+        type: 3}
+      propertyPath: asset.m_AssetGUID
+      value: b8be1fba3ff4e9e4eb3827f8ee16c0d8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812337215849245481, guid: 7934b8cf80e10094789c8786fa51195f,
+        type: 3}
+      propertyPath: wave
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1812337215849245482, guid: 7934b8cf80e10094789c8786fa51195f,
         type: 3}
       propertyPath: m_LocalPosition.x
