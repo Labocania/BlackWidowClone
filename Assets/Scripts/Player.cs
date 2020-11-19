@@ -71,7 +71,6 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		if (collidedObject.CompareTag("Enemy") || collidedObject.CompareTag("KillableEnemy"))
 		{
 			StartCoroutine(Death());
-			//EventBroker.TriggerEvent("Player Death");
 			EventList.playerDeath.Invoke();
 		}
 	}
@@ -137,7 +136,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		yield return lerpAnimations.LerpRotation(1080f);
 		// Restart Animation
 		yield return StartInitialAnimation(transform.position);
-		EventBroker.TriggerEvent("Wave Started");
+		EventList.waveStarted.Invoke();
 
 		/*
 		if (lives <= 0) 

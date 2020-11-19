@@ -33,7 +33,7 @@ public class BackgroundController : MonoBehaviour
     {
         yield return BackgroundAnimation();
         PlaceWebColliders(waveData.webColliders);
-        EventBroker.TriggerEvent("Wave Started");
+        EventList.waveStarted.Invoke();
     }
 
     IEnumerator BackgroundAnimation()

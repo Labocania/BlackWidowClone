@@ -59,7 +59,7 @@ public class Insect : MonoBehaviour
     {
         wasShot = true;
         gameObject.SetActive(false);
-        EventBroker.TriggerEvent("Enemy Death", score);
+        EventList.enemyDeath.Invoke(score);
     }
 
     protected virtual IEnumerator StartMovementRoutine()

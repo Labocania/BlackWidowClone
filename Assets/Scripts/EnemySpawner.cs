@@ -165,7 +165,7 @@ public class EnemySpawner : MonoBehaviour
         {
             // TO DO: Running away logic from non killable enemies.
             isSpawing = false;
-            EventBroker.TriggerEvent("Wave Changed");
+            EventList.waveChanged.Invoke();
             ReloadWaveData();
             return;
         }

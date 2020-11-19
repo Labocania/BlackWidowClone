@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
 
     void OnBecameInvisible()
     {
-        EventBroker.TriggerEvent("Projectile Hit");
+        EventList.projectileHit.Invoke();
         gameObject.SetActive(false);   
     }
 
@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
 
     public void Hit() 
 	{
-        EventBroker.TriggerEvent("Projectile Hit");
+        EventList.projectileHit.Invoke();
         gameObject.SetActive(false);
     }
 }
