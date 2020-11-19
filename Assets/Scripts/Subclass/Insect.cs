@@ -13,9 +13,6 @@ public class Insect : MonoBehaviour
 
     protected virtual void Awake()
     {
-        EventList.playerDeath += onPlayerDeath;
-
-
         moveComponent = GetComponent<MovementComponent>();
         polyCollider = GetComponent<PolygonCollider2D>();
         if (polyCollider == null)
@@ -28,13 +25,13 @@ public class Insect : MonoBehaviour
     protected virtual void OnEnable()
     {
         movementRoutine = StartCoroutine(StartMovementRoutine());
-        //EventBroker.StartListening("Player Death", EventList.playerDeath);
+        EventList.playerDeath += onPlayerDeath;
     }
 
     protected virtual void OnDisable()
     {
         StopCoroutine(movementRoutine);
-        //EventBroker.StopListening("Player Death", EventList.playerDeath);
+        EventList.playerDeath -= onPlayerDeath;
     }
 
     protected virtual void OnBecameInvisible()

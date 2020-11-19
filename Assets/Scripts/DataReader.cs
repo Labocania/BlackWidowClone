@@ -38,7 +38,7 @@ public class DataReader
 
     public WaveData LoadWaveData()
     {
-        Debug.Log($"Wave number {WaveNumber} loaded.");
+        Resources.UnloadUnusedAssets();
         return Resources.Load<WaveData>($"Wave{WaveNumber}");
     }
 
