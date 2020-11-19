@@ -71,7 +71,8 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		if (collidedObject.CompareTag("Enemy") || collidedObject.CompareTag("KillableEnemy"))
 		{
 			StartCoroutine(Death());
-			EventBroker.TriggerEvent("Player Death");
+			//EventBroker.TriggerEvent("Player Death");
+			EventList.playerDeath.Invoke();
 		}
 	}
 

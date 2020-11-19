@@ -15,6 +15,7 @@ public class Insect : MonoBehaviour
     {
         EventList.playerDeath += onPlayerDeath;
 
+
         moveComponent = GetComponent<MovementComponent>();
         polyCollider = GetComponent<PolygonCollider2D>();
         if (polyCollider == null)
@@ -27,13 +28,13 @@ public class Insect : MonoBehaviour
     protected virtual void OnEnable()
     {
         movementRoutine = StartCoroutine(StartMovementRoutine());
-        EventBroker.StartListening("Player Death", EventList.playerDeath);
+        //EventBroker.StartListening("Player Death", EventList.playerDeath);
     }
 
     protected virtual void OnDisable()
     {
         StopCoroutine(movementRoutine);
-        EventBroker.StopListening("Player Death", EventList.playerDeath);
+        //EventBroker.StopListening("Player Death", EventList.playerDeath);
     }
 
     protected virtual void OnBecameInvisible()
@@ -68,16 +69,19 @@ public class Insect : MonoBehaviour
 
     void onPlayerDeath()
     {
-        polyCollider.enabled = false;
-        animating = true;
+        if (gameObject.activeSelf == true)
+        {
+            polyCollider.enabled = false;
+            animating = true;
 
-        StopCoroutine(movementRoutine);
+            StopCoroutine(movementRoutine);
 
-        Vector3 direction = transform.position - Vector3.zero;
-        Quaternion rotation = Quaternion.LookRotation(-direction);
-        Vector3 eulerAngles = rotation.eulerAngles;
-        moveComponent.TransformRotate(eulerAngles, 0.2f);
-        moveComponent.moveSpeed += 3;
+            Vector3 direction = transform.position - Vector3.zero;
+            Quaternion rotation = Quaternion.LookRotation(-direction);
+            Vector3 eulerAngles = rotation.eulerAngles;
+            moveComponent.TransformRotate(eulerAngles, 0.2f);
+            moveComponent.moveSpeed += 3;
+        }
     }
 
     public virtual void Chase() { }

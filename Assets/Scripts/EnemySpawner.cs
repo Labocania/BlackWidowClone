@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour 
 {
     WaveData wave;
-    WaitForSeconds spawnInterval;
+    float timer;
     WaitUntil waveStartCondition;
 
     const int MAX_ENEMIES_ON_SCREEN = 11;
@@ -19,7 +19,6 @@ public class EnemySpawner : MonoBehaviour
     Dictionary<string, GameObjectPool> spawnDictionary = new Dictionary<string, GameObjectPool>();
 
     System.Random random = new System.Random();
-    Coroutine spawingRoutine;
 
     void Awake()
     {
@@ -32,8 +31,33 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        spawnInterval = new WaitForSeconds(wave.spawingSpeed);
+        timer = wave.spawingSpeed;
         waveStartCondition = new WaitUntil(() => enemiesOnScreen == 0 && killableEnemiesOnScreen == 0);
+    }
+
+    void Update()
+    {
+        if (isSpawing)
+        {
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                if (enemiesOnScreen < MAX_ENEMIES_ON_SCREEN)
+                {
+                    SpawnEnemy();
+                }
+
+                if (enemiesOnScreen == MAX_ENEMIES_ON_SCREEN)
+                {
+                    isSpawing = false;
+                }
+
+                timer = wave.spawingSpeed;
+            }
+        }
     }
 
     void LoadWaveData()
@@ -77,30 +101,13 @@ public class EnemySpawner : MonoBehaviour
         keyList = new List<string>(spawnDictionary.Keys);
     }
 
-    IEnumerator StartSpawningRoutine()
-    {
-        while (isSpawing == true)
-        {
-            if (keyList.Count > 0 && enemiesOnScreen < MAX_ENEMIES_ON_SCREEN)
-            {
-                if (enemiesOnScreen == MAX_ENEMIES_ON_SCREEN)
-                {
-                    isSpawing = false;
-                }
-
-                yield return spawnInterval;
-                SpawnEnemy();
-
-            }
-            else
-            {
-                isSpawing = false;
-            }
-        }
-    }
-
     void SpawnEnemy()
     {
+        if (keyList.Count == 0)
+        {
+            return;
+        }
+
         string randomKey = keyList[random.Next(keyList.Count)];
         currentPool = spawnDictionary[randomKey];
         GameObject obj = currentPool.GetObject();
@@ -149,20 +156,18 @@ public class EnemySpawner : MonoBehaviour
             killableEnemies--;
         }
 
+        if (isSpawing == false && killableEnemies > 0)
+        {
+            isSpawing = true;
+        }
+
         if (killableEnemies == 0)
         {
             // TO DO: Running away logic from non killable enemies.
             isSpawing = false;
-            StopAllCoroutines();
             EventBroker.TriggerEvent("Wave Changed");
             ReloadWaveData();
             return;
-        }
-
-        if (!isSpawing)
-        {
-            isSpawing = true;
-            spawingRoutine = StartCoroutine(StartSpawningRoutine());
         }
 
     }
@@ -171,7 +176,6 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return waveStartCondition;
         isSpawing = true;
-        spawingRoutine = StartCoroutine(StartSpawningRoutine());
     }
 
     void EnemySpawn_OnWaveStarted()
@@ -181,11 +185,7 @@ public class EnemySpawner : MonoBehaviour
 
     void EnemySpawn_OnPlayerDeath()
     {
-        if (isSpawing)
-        {
-            isSpawing = false;
-            StopCoroutine(spawingRoutine);
-        }     
+        isSpawing = false;   
     }
 
     void EnemySpawn_OnEnemyLeft(string enemy)
