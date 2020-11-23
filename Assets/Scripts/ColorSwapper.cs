@@ -84,6 +84,7 @@ public class ColorSwapper : MonoBehaviour
             PlatformEffector2D effector = sprites[spriteIndexes[i]].gameObject.AddComponent<PlatformEffector2D>();
             effector.rotationalOffset = offsetAngles[spriteIndexes[i]];
             effector.useColliderMask = false;
+            effector.useOneWay = true;
 
             if (name == ColorNames.Red)
             {
@@ -101,11 +102,13 @@ public class ColorSwapper : MonoBehaviour
     {
         for (int i = 0; i < spriteIndexes.Length; i++)
         {
-            if (sprites[spriteIndexes[i]].color == ColorList.colors[(int)ColorNames.Red])
+            // If sprite web color is either red or green.
+            if (sprites[spriteIndexes[i]].color == ColorList.colors[(int)ColorNames.Red] || sprites[spriteIndexes[i]].color == ColorList.colors[(int)ColorNames.Green])
             {
-                sprites[i].gameObject.layer = layerWeb;
-                PolygonCollider2D poly = sprites[i].gameObject.GetComponent<PolygonCollider2D>();
-                PlatformEffector2D effector = sprites[spriteIndexes[i]].gameObject.AddComponent<PlatformEffector2D>();
+                sprites[spriteIndexes[i]].gameObject.layer = layerWeb;
+                PolygonCollider2D poly = sprites[spriteIndexes[i]].gameObject.GetComponent<PolygonCollider2D>();
+                PlatformEffector2D effector = sprites[spriteIndexes[i]].gameObject.GetComponent<PlatformEffector2D>();
+                
                 Destroy(poly);
                 Destroy(effector);
             }

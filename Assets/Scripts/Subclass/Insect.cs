@@ -30,7 +30,10 @@ public class Insect : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        StopCoroutine(movementRoutine);
+        if (movementRoutine != null)
+        {
+            StopCoroutine(movementRoutine);
+        }
         EventList.playerDeath -= onPlayerDeath;
     }
 

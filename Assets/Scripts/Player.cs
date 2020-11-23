@@ -70,8 +70,8 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		GameObject collidedObject = collision.gameObject;
 		if (collidedObject.CompareTag("Enemy") || collidedObject.CompareTag("KillableEnemy"))
 		{
-			StartCoroutine(Death());
 			EventList.playerDeath.Invoke();
+			StartCoroutine(Death());
 		}
 	}
 

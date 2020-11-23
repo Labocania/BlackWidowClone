@@ -45,16 +45,15 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
-                if (enemiesOnScreen < MAX_ENEMIES_ON_SCREEN)
+                if (keyList.Count > 0 && enemiesOnScreen < MAX_ENEMIES_ON_SCREEN)
                 {
                     SpawnEnemy();
                 }
-
-                if (enemiesOnScreen == MAX_ENEMIES_ON_SCREEN)
+                else
                 {
                     isSpawing = false;
                 }
-
+                
                 timer = wave.spawingSpeed;
             }
         }
@@ -103,11 +102,6 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        if (keyList.Count == 0)
-        {
-            return;
-        }
-
         string randomKey = keyList[random.Next(keyList.Count)];
         currentPool = spawnDictionary[randomKey];
         GameObject obj = currentPool.GetObject();
@@ -185,12 +179,19 @@ public class EnemySpawner : MonoBehaviour
 
     void EnemySpawn_OnPlayerDeath()
     {
-        isSpawing = false;   
+        if (isSpawing)
+        {
+            isSpawing = false;
+        }   
     }
 
     void EnemySpawn_OnEnemyLeft(string enemy)
     {
         spawnDictionary[enemy].spawnTotal++;
+        if (!keyList.Contains(enemy))
+        {
+            keyList.Add(enemy);
+        }
         enemiesOnScreen--;
         killableEnemiesOnScreen--;
     }

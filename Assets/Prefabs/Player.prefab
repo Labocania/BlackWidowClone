@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736ef8e607b38de4ba8122ff34a35fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 3.5
 --- !u!114 &208239943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,7 +372,7 @@ MonoBehaviour:
   shootingSpot: {fileID: 1592904056}
   activeProjectilesAtOnce: 4
   activeProjectiles: 0
-  shotsPerSecond: 10
+  shotsPerSecond: 6
 --- !u!114 &5115627411607513415
 MonoBehaviour:
   m_ObjectHideFlags: 0

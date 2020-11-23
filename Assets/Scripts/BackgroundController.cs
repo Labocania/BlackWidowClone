@@ -18,9 +18,9 @@ public class BackgroundController : MonoBehaviour
 
     private void Background_OnWaveChanged()
     {
+        ClearWebColliders(waveData.webColliders);
         DataReader.instance.NextWave();
         waveData = DataReader.instance.LoadWaveData();
-        ClearWebColliders(waveData.webColliders);
         StartCoroutine(WaveChangeRoutine());
     }
 
