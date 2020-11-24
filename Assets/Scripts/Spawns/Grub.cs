@@ -7,6 +7,7 @@ public class Grub : MonoBehaviour
     public int Score { get; private set; }
 
     float _timer;
+    bool isChanging = true;
     ColorSwapper swapper;
     List<ColorNames> colors = new List<ColorNames> { ColorNames.LightBlue, ColorNames.Green, ColorNames.Blue };
     List<int> points = new List<int> { 250, 100, 50 };
@@ -15,6 +16,7 @@ public class Grub : MonoBehaviour
 
     void Awake()
     {
+        EventList.playerDeath += Grub_OnPlayerDeath;
         swapper = GetComponent<ColorSwapper>();
         swapper.ToggleObjectsColor(ColorNames.White);
         Score = 500;
@@ -23,9 +25,19 @@ public class Grub : MonoBehaviour
         pointEnum = points.GetEnumerator();
     }
 
+    private void Grub_OnPlayerDeath()
+    {
+        isChanging = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (!isChanging)
+        {
+            return;
+        }
+
         if (_timer > 0)
         {
             _timer -= Time.deltaTime;

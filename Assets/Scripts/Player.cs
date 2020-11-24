@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
-using System;
 using System.Collections.Generic;
 
 public class Player : MonoBehaviour, MainActions.IPlayerActions
