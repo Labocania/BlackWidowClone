@@ -85,7 +85,7 @@ public class Mosquito : Insect
         }
 
         // Edge of the sceen or Green Web
-        if (collision.enabled)
+        if (collision.enabled && gameObject.activeSelf == true)
         {
             if (movementRoutine != null)
             {
