@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1433082174496874229}
   - component: {fileID: 1433082174496874226}
   - component: {fileID: -8921317160985194686}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Grub
   m_TagString: Grub
   m_Icon: {fileID: 0}

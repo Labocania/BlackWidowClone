@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
 using System;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour, MainActions.IPlayerActions
 {
@@ -9,7 +10,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 	public int Lives { get; private set; }
 	public int Score { get; private set; }
 	// Initial position.
-	Vector2 initialPosition;
+	Vector2 firstPosition;
 	// Flag for executing animations.
 	bool inAnimation;
 
@@ -45,7 +46,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
     void Start()
 	{
 		Lives = 3;
-		initialPosition = new Vector2(-2.47f, 4.4f);
+		firstPosition = new Vector2(-2.47f, 4.4f);
 		swapper.ToggleObjectsColor(ColorNames.Green);			
 		inAnimation = true;
 		StartCoroutine(StartInitialAnimation(Vector2.zero));
@@ -104,49 +105,68 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		}
 	}
 
-	IEnumerator StartInitialAnimation(Vector2 targetPosition)
+	IEnumerator StartInitialAnimation(Vector2 finalPosition)
     {
-        if (polyCollider.enabled)
-        {
-			// Disables collider;
-			polyCollider.enabled = false;
-		}
-		// Starts rotation animation.
-		yield return lerpAnimations.LerpPosition(initialPosition, targetPosition);
+		// Sets to Grub Layer.
+		gameObject.layer = 15;
+		// Starts movement animation.
+		yield return MovementAnimations(firstPosition, finalPosition);
+		// Sets to Default Layer.
+		gameObject.layer = 0;
 		// Changes sprite color.
 		swapper.ToggleObjectsColor(ColorNames.Red);
 		// Resets rotation to zero.
 		transform.rotation = Quaternion.identity;
 		// Enables controls and colliders
 		mainActions.Player.Enable();
-		polyCollider.enabled = true;
 		// Resets animation flag.
 		inAnimation = false;
 	}
 
-	// Fix later
+	IEnumerator MovementAnimations(Vector2 firstPosition, Vector2 finalPosition)
+    {
+		List<Grub> grubs = new List<Grub>(FindObjectsOfType<Grub>());
+        if (grubs != null)
+        {
+			Vector2 currentPosition = firstPosition;
+			Vector2 nextPosition;
+            for (int i = 0; i < grubs.Count; i++)
+            {
+                if (grubs[i] == null)
+                {
+					continue;
+                }
+
+				nextPosition = grubs[i].gameObject.transform.position;
+				yield return lerpAnimations.LerpPosition(currentPosition, nextPosition);
+				currentPosition = nextPosition;
+			}
+
+			yield return lerpAnimations.LerpPosition(currentPosition, finalPosition);
+        }
+        else
+        {
+			yield return lerpAnimations.LerpPosition(firstPosition, finalPosition);
+		}
+    }
+
 	IEnumerator Death() 
 	{
-		polyCollider.enabled = false;
+		// Disabling player.
 		inAnimation = true;
-		// Disabling object.
 		mainActions.Player.Disable();
 		Lives -= 1;
 
-		// Death Animation
+		// Death Animation.
+		polyCollider.enabled = false;
 		StartCoroutine(swapper.IterateColors());
 		yield return lerpAnimations.LerpRotation(1080f);
-		// Restart Animation
-		yield return StartInitialAnimation(transform.position);
-		EventList.waveStarted.Invoke();
+		polyCollider.enabled = true;
 
-		/*
-		if (lives <= 0) 
-		{
-			manager.GameOver();
-			yield break;
-		}
-		*/
+		// Restart Animation.
+		yield return StartInitialAnimation(transform.position);
+
+		EventList.waveStarted.Invoke();
 	}
 
 	void Player_OnEnemyDeath(int score)
