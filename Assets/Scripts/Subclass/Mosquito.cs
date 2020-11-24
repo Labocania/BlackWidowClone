@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mosquito : Insect
 {
+    public GameObject grub;
     List<Vector3> rotationAngles = new List<Vector3>();
     List<WaitForSeconds> waitTimes = new List<WaitForSeconds>();
     System.Random randomNumber = new System.Random();
@@ -78,6 +79,7 @@ public class Mosquito : Insect
 
         if (obj.CompareTag("Projectile"))
         {
+            Spawn();
             base.Die();
             return;
         }
@@ -104,6 +106,11 @@ public class Mosquito : Insect
             //StartCoroutine(WaitOneSecond());
             //movementRoutine = StartCoroutine(StartMovementRoutine());
         }
+    }
+
+    protected override void Spawn()
+    {
+        Instantiate(grub, transform.position, Quaternion.identity);
     }
 
 }

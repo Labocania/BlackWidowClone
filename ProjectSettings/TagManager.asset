@@ -11,6 +11,7 @@ TagManager:
   - Center
   - ShootingSpot
   - KillableEnemy
+  - Grub
   layers:
   - Default
   - TransparentFX

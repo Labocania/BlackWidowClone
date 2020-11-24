@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using System;
 
 public class Player : MonoBehaviour, MainActions.IPlayerActions
 {
@@ -36,11 +37,12 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		swapper = GetComponent<ColorSwapper>();
 		mainActions = new MainActions();
 		mainActions.Player.SetCallbacks(this);
-		EventList.enemyDeath += onEnemyDeath;
+		EventList.enemyDeath += Player_OnEnemyDeath;
+		EventList.grubCollect += Player_OnGrubCollect;
 		//manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 	}
 
-	void Start()
+    void Start()
 	{
 		Lives = 3;
 		initialPosition = new Vector2(-2.47f, 4.4f);
@@ -147,9 +149,15 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		*/
 	}
 
-	void onEnemyDeath(int score)
+	void Player_OnEnemyDeath(int score)
     {
 		Score += score;
     }
+
+	private void Player_OnGrubCollect(int score)
+	{
+		Score += score;
+		Debug.Log(Score);
+	}
 
 }

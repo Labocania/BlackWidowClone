@@ -84,10 +84,12 @@ public class Insect : MonoBehaviour
         }
     }
 
-    public virtual void Chase() { }
+    protected virtual void Chase() { }
 
-    public virtual void Eat() { }
+    protected virtual void Eat() { }
 
-    public virtual void Shoot() { }
+    protected virtual void Shoot() { }
+
+    protected virtual void Spawn() { }
 
 }

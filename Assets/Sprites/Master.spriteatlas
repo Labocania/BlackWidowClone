@@ -31,7 +31,8 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: b72ef1f51e563ce4680f4b4ec863a917, type: 3}
-    totalSpriteSurfaceArea: 2170829
+    - {fileID: 102900000, guid: e3d09d56dff7d8f428c616e3fb062540, type: 3}
+    totalSpriteSurfaceArea: 2174491
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -42,6 +43,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5257d4a0449f7024e8fd55ef4b3992b2, type: 3}
   - {fileID: 21300000, guid: 3be0aa11990b03043933735287783e17, type: 3}
   - {fileID: 21300000, guid: ad286541743166e49b5e77eed9234bb9, type: 3}
+  - {fileID: 7171344410430279650, guid: 5d446941f1c792444a2aa095f8e6a7a7, type: 3}
+  - {fileID: 6186919071455436798, guid: 5d446941f1c792444a2aa095f8e6a7a7, type: 3}
+  - {fileID: 9007319762387265882, guid: 5d446941f1c792444a2aa095f8e6a7a7, type: 3}
   - {fileID: 21300000, guid: 14764451da191674795d5f80775e7c34, type: 3}
   - {fileID: 21300000, guid: 1a7bca910b06c054997700e5ba8e7dad, type: 3}
   - {fileID: 21300000, guid: a90b0de122aed134d91407c2b7878236, type: 3}
@@ -70,6 +74,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: fd1df7053c7d8fa46befe5faf2632140, type: 3}
   - {fileID: 21300000, guid: 9d6967c5cbb21fc41bff63a459c71a6f, type: 3}
   - {fileID: 21300000, guid: 6d1498c589b909841bcaf0a5faeb6ae8, type: 3}
+  - {fileID: 21300000, guid: 4421f6063ecdf5f42996c60fb38110f9, type: 3}
   - {fileID: 21300000, guid: 55dbda567fcdcfd4c8e36080b32a2156, type: 3}
   - {fileID: 21300000, guid: baebac7628dcce4439633cc8a8e933bb, type: 3}
   - {fileID: 21300000, guid: cb1a6586947bf374584c9f611569aeff, type: 3}
@@ -120,6 +125,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5ed58fdb7116bbb408a71a166c8a6b69, type: 3}
   - {fileID: 21300000, guid: 487c6ffb11fe5e54aaa6453cc8763f4a, type: 3}
   - {fileID: 21300000, guid: b7ffec0c22a08d44180527177e151936, type: 3}
+  - {fileID: 21300000, guid: 0f17151cde1845c46aa107de331949ef, type: 3}
   - {fileID: 21300000, guid: 988eff3c58a75f14fabe7f8d8bb9fee9, type: 3}
   - {fileID: 21300000, guid: c92a864c6eb13bb4ebf178314f954d87, type: 3}
   - {fileID: 21300000, guid: 487e4bac2279b1347ad25f04b098013f, type: 3}
@@ -151,6 +157,9 @@ SpriteAtlas:
   - Web1-5
   - Web4-8
   - Web7-2
+  - Mosquito-Sheet_1
+  - Mosquito-Sheet_0
+  - Mosquito-Sheet_2
   - Web5-6
   - Web4-9
   - Web0-10
@@ -179,6 +188,7 @@ SpriteAtlas:
   - Web1-8
   - Web4-4
   - Web2-2
+  - Grub
   - Line-03
   - Web0-3
   - Web3-0
@@ -229,6 +239,7 @@ SpriteAtlas:
   - Web2-8
   - Web6-9
   - Web7-7
+  - Mosquito-Base
   - Line-05
   - Web5-10
   - Web6-5
