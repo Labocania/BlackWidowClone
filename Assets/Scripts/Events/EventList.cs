@@ -10,5 +10,6 @@ public class EventList : MonoBehaviour
     public static UnityAction waveStarted;
     public static UnityAction waveChanged;
     public static UnityAction playerDeath;
+    public static UnityAction gameOver;
 
 }

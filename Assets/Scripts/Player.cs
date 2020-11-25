@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour, MainActions.IPlayerActions
 {
 	// The number of lives.
-	public int Lives { get; private set; }
+	public int Lives { get; set; }
 	public int Score { get; private set; }
 	// Initial position.
 	Vector2 firstPosition;
@@ -17,7 +17,6 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 	ShootingComponent shootComponent;
 	MovementComponent moveComponent;
 	PolygonCollider2D polyCollider;
-	GameManager manager;
 
 	// Color management.
 	ColorSwapper swapper;
@@ -39,7 +38,6 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		mainActions.Player.SetCallbacks(this);
 		EventList.enemyDeath += Player_OnEnemyDeath;
 		EventList.grubCollect += Player_OnGrubCollect;
-		//manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 	}
 
     void Start()
@@ -154,7 +152,6 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		// Disabling player.
 		inAnimation = true;
 		mainActions.Player.Disable();
-		Lives -= 1;
 
 		// Death Animation.
 		polyCollider.enabled = false;
@@ -162,9 +159,14 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		yield return lerpAnimations.LerpRotation(1080f);
 		polyCollider.enabled = true;
 
+		Lives -= 1;
+        if (Lives == 0)
+        {
+			EventList.gameOver.Invoke();
+        }
+
 		// Restart Animation.
 		yield return StartInitialAnimation(transform.position);
-
 		EventList.waveStarted.Invoke();
 	}
 
