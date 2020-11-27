@@ -1,13 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Mosquito : Insect
 {
     public GameObject grub;
-    List<Vector3> rotationAngles = new List<Vector3>();
-    List<WaitForSeconds> waitTimes = new List<WaitForSeconds>();
-    System.Random randomNumber = new System.Random();
     int bounceAmount;
 
     protected override void Awake()

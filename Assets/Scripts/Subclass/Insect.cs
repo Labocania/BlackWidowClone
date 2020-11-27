@@ -1,12 +1,16 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Insect : MonoBehaviour
 {
+    protected List<Vector3> rotationAngles = new List<Vector3>();
+    protected List<WaitForSeconds> waitTimes = new List<WaitForSeconds>();
+    protected System.Random randomNumber = new System.Random();
     protected MovementComponent moveComponent;
     protected PolygonCollider2D polyCollider;
     protected Coroutine movementRoutine;
-    protected float speed;
+    protected float baseSpeed;
     protected int score;
     protected bool animating = false;
     protected bool wasShot;
@@ -19,7 +23,7 @@ public class Insect : MonoBehaviour
         {
             polyCollider = GetComponentInChildren<PolygonCollider2D>();
         }
-        speed = moveComponent.moveSpeed;
+        baseSpeed = moveComponent.moveSpeed;
     }
 
     protected virtual void OnEnable()
@@ -42,7 +46,7 @@ public class Insect : MonoBehaviour
         gameObject.SetActive(false);
         polyCollider.enabled = true;
         animating = false;
-        moveComponent.moveSpeed = speed;
+        moveComponent.moveSpeed = baseSpeed;
 
         if (!wasShot)
         {

@@ -32,7 +32,7 @@ SpriteAtlas:
     packables:
     - {fileID: 102900000, guid: b72ef1f51e563ce4680f4b4ec863a917, type: 3}
     - {fileID: 102900000, guid: e3d09d56dff7d8f428c616e3fb062540, type: 3}
-    totalSpriteSurfaceArea: 2174491
+    totalSpriteSurfaceArea: 2201039
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -126,6 +126,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 487c6ffb11fe5e54aaa6453cc8763f4a, type: 3}
   - {fileID: 21300000, guid: b7ffec0c22a08d44180527177e151936, type: 3}
   - {fileID: 21300000, guid: 0f17151cde1845c46aa107de331949ef, type: 3}
+  - {fileID: -2330213095281080702, guid: 68e20e3c83f00e64cb0abba53658288b, type: 3}
+  - {fileID: -6999756457996550341, guid: 68e20e3c83f00e64cb0abba53658288b, type: 3}
+  - {fileID: 1802795634413925329, guid: 68e20e3c83f00e64cb0abba53658288b, type: 3}
+  - {fileID: 3611033356025962415, guid: 68e20e3c83f00e64cb0abba53658288b, type: 3}
   - {fileID: 21300000, guid: 988eff3c58a75f14fabe7f8d8bb9fee9, type: 3}
   - {fileID: 21300000, guid: c92a864c6eb13bb4ebf178314f954d87, type: 3}
   - {fileID: 21300000, guid: 487e4bac2279b1347ad25f04b098013f, type: 3}
@@ -240,6 +244,10 @@ SpriteAtlas:
   - Web6-9
   - Web7-7
   - Mosquito-Base
+  - Bug Slayer-Sheet_0
+  - Bug Slayer-Sheet_3
+  - Bug Slayer-Sheet_4
+  - Bug Slayer-Sheet_5
   - Line-05
   - Web5-10
   - Web6-5
