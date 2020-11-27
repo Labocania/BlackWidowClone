@@ -11,6 +11,4 @@ public class EventList : MonoBehaviour
     public static UnityAction waveChanged;
     public static UnityAction playerDeath;
     public static UnityAction gameOver;
-    public static UnityAction<Transform> eatMe;
-
 }

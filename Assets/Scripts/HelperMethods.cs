@@ -35,21 +35,18 @@ public static class HelperMethods
 
     public static Transform SelectBug()
     {
-        int scope = 1;
-        Transform chosenBug = null;
+        Transform result = null;
         LinkedListNode<Transform> currentNode = edibleBugs.First;
-
-        while (currentNode != null)
+        for (int n = 2;  currentNode != null; n++)
         {
-            if (rand.Next() < 1 / scope)
+            if (rand.Next() % n == 0)
             {
-                chosenBug = currentNode.Value;
+                result = currentNode.Value;
             }
 
-            scope++;
             currentNode = currentNode.Next;
         }
 
-        return chosenBug;
+        return result;
     }
 }

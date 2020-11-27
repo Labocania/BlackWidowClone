@@ -71,8 +71,10 @@ MonoBehaviour:
     isExpanded: 1
     _keyValues:
     - {fileID: 3067285897765418296, guid: 141a8ced8affe1642889f5f168d92011, type: 3}
+    - {fileID: 3247838676555587249, guid: 969cd9064899906418b57d1b1032e7a0, type: 3}
     _keys:
     - {fileID: 3067285897765418296, guid: 141a8ced8affe1642889f5f168d92011, type: 3}
-    _values: 01000000
+    - {fileID: 3247838676555587249, guid: 969cd9064899906418b57d1b1032e7a0, type: 3}
+    _values: 0100000003000000
   waveNumber: 1
   spawingSpeed: 2

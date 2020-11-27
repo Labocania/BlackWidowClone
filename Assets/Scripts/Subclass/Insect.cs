@@ -9,7 +9,9 @@ public class Insect : MonoBehaviour
     protected System.Random randomNumber = new System.Random();
     protected MovementComponent moveComponent;
     protected PolygonCollider2D polyCollider;
+    protected SpriteRenderer baseSprite;
     protected Coroutine movementRoutine;
+    protected Color currentColor;
     protected float baseSpeed;
     protected int score;
     protected bool animating = false;
@@ -18,12 +20,23 @@ public class Insect : MonoBehaviour
     protected virtual void Awake()
     {
         moveComponent = GetComponent<MovementComponent>();
+        baseSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        currentColor = baseSprite.color;
         polyCollider = GetComponent<PolygonCollider2D>();
         if (polyCollider == null)
         {
-            polyCollider = GetComponentInChildren<PolygonCollider2D>();
+            polyCollider = GetComponentInChildren<PolygonCollider2D>(true);
         }
         baseSpeed = moveComponent.moveSpeed;
+        waitTimes.Add(new WaitForSeconds(0.1f));
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        if (gameObject.activeSelf == true)
+        {
+            moveComponent.TransformMove(transform.up);
+        }
     }
 
     protected virtual void OnEnable()
@@ -44,6 +57,7 @@ public class Insect : MonoBehaviour
     protected virtual void OnBecameInvisible()
     {
         gameObject.SetActive(false);
+        baseSprite.color = currentColor;
         polyCollider.enabled = true;
         animating = false;
         moveComponent.moveSpeed = baseSpeed;
@@ -88,9 +102,23 @@ public class Insect : MonoBehaviour
         }
     }
 
-    protected virtual void Chase() { }
+    public void FlashColors()
+    {
+        StartCoroutine(FlashRoutine());
+    }
 
-    protected virtual void Eat() { }
+    IEnumerator FlashRoutine()
+    {      
+        while (gameObject.activeSelf == true && !animating)
+        {
+            baseSprite.color = Color.white;
+            yield return waitTimes[0];
+            baseSprite.color = currentColor;
+            yield return waitTimes[0];
+        }
+    }
+
+    protected virtual void Chase() { }
 
     protected virtual void Shoot() { }
 

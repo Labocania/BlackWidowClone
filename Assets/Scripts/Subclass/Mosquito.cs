@@ -9,7 +9,7 @@ public class Mosquito : Insect
     protected override void Awake()
     {
         base.Awake();
-
+        
         //Left rotation
         rotationAngles.Add(new Vector3(0f, 0f, 45f));
         //Right rotation
@@ -41,19 +41,11 @@ public class Mosquito : Insect
 
     protected override void OnBecameInvisible() => base.OnBecameInvisible();
 
-    void FixedUpdate()
-    {
-        if (gameObject.activeSelf == true)
-        {
-            moveComponent.TransformMove(transform.up);       
-        }
-    }
-
     protected override IEnumerator StartMovementRoutine()
     {
         while (gameObject.activeSelf == true && animating == false)
         {
-            yield return waitTimes[randomNumber.Next(waitTimes.Count)];
+            yield return waitTimes[randomNumber.Next(1, waitTimes.Count)];
             yield return moveComponent.TransformRotate(rotationAngles[randomNumber.Next(rotationAngles.Count)], 3f);
         }
     }
@@ -87,6 +79,12 @@ public class Mosquito : Insect
         {
             Spawn();
             base.Die();
+            return;
+        }
+
+        if (obj.CompareTag("Enemy"))
+        {
+            gameObject.SetActive(false);
             return;
         }
 

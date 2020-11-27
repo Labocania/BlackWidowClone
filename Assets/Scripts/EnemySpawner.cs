@@ -188,11 +188,14 @@ public class EnemySpawner : MonoBehaviour
     void EnemySpawn_OnEnemyLeft(string enemy)
     {
         spawnDictionary[enemy].spawnTotal++;
+        if (spawnDictionary[enemy].prefab.CompareTag("KillableEnemy"))
+        {
+            killableEnemiesOnScreen--;
+        }
         if (!keyList.Contains(enemy))
         {
             keyList.Add(enemy);
         }
-        enemiesOnScreen--;
-        killableEnemiesOnScreen--;
+        enemiesOnScreen--;       
     }
 }

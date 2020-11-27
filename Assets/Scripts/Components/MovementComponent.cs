@@ -64,6 +64,19 @@ public class MovementComponent : MonoBehaviour
         yield break;
     }
 
+    public void MoveTowards(Vector2 target)
+    {
+        transform.position = Vector2.MoveTowards(transform.position, target, moveSpeed * Time.fixedDeltaTime);
+    }
+
+    public void RotateTowards(Vector2 target)
+    {
+        Vector2 direction = (target - (Vector2)transform.position).normalized;
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        var offset = -90f;
+        transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
+    }
+
     void UpdateAnimation(Vector2 direction)
     {
         movementAnim.SetFloat("MoveY", direction.y);

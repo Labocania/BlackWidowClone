@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8620360769954144303}
   - component: {fileID: 8555921680703979508}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Base
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 9163076206212920222}
   - component: {fileID: -3223539311177526798}
   - component: {fileID: -5922424789987723870}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: BugSlayer
   m_TagString: Enemy
   m_Icon: {fileID: 0}
