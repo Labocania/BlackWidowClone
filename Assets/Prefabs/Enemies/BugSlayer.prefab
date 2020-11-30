@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: -5922424789987723870}
   m_Layer: 8
   m_Name: BugSlayer
-  m_TagString: Enemy
+  m_TagString: BugSlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

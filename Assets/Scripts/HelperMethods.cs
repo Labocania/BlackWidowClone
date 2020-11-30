@@ -24,7 +24,7 @@ public static class HelperMethods
         }
         else
         {
-            edibleBugs.AddLast(transform);
+            edibleBugs.AddLast(transform);          
         }
     }
 

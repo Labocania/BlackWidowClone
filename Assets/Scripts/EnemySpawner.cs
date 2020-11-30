@@ -111,9 +111,10 @@ public class EnemySpawner : MonoBehaviour
 
         enemiesOnScreen++;
 
-        if (currentPool.prefab.CompareTag("KillableEnemy"))
+        if (obj.CompareTag("KillableEnemy"))
         {
             killableEnemiesOnScreen++;
+            HelperMethods.AddEdibleBug(obj.transform);
         }
 
         if (currentPool.spawnTotal == 0)

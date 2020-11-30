@@ -12,6 +12,7 @@ TagManager:
   - ShootingSpot
   - KillableEnemy
   - Grub
+  - BugSlayer
   layers:
   - Default
   - TransparentFX

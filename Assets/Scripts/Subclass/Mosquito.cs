@@ -27,19 +27,15 @@ public class Mosquito : Insect
         bounceAmount = randomNumber.Next(8);
     }
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        HelperMethods.AddEdibleBug(transform);
-    }
+    protected override void OnEnable() => base.OnEnable();
 
-    protected override void OnDisable()
+    protected override void OnDisable() => base.OnDisable();
+
+    protected override void OnBecameInvisible()
     {
-        base.OnDisable();
+        base.OnBecameInvisible();
         HelperMethods.RemoveEdibleBug(transform);
     }
-
-    protected override void OnBecameInvisible() => base.OnBecameInvisible();
 
     protected override IEnumerator StartMovementRoutine()
     {
@@ -79,12 +75,6 @@ public class Mosquito : Insect
         {
             Spawn();
             base.Die();
-            return;
-        }
-
-        if (obj.CompareTag("Enemy"))
-        {
-            gameObject.SetActive(false);
             return;
         }
 

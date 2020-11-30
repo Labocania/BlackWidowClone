@@ -67,8 +67,9 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-		GameObject collidedObject = collision.gameObject;
-		if (collidedObject.CompareTag("Enemy") || collidedObject.CompareTag("KillableEnemy"))
+		GameObject obj = collision.gameObject;
+		if (obj.CompareTag("Enemy") || obj.CompareTag("KillableEnemy") 
+			|| obj.CompareTag("BugSlayer"))
 		{
 			EventList.playerDeath.Invoke();
 			StartCoroutine(Death());
