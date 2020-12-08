@@ -15,8 +15,7 @@ public class BugSlayer : Insect
         baseSpeed = 1;
 
         waitUntilActive = new WaitUntil(() => target.gameObject.activeSelf == true);
-        // Full Turn
-        rotationAngles.Add(new Vector3(0f, 0f, 360f));
+
         rotationAngles.Add(new Vector3(0f, 0f, 20f));
         rotationAngles.Add(new Vector3(0f, 0f, -20f));
 
@@ -92,7 +91,7 @@ public class BugSlayer : Insect
     {
         while (gameObject.activeSelf == true && animating == false)
         {
-            yield return moveComponent.TransformRotate(rotationAngles[randomNumber.Next(1, 3)], 0.5f);
+            yield return moveComponent.TransformRotate(rotationAngles[randomNumber.Next(0, 2)], 1f);
         }
     }
 
@@ -104,6 +103,11 @@ public class BugSlayer : Insect
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Edge"))
+        {
+            moveComponent.RotateTowards(Vector2.zero);
+        }
+
         if (target != null && collision.gameObject == target.gameObject)
         {
             CheckNextTarget();
@@ -128,11 +132,8 @@ public class BugSlayer : Insect
         yield return waitUntilActive;
         Insect bug = target.GetComponent<Mosquito>();
         bug.FlashColors();
-
+        yield return waitTimes[2]; // 1s
         StopCoroutine(movementRoutine);
-        polyCollider.enabled = false; // Fix this.
-        yield return moveComponent.TransformRotate(rotationAngles[0], 1f); // 360 turn.
-        polyCollider.enabled = true;
         moveComponent.moveSpeed += 3;
         isChasing = true;
     }
