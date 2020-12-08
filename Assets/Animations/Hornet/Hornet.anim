@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BugSlayerMov
+  m_Name: Hornet
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,16 +20,16 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -2330213095281080702, guid: 68e20e3c83f00e64cb0abba53658288b,
+      value: {fileID: -5061359671071284763, guid: 449df1e5c3720f24793f3fed5abf871f,
         type: 3}
     - time: 0.025
-      value: {fileID: -6999756457996550341, guid: 68e20e3c83f00e64cb0abba53658288b,
+      value: {fileID: 8303354899903872694, guid: 449df1e5c3720f24793f3fed5abf871f,
         type: 3}
     - time: 0.05
-      value: {fileID: 1802795634413925329, guid: 68e20e3c83f00e64cb0abba53658288b,
+      value: {fileID: 2191812780951608279, guid: 449df1e5c3720f24793f3fed5abf871f,
         type: 3}
     - time: 0.075
-      value: {fileID: -6999756457996550341, guid: 68e20e3c83f00e64cb0abba53658288b,
+      value: {fileID: 2233320821615210922, guid: 449df1e5c3720f24793f3fed5abf871f,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -50,10 +50,10 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -2330213095281080702, guid: 68e20e3c83f00e64cb0abba53658288b, type: 3}
-    - {fileID: -6999756457996550341, guid: 68e20e3c83f00e64cb0abba53658288b, type: 3}
-    - {fileID: 1802795634413925329, guid: 68e20e3c83f00e64cb0abba53658288b, type: 3}
-    - {fileID: -6999756457996550341, guid: 68e20e3c83f00e64cb0abba53658288b, type: 3}
+    - {fileID: -5061359671071284763, guid: 449df1e5c3720f24793f3fed5abf871f, type: 3}
+    - {fileID: 8303354899903872694, guid: 449df1e5c3720f24793f3fed5abf871f, type: 3}
+    - {fileID: 2191812780951608279, guid: 449df1e5c3720f24793f3fed5abf871f, type: 3}
+    - {fileID: 2233320821615210922, guid: 449df1e5c3720f24793f3fed5abf871f, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
     int killableEnemies;
     bool isSpawing = false;
 
-    List<string> keyList;
+    List<string> keyList = new List<string>();
     GameObjectPool currentPool;
     Dictionary<string, GameObjectPool> spawnDictionary = new Dictionary<string, GameObjectPool>();
 
@@ -85,6 +85,7 @@ public class EnemySpawner : MonoBehaviour
                 }
                 spawnDictionary[enemy.Key.name].spawnTotal = enemy.Value;
                 spawnDictionary[enemy.Key.name].maximumSize = MAX_ENEMIES_ON_SCREEN;
+                keyList.Add(enemy.Key.name);
 
             }
             else
@@ -94,10 +95,9 @@ public class EnemySpawner : MonoBehaviour
                     killableEnemies += enemy.Value;
                 }
                 spawnDictionary[enemy.Key.name].spawnTotal = enemy.Value;
+                keyList.Add(enemy.Key.name);
             }
         }
-
-        keyList = new List<string>(spawnDictionary.Keys);
     }
 
     void SpawnEnemy()
@@ -144,11 +144,15 @@ public class EnemySpawner : MonoBehaviour
 
     void EnemySpawn_OnEnemyDeath(int score)
     {
-        if (enemiesOnScreen > 0 || killableEnemiesOnScreen > 0)
+        if (enemiesOnScreen > 0)
         {
             enemiesOnScreen--;
-            killableEnemiesOnScreen--;
-            killableEnemies--;
+
+            if (killableEnemiesOnScreen > 0 && killableEnemies > 0)
+            {
+                killableEnemiesOnScreen--;
+                killableEnemies--;
+            }
         }
 
         if (isSpawing == false && killableEnemies > 0)
@@ -156,10 +160,11 @@ public class EnemySpawner : MonoBehaviour
             isSpawing = true;
         }
 
-        if (killableEnemies == 0)
+        if (killableEnemies == 0 && enemiesOnScreen == 0)
         {
             // TO DO: Running away logic from non killable enemies.
             isSpawing = false;
+            keyList.Clear();
             EventList.waveChanged.Invoke();
             ReloadWaveData();
             return;

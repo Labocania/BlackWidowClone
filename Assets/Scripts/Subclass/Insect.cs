@@ -16,6 +16,7 @@ public class Insect : MonoBehaviour
     protected int score;
     protected bool animating = false;
     protected bool wasShot;
+    protected bool flashing;
 
     protected virtual void Awake()
     {
@@ -62,15 +63,12 @@ public class Insect : MonoBehaviour
         animating = false;
         moveComponent.moveSpeed = baseSpeed;
 
-        if (!wasShot)
+        if (wasShot == false)
         {
             string name = gameObject.name.Replace("(Clone)", "");
             EventList.enemyLeft.Invoke(name);
         }
-        else
-        {
-            wasShot = false;
-        }
+        wasShot = false;
     }
 
     protected virtual void Die()
@@ -85,7 +83,12 @@ public class Insect : MonoBehaviour
         yield return null;
     }
 
-    void onPlayerDeath()
+    protected virtual void onPlayerDeath()
+    {
+        RunAway();
+    }
+
+    protected void RunAway()
     {
         if (gameObject.activeSelf == true)
         {
@@ -111,11 +114,14 @@ public class Insect : MonoBehaviour
     {      
         while (gameObject.activeSelf == true && !animating)
         {
+            flashing = true;
             baseSprite.color = Color.white;
             yield return waitTimes[0];
             baseSprite.color = currentColor;
             yield return waitTimes[0];
         }
+
+        flashing = false;
     }
 
     protected virtual void Chase() { }

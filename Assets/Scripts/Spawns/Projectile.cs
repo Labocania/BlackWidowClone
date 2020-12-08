@@ -36,6 +36,10 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("KillableEnemy"))
         {
 			Hit();
+            if (HelperMethods.edibleBugs.Contains(collision.transform))
+            {
+                HelperMethods.RemoveEdibleBug(collision.transform);
+            }
         }
     }
 

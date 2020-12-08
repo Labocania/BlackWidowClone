@@ -78,6 +78,13 @@ public class Mosquito : Insect
             return;
         }
 
+        if (obj.CompareTag("BugSlayer") && flashing == true)
+        {
+            base.Die();
+            flashing = false;
+            return;
+        }
+
         // Edge of the sceen or Green Web
         if (collision.enabled && gameObject.activeSelf == true)
         {

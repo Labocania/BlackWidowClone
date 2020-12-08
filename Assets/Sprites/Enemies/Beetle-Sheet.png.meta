@@ -1,0 +1,328 @@
+fileFormatVersion: 2
+guid: 80b239bb97392b94790ebe07443e109b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4706256051277496240
+    second: Beetle-Sheet_0
+  - first:
+      213: -5790993561532189390
+    second: Beetle-Sheet_1
+  - first:
+      213: -543120262046906468
+    second: Beetle-Sheet_2
+  - first:
+      213: -4466875538117438854
+    second: Beetle-Sheet_3
+  - first:
+      213: 8288464269279876853
+    second: Beetle-Sheet_4
+  - first:
+      213: 7294697025806432331
+    second: Beetle-Sheet_5
+  - first:
+      213: -6545190395649461172
+    second: Beetle-Sheet_6
+  - first:
+      213: 1001377412981078427
+    second: Beetle-Sheet_7
+  - first:
+      213: -2680104563159628467
+    second: Beetle-Sheet_8
+  - first:
+      213: 8760224705118445126
+    second: Beetle-Sheet_9
+  - first:
+      213: 984759766825590535
+    second: Beetle-Sheet_10
+  - first:
+      213: 6191226389898875551
+    second: Beetle-Sheet_11
+  - first:
+      213: 4507677494502395161
+    second: Beetle-Sheet_12
+  - first:
+      213: 2856070346826593281
+    second: Beetle-Sheet_13
+  - first:
+      213: -3411108976281605682
+    second: Beetle-Sheet_14
+  - first:
+      213: 1203142644903789652
+    second: Beetle-Sheet_15
+  - first:
+      213: -8577752788962988756
+    second: Beetle-Sheet_16
+  - first:
+      213: -7538562469163628151
+    second: Beetle-Sheet_17
+  - first:
+      213: 8017977233551067653
+    second: Beetle-Sheet_18
+  - first:
+      213: -819300233602239844
+    second: Beetle-Sheet_19
+  - first:
+      213: 5040606495569755445
+    second: Beetle-Sheet_20
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 120
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Beetle-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 81
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -6.5, y: 7}
+        - {x: -14.5, y: 21}
+        - {x: -6.5, y: 29}
+        - {x: 6.5, y: 29}
+        - {x: 14.5, y: 20}
+        - {x: 7.5, y: 7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 235bc4ca90242afa0800000000000000
+      internalID: -5790993561532189390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beetle-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 0
+        width: 70
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -19, y: 17}
+        - {x: -19, y: 26}
+        - {x: -11, y: 30}
+        - {x: 10, y: 30}
+        - {x: 18, y: 26}
+        - {x: 18, y: 16}
+        - {x: 7, y: 8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f6d1f7b65a860370800000000000000
+      internalID: 8288464269279876853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beetle-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 0
+        width: 72
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -7, y: 7}
+        - {x: -18, y: 16}
+        - {x: -14, y: 27}
+        - {x: -4, y: 30}
+        - {x: 4, y: 30}
+        - {x: 13, y: 27}
+        - {x: 18, y: 16}
+        - {x: 8, y: 7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b487a47cb48fb3560800000000000000
+      internalID: 7294697025806432331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beetle-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 3
+        width: 41
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 20.5, y: -3}
+        - {x: 20.5, y: -22}
+        - {x: 13.5, y: -26}
+        - {x: -12.5, y: -26}
+        - {x: -19.5, y: -23}
+        - {x: -19.5, y: -3}
+        - {x: -11.5, y: 9}
+        - {x: -13.5, y: 17}
+        - {x: -6.5, y: 26}
+        - {x: 8.5, y: 26}
+        - {x: 14.5, y: 17}
+        - {x: 12.5, y: 9}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c44f3085300da25a0800000000000000
+      internalID: -6545190395649461172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beetle-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 0
+        width: 73
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -6.5, y: 7}
+        - {x: -18.5, y: 17}
+        - {x: -13.5, y: 27}
+        - {x: -4.5, y: 30}
+        - {x: 4.5, y: 30}
+        - {x: 13.5, y: 27}
+        - {x: 18.5, y: 16}
+        - {x: 7.5, y: 7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9252fd5997abe550800000000000000
+      internalID: 6191226389898875551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 1f20d6c709b55ea46b64e0096855a3dd
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

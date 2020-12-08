@@ -163,7 +163,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		Lives -= 1;
         if (Lives == 0)
         {
-			EventList.gameOver.Invoke();
+			//EventList.gameOver.Invoke();
         }
 
 		// Restart Animation.

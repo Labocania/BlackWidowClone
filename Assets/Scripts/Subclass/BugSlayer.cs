@@ -1,11 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BugSlayer : Insect
 {
     Transform target;
     WaitUntil waitUntilActive;
+    Coroutine pickTargetRoutine;
     bool isChasing = false;
 
     protected override void Awake()
@@ -23,26 +23,66 @@ public class BugSlayer : Insect
         waitTimes.Add(new WaitForSeconds(0.5f));
         waitTimes.Add(new WaitForSeconds(1f));
         waitTimes.Add(new WaitForSeconds(2f));
+        EventList.waveChanged += BugSlayer_OnWaveChanged;
+        EventList.noTargets += BugSlayer_OnNoTargets;
+        EventList.enemyDeath += BugSlayer_OnEnemyDeath;
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        StartCoroutine(PickATarget());
+        pickTargetRoutine = StartCoroutine(PickATarget());
     }
 
     protected override void OnDisable() => base.OnDisable();
     protected override void OnBecameInvisible()
     {
-        base.OnBecameInvisible();
-        StopAllCoroutines();
+        target = null;
+        gameObject.SetActive(false);
+        baseSprite.color = currentColor;
+        moveComponent.moveSpeed = baseSpeed;
+        polyCollider.enabled = true;
+        if (animating)
+        {
+            if (wasShot)
+            {
+                wasShot = false;
+                EventList.enemyDeath.Invoke(score);
+            }
+            else
+            {
+                string name = gameObject.name.Replace("(Clone)", "");   
+                EventList.enemyLeft.Invoke(name);
+            }
+            animating = false;
+        }
     }
+
+    protected override void onPlayerDeath()
+    {
+        isChasing = false;
+        StopCoroutine(pickTargetRoutine);
+        base.onPlayerDeath();
+    }
+
+    void BugSlayer_OnWaveChanged()
+    {
+        //BugSlayerStartExit();
+        //RunAway();
+    }
+
+    void BugSlayerStartExit()
+    {
+        wasShot = true;
+        RunAway();
+    }
+
 
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
 
-        if (isChasing)
+        if (isChasing && !animating)
         {
             Chase();
         }
@@ -53,6 +93,27 @@ public class BugSlayer : Insect
         while (gameObject.activeSelf == true && animating == false)
         {
             yield return moveComponent.TransformRotate(rotationAngles[randomNumber.Next(1, 3)], 0.5f);
+        }
+    }
+
+
+    protected override void Chase()
+    {
+        moveComponent.RotateTowards(target.position);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (target != null && collision.gameObject == target.gameObject)
+        {
+            CheckNextTarget();
+            return;
+        }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isChasing = false;
+            StopCoroutine(pickTargetRoutine);
         }
     }
 
@@ -69,26 +130,54 @@ public class BugSlayer : Insect
         bug.FlashColors();
 
         StopCoroutine(movementRoutine);
+        polyCollider.enabled = false; // Fix this.
         yield return moveComponent.TransformRotate(rotationAngles[0], 1f); // 360 turn.
-        moveComponent.moveSpeed += 2;
-        isChasing = true; 
+        polyCollider.enabled = true;
+        moveComponent.moveSpeed += 3;
+        isChasing = true;
     }
 
-    protected override void Chase()
-    {
-        moveComponent.RotateTowards(target.position);
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void BugSlayer_OnNoTargets()
     {
-        if (collision.gameObject == target.gameObject)
+        isChasing = false;
+        target = null;
+        moveComponent.moveSpeed = baseSpeed;
+        if (this != null)
         {
-            moveComponent.moveSpeed = baseSpeed;
-            collision.gameObject.SetActive(false);
-            isChasing = false;
-            movementRoutine = StartCoroutine(StartMovementRoutine());
+            BugSlayerStartExit();
+        }
+    }
+
+    void BugSlayer_OnEnemyDeath(int score)
+    {
+        if (gameObject.activeSelf == true && animating == false)
+        {
+            if (target.gameObject.activeSelf == false)
+            {
+                CheckNextTarget();
+            }
+        }
+    }
+
+    void CheckNextTarget()
+    {
+        isChasing = false;
+        if (pickTargetRoutine != null)
+        {
+            StopCoroutine(pickTargetRoutine);
+        }
+
+        if (HelperMethods.edibleBugs.Count > 0)
+        {
             target = null;
-            StartCoroutine(PickATarget());
+            pickTargetRoutine = StartCoroutine(PickATarget());
+            moveComponent.moveSpeed = baseSpeed;
+            movementRoutine = StartCoroutine(StartMovementRoutine());
+        }
+        else
+        {
+            BugSlayerStartExit();
         }
     }
 }

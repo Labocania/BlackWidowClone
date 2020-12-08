@@ -13,7 +13,7 @@ public static class HelperMethods
         return children;
     }
 
-    static LinkedList<Transform> edibleBugs = new LinkedList<Transform>();
+    public static LinkedList<Transform> edibleBugs = new LinkedList<Transform>();
     static System.Random rand = new System.Random();
 
     public static void AddEdibleBug(Transform transform)
@@ -31,6 +31,11 @@ public static class HelperMethods
     public static void RemoveEdibleBug(Transform transform)
     {
         edibleBugs.Remove(transform);
+
+        if (edibleBugs.Count == 0)
+        {
+            EventList.noTargets.Invoke();
+        }
     }
 
     public static Transform SelectBug()
