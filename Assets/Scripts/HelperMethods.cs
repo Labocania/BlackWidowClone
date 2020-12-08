@@ -31,11 +31,6 @@ public static class HelperMethods
     public static void RemoveEdibleBug(Transform transform)
     {
         edibleBugs.Remove(transform);
-
-        if (edibleBugs.Count == 0)
-        {
-            EventList.noTargets.Invoke();
-        }
     }
 
     public static Transform SelectBug()

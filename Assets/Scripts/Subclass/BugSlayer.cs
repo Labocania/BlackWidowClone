@@ -153,7 +153,7 @@ public class BugSlayer : Insect
     {
         if (gameObject.activeSelf == true && animating == false)
         {
-            if (target.gameObject.activeSelf == false)
+            if (target != null && target.gameObject.activeSelf == false)
             {
                 CheckNextTarget();
             }
@@ -163,21 +163,15 @@ public class BugSlayer : Insect
     void CheckNextTarget()
     {
         isChasing = false;
+
         if (pickTargetRoutine != null)
         {
             StopCoroutine(pickTargetRoutine);
         }
 
-        if (HelperMethods.edibleBugs.Count > 0)
-        {
-            target = null;
-            pickTargetRoutine = StartCoroutine(PickATarget());
-            moveComponent.moveSpeed = baseSpeed;
-            movementRoutine = StartCoroutine(StartMovementRoutine());
-        }
-        else
-        {
-            BugSlayerStartExit();
-        }
+        target = null;
+        pickTargetRoutine = StartCoroutine(PickATarget());
+        moveComponent.moveSpeed = baseSpeed;
+        movementRoutine = StartCoroutine(StartMovementRoutine());
     }
 }
