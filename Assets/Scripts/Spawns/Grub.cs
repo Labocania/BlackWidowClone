@@ -17,6 +17,8 @@ public class Grub : MonoBehaviour
     void Awake()
     {
         EventList.playerDeath += Grub_OnPlayerDeath;
+        EventList.waveChanged += Grub_OnWaveChanged;
+
         swapper = GetComponent<ColorSwapper>();
         swapper.ToggleObjectsColor(ColorNames.White);
         Score = 500;
@@ -25,9 +27,23 @@ public class Grub : MonoBehaviour
         pointEnum = points.GetEnumerator();
     }
 
-    private void Grub_OnPlayerDeath()
+    void OnDestroy()
+    {
+        EventList.playerDeath -= Grub_OnPlayerDeath;
+        EventList.waveChanged -= Grub_OnWaveChanged;
+    }
+
+    void Grub_OnPlayerDeath()
     {
         isChanging = false;
+    }
+
+    void Grub_OnWaveChanged()
+    {
+        if (this != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame

@@ -22,7 +22,7 @@ public class BugSlayer : Insect
         waitTimes.Add(new WaitForSeconds(0.5f));
         waitTimes.Add(new WaitForSeconds(1f));
         waitTimes.Add(new WaitForSeconds(2f));
-        EventList.waveChanged += BugSlayer_OnWaveChanged;
+
         EventList.noTargets += BugSlayer_OnNoTargets;
         EventList.enemyDeath += BugSlayer_OnEnemyDeath;
     }
@@ -62,12 +62,6 @@ public class BugSlayer : Insect
         isChasing = false;
         StopCoroutine(pickTargetRoutine);
         base.onPlayerDeath();
-    }
-
-    void BugSlayer_OnWaveChanged()
-    {
-        //BugSlayerStartExit();
-        //RunAway();
     }
 
     void BugSlayerStartExit()
