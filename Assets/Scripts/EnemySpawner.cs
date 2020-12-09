@@ -79,24 +79,17 @@ public class EnemySpawner : MonoBehaviour
             {
                 spawnDictionary[enemy.Key.name] = gameObject.AddComponent<GameObjectPool>();
                 spawnDictionary[enemy.Key.name].prefab = enemy.Key;
-                if (enemy.Key.CompareTag("KillableEnemy"))
-                {
-                    killableEnemies += enemy.Value;
-                }
-                spawnDictionary[enemy.Key.name].spawnTotal = enemy.Value;
                 spawnDictionary[enemy.Key.name].maximumSize = MAX_ENEMIES_ON_SCREEN;
-                keyList.Add(enemy.Key.name);
+            }
 
-            }
-            else
+            if (enemy.Key.CompareTag("KillableEnemy"))
             {
-                if (enemy.Key.CompareTag("KillableEnemy"))
-                {
-                    killableEnemies += enemy.Value;
-                }
-                spawnDictionary[enemy.Key.name].spawnTotal = enemy.Value;
-                keyList.Add(enemy.Key.name);
+                killableEnemies += enemy.Value;
             }
+            spawnDictionary[enemy.Key.name].spawnTotal = enemy.Value;
+
+            keyList.Add(enemy.Key.name);
+
         }
     }
 

@@ -113,5 +113,4 @@ public class Mosquito : Insect
     {
         Instantiate(grub, transform.position, Quaternion.identity);
     }
-
 }

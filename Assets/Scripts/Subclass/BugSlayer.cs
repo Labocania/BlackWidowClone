@@ -42,7 +42,7 @@ public class BugSlayer : Insect
             gameObject.SetActive(false);
         }
         baseSprite.color = currentColor;
-        moveComponent.moveSpeed = baseSpeed;
+        moveComponent.MoveSpeed = baseSpeed;
         polyCollider.enabled = true;
         gameObject.layer = 8; // BugSlayer
         if (animating)
@@ -136,7 +136,7 @@ public class BugSlayer : Insect
         bug.FlashColors();
         yield return waitTimes[2]; // 1s
         StopCoroutine(movementRoutine);
-        moveComponent.moveSpeed += 3;
+        moveComponent.MoveSpeed += 3;
         isChasing = true;
     }
 
@@ -145,7 +145,7 @@ public class BugSlayer : Insect
     {
         isChasing = false;
         target = null;
-        moveComponent.moveSpeed = baseSpeed;
+        moveComponent.MoveSpeed = baseSpeed;
         baseSprite.color = ColorList.colors[(int)ColorNames.Yellow];
         wasShot = true;
         if (this != null)
@@ -176,7 +176,7 @@ public class BugSlayer : Insect
 
         target = null;
         pickTargetRoutine = StartCoroutine(PickATarget());
-        moveComponent.moveSpeed = baseSpeed;
+        moveComponent.MoveSpeed = baseSpeed;
         movementRoutine = StartCoroutine(StartMovementRoutine());
     }
 

@@ -8,6 +8,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 	// The number of lives.
 	public int Lives { get; set; }
 	public int Score { get; private set; }
+	public float baseSpeed;
 	// Initial position.
 	Vector2 firstPosition;
 	// Flag for executing animations.
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		lerpAnimations = GetComponent<LerpComponent>();
 		shootComponent = GetComponent<ShootingComponent>();
 		moveComponent = GetComponent<MovementComponent>();
+		moveComponent.MoveSpeed = baseSpeed;
 		polyCollider = GetComponent<PolygonCollider2D>();
 		swapper = GetComponent<ColorSwapper>();
 		mainActions = new MainActions();

@@ -12,7 +12,7 @@ public class Insect : MonoBehaviour
     protected SpriteRenderer baseSprite;
     protected Coroutine movementRoutine;
     protected Color currentColor;
-    protected float baseSpeed;
+    public float baseSpeed;
     protected int score;
     protected bool animating = false;
     protected bool wasShot;
@@ -20,6 +20,7 @@ public class Insect : MonoBehaviour
 
     protected virtual void Awake()
     {
+        EventList.waveChanged += Insect_OnWaveChange;
         moveComponent = GetComponent<MovementComponent>();
         baseSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
         currentColor = baseSprite.color;
@@ -28,7 +29,7 @@ public class Insect : MonoBehaviour
         {
             polyCollider = GetComponentInChildren<PolygonCollider2D>(true);
         }
-        baseSpeed = moveComponent.moveSpeed;
+        moveComponent.MoveSpeed = baseSpeed;
         waitTimes.Add(new WaitForSeconds(0.1f));
     }
 
@@ -61,7 +62,7 @@ public class Insect : MonoBehaviour
         baseSprite.color = currentColor;
         polyCollider.enabled = true;
         animating = false;
-        moveComponent.moveSpeed = baseSpeed;
+        moveComponent.MoveSpeed = baseSpeed;
 
         if (wasShot == false)
         {
@@ -107,7 +108,7 @@ public class Insect : MonoBehaviour
             Quaternion rotation = Quaternion.LookRotation(-direction);
             Vector3 eulerAngles = rotation.eulerAngles;
             moveComponent.TransformRotate(eulerAngles, 0.2f);
-            moveComponent.moveSpeed += 3;
+            moveComponent.MoveSpeed += 3;
         }
     }
 
@@ -128,6 +129,11 @@ public class Insect : MonoBehaviour
         }
 
         flashing = false;
+    }
+
+    void Insect_OnWaveChange()
+    {
+        baseSpeed += 0.5f;
     }
 
     protected virtual void Chase() { }

@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09fd6b996cd73e4d961da82e6b43f0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpeed: 1
   grub: {fileID: 1433082174496874227, guid: 56f9d5e3f57256242b9663445ffe72af, type: 3}
 --- !u!114 &5572787111326804870
 MonoBehaviour:
@@ -153,7 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736ef8e607b38de4ba8122ff34a35fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
 --- !u!1 &8744004268183536575
 GameObject:
   m_ObjectHideFlags: 0

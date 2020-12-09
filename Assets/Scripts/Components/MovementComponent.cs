@@ -6,8 +6,24 @@ public class MovementComponent : MonoBehaviour
 {
     Rigidbody2D rBody;
     Animator movementAnim;
-    public float moveSpeed = 5f;
+    float moveSpeed;
     WaitForFixedUpdate waitTime;
+
+    public float MoveSpeed 
+    { 
+        get => moveSpeed;
+        set
+        {
+            if (value > 10)
+            {
+                moveSpeed = 10;
+            }
+            else
+            {
+                moveSpeed = value;
+            }
+        }
+    }
 
     // Start is called before the first frame update
     void Awake()
@@ -27,7 +43,7 @@ public class MovementComponent : MonoBehaviour
 
     public void TransformMove(Vector2 direction)
     {
-        transform.Translate(direction * Time.fixedDeltaTime * moveSpeed, Space.World);
+        transform.Translate(direction * Time.fixedDeltaTime * MoveSpeed, Space.World);
 
         if (movementAnim != null)
         {
@@ -38,7 +54,7 @@ public class MovementComponent : MonoBehaviour
     public void RigidBodyMove(Vector2 direction)
     {
         //rBody.velocity = new Vector2(direction.x, direction.y) * moveSpeed;
-        rBody.AddForce(new Vector2(direction.x, direction.y) * moveSpeed);
+        rBody.AddForce(new Vector2(direction.x, direction.y) * MoveSpeed);
 
         if (movementAnim != null)
         {
@@ -66,7 +82,7 @@ public class MovementComponent : MonoBehaviour
 
     public void MoveTowards(Vector2 target)
     {
-        transform.position = Vector2.MoveTowards(transform.position, target, moveSpeed * Time.fixedDeltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target, MoveSpeed * Time.fixedDeltaTime);
     }
 
     public void RotateTowards(Vector2 target)
