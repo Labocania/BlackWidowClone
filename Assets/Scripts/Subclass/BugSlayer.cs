@@ -43,6 +43,7 @@ public class BugSlayer : Insect
         }
         baseSprite.color = currentColor;
         moveComponent.moveSpeed = baseSpeed;
+        polyCollider.enabled = true;
         gameObject.layer = 8; // BugSlayer
         if (animating)
         {
