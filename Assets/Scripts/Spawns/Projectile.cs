@@ -33,7 +33,8 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("KillableEnemy"))
+        GameObject obj = collision.gameObject;
+        if (obj.CompareTag("Enemy") || obj.CompareTag("KillableEnemy") || obj.CompareTag("BugSlayer"))
         {
 			Hit();
             if (HelperMethods.edibleBugs.Contains(collision.transform))

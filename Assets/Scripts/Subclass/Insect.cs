@@ -88,15 +88,21 @@ public class Insect : MonoBehaviour
         RunAway();
     }
 
-    protected void RunAway()
+    protected void RunAway(bool specialBug = false)
     {
         if (gameObject.activeSelf == true)
         {
-            polyCollider.enabled = false;
+            if (specialBug)
+            {
+                gameObject.layer = 16; // Special Escape.
+            }
+            else
+            {
+                polyCollider.enabled = false;
+            }
+
             animating = true;
-
             StopCoroutine(movementRoutine);
-
             Vector3 direction = transform.position - Vector3.zero;
             Quaternion rotation = Quaternion.LookRotation(-direction);
             Vector3 eulerAngles = rotation.eulerAngles;

@@ -37,10 +37,13 @@ public class BugSlayer : Insect
     protected override void OnBecameInvisible()
     {
         target = null;
-        gameObject.SetActive(false);
+        if (gameObject.activeSelf)
+        {
+            gameObject.SetActive(false);
+        }
         baseSprite.color = currentColor;
         moveComponent.moveSpeed = baseSpeed;
-        polyCollider.enabled = true;
+        gameObject.layer = 8; // BugSlayer
         if (animating)
         {
             if (wasShot)
@@ -66,8 +69,7 @@ public class BugSlayer : Insect
 
     void BugSlayerStartExit()
     {
-        wasShot = true;
-        RunAway();
+        RunAway(true);
     }
 
 
@@ -97,6 +99,12 @@ public class BugSlayer : Insect
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            Die();
+            return;
+        }
+
         if (collision.gameObject.CompareTag("Edge"))
         {
             moveComponent.RotateTowards(Vector2.zero);
@@ -105,7 +113,6 @@ public class BugSlayer : Insect
         if (target != null && collision.gameObject == target.gameObject)
         {
             CheckNextTarget();
-            return;
         }
 
         if (collision.gameObject.CompareTag("Player"))
@@ -138,6 +145,8 @@ public class BugSlayer : Insect
         isChasing = false;
         target = null;
         moveComponent.moveSpeed = baseSpeed;
+        baseSprite.color = ColorList.colors[(int)ColorNames.Yellow];
+        wasShot = true;
         if (this != null)
         {
             BugSlayerStartExit();
@@ -168,5 +177,11 @@ public class BugSlayer : Insect
         pickTargetRoutine = StartCoroutine(PickATarget());
         moveComponent.moveSpeed = baseSpeed;
         movementRoutine = StartCoroutine(StartMovementRoutine());
+    }
+
+    protected override void Die()
+    {
+        wasShot = true;
+        gameObject.SetActive(false);
     }
 }

@@ -174,6 +174,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 	void Player_OnEnemyDeath(int score)
     {
 		Score += score;
+		Debug.Log(Score);
     }
 
 	private void Player_OnGrubCollect(int score)
