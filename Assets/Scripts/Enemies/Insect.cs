@@ -86,11 +86,11 @@ public class Insect : MonoBehaviour
         RunAway();
     }
 
-    protected void RunAway(bool specialBug = false)
+    protected void RunAway(bool bugSlayer = false)
     {
         if (gameObject.activeSelf == true)
         {
-            if (specialBug)
+            if (bugSlayer)
             {
                 gameObject.layer = 16; // Special Escape.
             }
