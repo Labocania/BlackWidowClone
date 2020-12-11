@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Insect : MonoBehaviour
 {
-    protected List<Vector3> rotationAngles = new List<Vector3>();
-    protected List<WaitForSeconds> waitTimes = new List<WaitForSeconds>();
     protected System.Random randomNumber = new System.Random();
     protected MovementComponent moveComponent;
     protected PolygonCollider2D polyCollider;
@@ -30,7 +28,6 @@ public class Insect : MonoBehaviour
             polyCollider = GetComponentInChildren<PolygonCollider2D>(true);
         }
         moveComponent.MoveSpeed = baseSpeed;
-        waitTimes.Add(new WaitForSeconds(0.1f));
     }
 
     protected virtual void FixedUpdate()
@@ -123,9 +120,9 @@ public class Insect : MonoBehaviour
         {
             flashing = true;
             baseSprite.color = Color.white;
-            yield return waitTimes[0];
+            yield return HelperMethods.GetWaitTime(0.1f);
             baseSprite.color = currentColor;
-            yield return waitTimes[0];
+            yield return HelperMethods.GetWaitTime(0.1f);
         }
 
         flashing = false;

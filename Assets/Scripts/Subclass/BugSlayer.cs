@@ -16,13 +16,6 @@ public class BugSlayer : Insect
 
         waitUntilActive = new WaitUntil(() => target.gameObject.activeSelf == true);
 
-        rotationAngles.Add(new Vector3(0f, 0f, 20f));
-        rotationAngles.Add(new Vector3(0f, 0f, -20f));
-
-        waitTimes.Add(new WaitForSeconds(0.5f));
-        waitTimes.Add(new WaitForSeconds(1f));
-        waitTimes.Add(new WaitForSeconds(2f));
-
         EventList.noTargets += BugSlayer_OnNoTargets;
         EventList.enemyDeath += BugSlayer_OnEnemyDeath;
     }
@@ -88,7 +81,7 @@ public class BugSlayer : Insect
     {
         while (gameObject.activeSelf == true && animating == false)
         {
-            yield return moveComponent.TransformRotate(rotationAngles[randomNumber.Next(0, 2)], 1f);
+            yield return moveComponent.TransformRotate(HelperMethods.GetRandomAngle(20f, -20f), 1f);
         }
     }
 
@@ -128,13 +121,13 @@ public class BugSlayer : Insect
         while (target == null)
         {
             target = HelperMethods.SelectBug();
-            yield return waitTimes[1]; // 0.5s
+            yield return HelperMethods.GetWaitTime(0.5f); 
         }
 
         yield return waitUntilActive;
         Insect bug = target.GetComponent<Mosquito>();
         bug.FlashColors();
-        yield return waitTimes[2]; // 1s
+        yield return HelperMethods.GetWaitTime(1f);
         StopCoroutine(movementRoutine);
         moveComponent.MoveSpeed += 3;
         isChasing = true;

@@ -9,21 +9,6 @@ public class Mosquito : Insect
     protected override void Awake()
     {
         base.Awake();
-        
-        //Left rotation
-        rotationAngles.Add(new Vector3(0f, 0f, 45f));
-        //Right rotation
-        rotationAngles.Add(new Vector3(0f, 0f, -45f));
-        //U-turn left
-        rotationAngles.Add(new Vector3(0f, 0f, 180f));
-        //U-turn right
-        rotationAngles.Add(new Vector3(0f, 0f, -180f));
-
-        waitTimes.Add(new WaitForSeconds(1f));
-        waitTimes.Add(new WaitForSeconds(2f));
-        waitTimes.Add(new WaitForSeconds(5f));
-        waitTimes.Add(new WaitForSeconds(8f));
-
         bounceAmount = randomNumber.Next(8);
     }
 
@@ -41,29 +26,24 @@ public class Mosquito : Insect
     {
         while (gameObject.activeSelf == true && animating == false)
         {
-            yield return waitTimes[randomNumber.Next(1, waitTimes.Count)];
-            yield return moveComponent.TransformRotate(rotationAngles[randomNumber.Next(rotationAngles.Count)], 3f);
+            yield return HelperMethods.GetRandomWaitTime(1f, 2f, 5f, 8f);
+            yield return moveComponent.TransformRotate(HelperMethods.GetRandomAngle(45f, -45f, 180f, -180f), 3f);
         }
-    }
-
-    IEnumerator WaitOneSecond()
-    {
-        yield return waitTimes[1];
     }
 
     IEnumerator BounceRoutine()
     {
         //Snap rotate 180 degrees.
-        gameObject.transform.Rotate(rotationAngles[2]);
+        gameObject.transform.Rotate(HelperMethods.GetRotationAngle(180f));
         //Pick left or right U turn
-        yield return moveComponent.TransformRotate(rotationAngles[randomNumber.Next(2, 4)], 0.5f);
+        yield return moveComponent.TransformRotate(HelperMethods.GetRandomAngle(180f, -180f), 0.5f);
     }
 
     IEnumerator ResetRoutine()
     {
         //Snap rotate 180 degrees.
-        gameObject.transform.Rotate(rotationAngles[2]);
-        yield return WaitOneSecond();
+        gameObject.transform.Rotate(HelperMethods.GetRotationAngle(180f));
+        yield return HelperMethods.GetWaitTime(1f);
 
     }
 
