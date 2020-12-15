@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Insect : MonoBehaviour
@@ -132,8 +131,6 @@ public class Insect : MonoBehaviour
     {
         baseSpeed += 0.5f;
     }
-
-    protected virtual void Chase() { }
 
     protected virtual void Shoot() { }
 

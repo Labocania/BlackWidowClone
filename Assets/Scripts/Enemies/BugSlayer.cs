@@ -3,21 +3,14 @@ using UnityEngine;
 
 public class BugSlayer : Insect
 {
-    Transform target;
-    WaitUntil waitUntilActive;
-    Coroutine pickTargetRoutine;
-    bool isChasing = false;
     BugChaser bugChaser;
 
     protected override void Awake()
     {
         base.Awake();
         score = 1000;
-        baseSpeed = 1;
         bugChaser = GetComponent<BugChaser>();
         bugChaser.moveComp = moveComponent;
-
-        waitUntilActive = new WaitUntil(() => target.gameObject.activeSelf == true);
 
         EventList.noTargets += BugSlayer_OnNoTargets;
         EventList.enemyDeath += BugSlayer_OnEnemyDeath;
@@ -86,12 +79,6 @@ public class BugSlayer : Insect
         }
     }
 
-
-    protected override void Chase()
-    {
-        moveComponent.RotateTowards(target.position);
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Projectile"))
@@ -117,24 +104,6 @@ public class BugSlayer : Insect
             bugChaser.StopChase();
         }
     }
-
-    IEnumerator PickATarget()
-    {
-        while (target == null)
-        {
-            target = HelperMethods.SelectBug();
-            yield return HelperMethods.GetWaitTime(0.5f); 
-        }
-
-        yield return waitUntilActive;
-        Insect bug = target.GetComponent<Mosquito>();
-        bug.FlashColors();
-        yield return HelperMethods.GetWaitTime(1f);
-        StopCoroutine(movementRoutine);
-        moveComponent.MoveSpeed += 3;
-        isChasing = true;
-    }
-
 
     void BugSlayer_OnNoTargets()
     {

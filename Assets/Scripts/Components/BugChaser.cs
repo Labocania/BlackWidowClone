@@ -4,6 +4,7 @@ using UnityEngine;
 public class BugChaser : ChasingType
 {
     public Coroutine PickATargetRoutine { get; private set; }
+    bool speedUp = false;
 
     protected override void Awake()
     {
@@ -25,6 +26,7 @@ public class BugChaser : ChasingType
     void SpeedUp()
     {
         moveComp.MoveSpeed += 3;
+        speedUp = true;
     }
 
     protected override IEnumerator ChaseRoutine()
@@ -52,7 +54,11 @@ public class BugChaser : ChasingType
             StopCoroutine(PickATargetRoutine);
         }
         base.StopChase();
-        moveComp.MoveSpeed -= 3;    
+        if (speedUp)
+        {
+            moveComp.MoveSpeed -= 3;
+            speedUp = false;
+        }
     }
 
     public void CheckNextTarget()
