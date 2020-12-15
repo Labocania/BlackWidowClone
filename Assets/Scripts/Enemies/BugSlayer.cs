@@ -7,12 +7,15 @@ public class BugSlayer : Insect
     WaitUntil waitUntilActive;
     Coroutine pickTargetRoutine;
     bool isChasing = false;
+    BugChaser bugChaser;
 
     protected override void Awake()
     {
         base.Awake();
         score = 1000;
         baseSpeed = 1;
+        bugChaser = GetComponent<BugChaser>();
+        bugChaser.moveComp = moveComponent;
 
         waitUntilActive = new WaitUntil(() => target.gameObject.activeSelf == true);
 
@@ -23,13 +26,13 @@ public class BugSlayer : Insect
     protected override void OnEnable()
     {
         base.OnEnable();
-        pickTargetRoutine = StartCoroutine(PickATarget());
+        bugChaser.CheckNextTarget();
     }
 
     protected override void OnDisable() => base.OnDisable();
     protected override void OnBecameInvisible()
     {
-        target = null;
+        bugChaser.StopChase();
         if (gameObject.activeSelf)
         {
             gameObject.SetActive(false);
@@ -56,8 +59,7 @@ public class BugSlayer : Insect
 
     protected override void onPlayerDeath()
     {
-        isChasing = false;
-        StopCoroutine(pickTargetRoutine);
+        bugChaser.StopChase();
         base.onPlayerDeath();
     }
 
@@ -70,10 +72,9 @@ public class BugSlayer : Insect
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
-        if (isChasing && !animating)
+        if (bugChaser.IsChasing)
         {
-            Chase();
+            bugChaser.StartChase();
         }
     }
 
@@ -104,15 +105,16 @@ public class BugSlayer : Insect
             moveComponent.RotateTowards(Vector2.zero);
         }
 
-        if (target != null && collision.gameObject == target.gameObject)
+        if (bugChaser.GrubTarget != null && collision.gameObject == bugChaser.GrubTarget.gameObject)
         {
-            CheckNextTarget();
+            bugChaser.StopChase();
+            bugChaser.CheckNextTarget();
+            movementRoutine = StartCoroutine(StartMovementRoutine());
         }
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            isChasing = false;
-            StopCoroutine(pickTargetRoutine);
+            bugChaser.StopChase();
         }
     }
 
@@ -136,9 +138,7 @@ public class BugSlayer : Insect
 
     void BugSlayer_OnNoTargets()
     {
-        isChasing = false;
-        target = null;
-        moveComponent.MoveSpeed = baseSpeed;
+        bugChaser.StopChase();
         baseSprite.color = ColorList.colors[(int)ColorNames.Yellow];
         wasShot = true;
         if (this != null)
@@ -151,26 +151,13 @@ public class BugSlayer : Insect
     {
         if (gameObject.activeSelf == true && animating == false)
         {
-            if (target != null && target.gameObject.activeSelf == false)
+            if (bugChaser.GrubTarget != null && bugChaser.GrubTarget.gameObject.activeSelf == false)
             {
-                CheckNextTarget();
+                bugChaser.StopChase();
+                bugChaser.CheckNextTarget();
+                movementRoutine = StartCoroutine(StartMovementRoutine());
             }
         }
-    }
-
-    void CheckNextTarget()
-    {
-        isChasing = false;
-
-        if (pickTargetRoutine != null)
-        {
-            StopCoroutine(pickTargetRoutine);
-        }
-
-        target = null;
-        pickTargetRoutine = StartCoroutine(PickATarget());
-        moveComponent.MoveSpeed = baseSpeed;
-        movementRoutine = StartCoroutine(StartMovementRoutine());
     }
 
     protected override void Die()

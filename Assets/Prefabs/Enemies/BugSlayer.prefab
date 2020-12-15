@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 9163076206212920222}
   - component: {fileID: -3223539311177526798}
   - component: {fileID: -5922424789987723870}
+  - component: {fileID: 939966346534902512}
   m_Layer: 8
   m_Name: BugSlayer
   m_TagString: BugSlayer
@@ -275,3 +276,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 1
+--- !u!114 &939966346534902512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3067285897765418296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff489db38faa2d45b338591d27a3cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveComp: {fileID: 0}
