@@ -27,10 +27,9 @@ public class Grub : MonoBehaviour
         pointEnum = points.GetEnumerator();
     }
 
-    void OnDestroy()
+    void Start()
     {
-        EventList.playerDeath -= Grub_OnPlayerDeath;
-        EventList.waveChanged -= Grub_OnWaveChanged;
+        HelperMethods.AddEdibleBug(transform);
     }
 
     void Grub_OnPlayerDeath()
@@ -82,4 +81,12 @@ public class Grub : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void OnDestroy()
+    {
+        HelperMethods.RemoveEdibleBug(transform);
+        EventList.playerDeath -= Grub_OnPlayerDeath;
+        EventList.waveChanged -= Grub_OnWaveChanged;
+    }
+
 }

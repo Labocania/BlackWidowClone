@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8555921680703979508}
   m_Layer: 8
   m_Name: Base
-  m_TagString: Enemy
+  m_TagString: BugSlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -288,4 +288,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff489db38faa2d45b338591d27a3cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveComp: {fileID: 0}

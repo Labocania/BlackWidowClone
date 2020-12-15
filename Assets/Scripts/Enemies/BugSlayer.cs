@@ -79,29 +79,42 @@ public class BugSlayer : Insect
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Projectile"))
+        GameObject obj = collision.gameObject;
+        if (obj.CompareTag("Projectile"))
         {
             Die();
             return;
         }
 
-        if (collision.gameObject.CompareTag("Edge"))
-        {
-            moveComponent.RotateTowards(Vector2.zero);
-        }
-
-        if (bugChaser.GrubTarget != null && collision.gameObject == bugChaser.GrubTarget.gameObject)
+        if (bugChaser.GrubTarget != null && obj == bugChaser.GrubTarget.gameObject)
         {
             bugChaser.StopChase();
             bugChaser.CheckNextTarget();
             movementRoutine = StartCoroutine(StartMovementRoutine());
+            return;
         }
 
-        if (collision.gameObject.CompareTag("Player"))
+        if (obj.CompareTag("Edge"))
+        {
+            moveComponent.RotateTowards(Vector2.zero);
+        }
+
+        if (obj.CompareTag("Player"))
         {
             bugChaser.StopChase();
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (bugChaser.GrubTarget != null && collision.gameObject == bugChaser.GrubTarget.gameObject)
+        {
+            Destroy(collision.gameObject);
+            bugChaser.StopChase();
+            bugChaser.CheckNextTarget();
+            movementRoutine = StartCoroutine(StartMovementRoutine());
         }
     }
 
