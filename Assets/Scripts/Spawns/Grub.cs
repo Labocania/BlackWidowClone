@@ -76,7 +76,6 @@ public class Grub : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            EventList.grubCollect.Invoke(Score);
             //TO DO: Object Pool for grubs
             Destroy(gameObject);
         }
@@ -84,6 +83,7 @@ public class Grub : MonoBehaviour
 
     void OnDestroy()
     {
+        EventList.grubCollect.Invoke(Score);
         HelperMethods.RemoveEdibleBug(transform);
         EventList.playerDeath -= Grub_OnPlayerDeath;
         EventList.waveChanged -= Grub_OnWaveChanged;

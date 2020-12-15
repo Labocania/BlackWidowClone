@@ -27,13 +27,13 @@ public abstract class ChasingType : MonoBehaviour
     }
     void ChaseTarget()
     {
-        if (PlayerTarget != null)
+        if (GrubTarget != null)
         {
-            moveComp.RotateTowards(PlayerTarget.position);
+            moveComp.RotateTowards(GrubTarget.position);
         }
         else
         {
-            moveComp.RotateTowards(GrubTarget.position);
+            moveComp.RotateTowards(PlayerTarget.position);
         }
     }
 

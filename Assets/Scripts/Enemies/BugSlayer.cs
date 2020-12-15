@@ -14,6 +14,7 @@ public class BugSlayer : Insect
 
         EventList.noTargets += BugSlayer_OnNoTargets;
         EventList.enemyDeath += BugSlayer_OnEnemyDeath;
+        EventList.grubCollect += BugSlayer_OnBugCollect;
     }
 
     protected override void OnEnable()
@@ -130,6 +131,19 @@ public class BugSlayer : Insect
     }
 
     void BugSlayer_OnEnemyDeath(int score)
+    {
+        if (gameObject.activeSelf == true && animating == false)
+        {
+            if (bugChaser.GrubTarget != null && bugChaser.GrubTarget.gameObject.activeSelf == false)
+            {
+                bugChaser.StopChase();
+                bugChaser.CheckNextTarget();
+                movementRoutine = StartCoroutine(StartMovementRoutine());
+            }
+        }
+    }
+
+    void BugSlayer_OnBugCollect(int score)
     {
         if (gameObject.activeSelf == true && animating == false)
         {
