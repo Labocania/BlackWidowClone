@@ -135,6 +135,8 @@ GameObject:
   - component: {fileID: 2024638695319308248}
   - component: {fileID: 8302365068034778694}
   - component: {fileID: -766067524840483529}
+  - component: {fileID: 1482130833844531144}
+  - component: {fileID: 6725437969016152533}
   m_Layer: 10
   m_Name: Beetle
   m_TagString: KillableEnemy
@@ -292,5 +294,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 736ef8e607b38de4ba8122ff34a35fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1482130833844531144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3491423322712598242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36fe1bdd489b58747b24a8a5666e3718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeed: 1
+  grub: {fileID: 1433082174496874227, guid: 56f9d5e3f57256242b9663445ffe72af, type: 3}
+--- !u!114 &6725437969016152533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3491423322712598242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eb563691dda1774a8fa26dd8dfd92b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public static class HelperMethods
 {
-    public static LinkedList<Transform> edibleBugs = new LinkedList<Transform>();
+    public static LinkedList<Transform> EdibleBugs { get; private set; } = new LinkedList<Transform>();
+    public static Transform playerTransform;
     static Dictionary<float, Vector3> rotationAngles = new Dictionary<float, Vector3>();
     static Dictionary<float, WaitForSeconds> waitTimes = new Dictionary<float, WaitForSeconds>();
-    static System.Random rand = new System.Random();
-
+    static System.Random rand = new System.Random();   
 
     public static List<GameObject> GetChildren(this GameObject go)
     {
@@ -21,25 +21,25 @@ public static class HelperMethods
 
     public static void AddEdibleBug(Transform transform)
     {
-        if (edibleBugs == null)
+        if (EdibleBugs == null)
         {
-            edibleBugs.AddFirst(transform);
+            EdibleBugs.AddFirst(transform);
         }
         else
         {
-            edibleBugs.AddLast(transform);          
+            EdibleBugs.AddLast(transform);          
         }
     }
 
     public static void RemoveEdibleBug(Transform transform)
     {
-        edibleBugs.Remove(transform);
+        EdibleBugs.Remove(transform);
     }
 
     public static Transform SelectBug()
     {
         Transform result = null;
-        LinkedListNode<Transform> currentNode = edibleBugs.First;
+        LinkedListNode<Transform> currentNode = EdibleBugs.First;
         for (int n = 2;  currentNode != null; n++)
         {
             if (rand.Next() % n == 0)

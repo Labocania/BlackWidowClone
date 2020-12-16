@@ -84,8 +84,6 @@ public class Mosquito : Insect
 
             StartCoroutine(BounceRoutine());
             bounceAmount--;
-            //StartCoroutine(WaitOneSecond());
-            //movementRoutine = StartCoroutine(StartMovementRoutine());
         }
     }
 

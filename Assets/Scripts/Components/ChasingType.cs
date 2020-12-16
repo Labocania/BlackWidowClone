@@ -9,6 +9,7 @@ public abstract class ChasingType : MonoBehaviour
     public MovementComponent moveComp;
     public bool IsChasing { get; protected set; }
     protected Coroutine chaseRoutine;
+    public Coroutine PickATargetRoutine { get; protected set; }
     protected WaitUntil waitUntilActive;
 
     protected virtual void Awake()
@@ -25,6 +26,16 @@ public abstract class ChasingType : MonoBehaviour
             yield return null;
         }
     }
+
+    protected virtual IEnumerator PickTarget()
+    {
+        while (GrubTarget == null)
+        {
+            GrubTarget = HelperMethods.SelectBug();
+            yield return HelperMethods.GetWaitTime(0.5f);
+        }
+    }
+
     void ChaseTarget()
     {
         if (GrubTarget != null)
@@ -43,13 +54,30 @@ public abstract class ChasingType : MonoBehaviour
         IsChasing = false;
     }
 
-    public virtual void StopChase()
+    public virtual void StopAllChases()
     {
+        StopBugChase();
+
         if (chaseRoutine != null)
         {
             StopCoroutine(chaseRoutine);
         }
-        GrubTarget = null;
+
         PlayerTarget = null;
+    }
+
+    public virtual void StopBugChase()
+    {
+        GrubTarget = null;
+        if (PickATargetRoutine != null)
+        {
+            StopCoroutine(PickATargetRoutine);
+        }
+    }
+
+
+    public void CheckNextTarget()
+    {
+        PickATargetRoutine = StartCoroutine(PickTarget());
     }
 }

@@ -1,9 +1,7 @@
 ﻿using System.Collections;
-using UnityEngine;
 
 public class BugChaser : ChasingType
 {
-    public Coroutine PickATargetRoutine { get; private set; }
     bool speedUp = false;
 
     protected override void Awake()
@@ -12,14 +10,9 @@ public class BugChaser : ChasingType
         PickATargetRoutine = StartCoroutine(PickTarget());
     }
 
-    IEnumerator PickTarget()
+    protected override IEnumerator PickTarget()
     {
-        while (GrubTarget == null)
-        {
-            GrubTarget = HelperMethods.SelectBug();
-            yield return HelperMethods.GetWaitTime(0.5f);
-        }
-
+        yield return base.PickTarget();
         IsChasing = true;
     }
 
@@ -47,22 +40,13 @@ public class BugChaser : ChasingType
         bug.FlashColors();
     }
 
-    public override void StopChase()
+    public override void StopAllChases()
     {
-        if (PickATargetRoutine != null)
-        {
-            StopCoroutine(PickATargetRoutine);
-        }
-        base.StopChase();
+        base.StopAllChases();
         if (speedUp)
         {
             moveComp.MoveSpeed -= 3;
             speedUp = false;
         }
-    }
-
-    public void CheckNextTarget()
-    {
-        PickATargetRoutine = StartCoroutine(PickTarget());
     }
 }

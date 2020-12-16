@@ -24,9 +24,9 @@ public class BugSlayer : Insect
     }
 
     protected override void OnDisable() => base.OnDisable();
-    protected override void OnBecameInvisible()
+    protected override void OnBecameInvisible() // fix this
     {
-        bugChaser.StopChase();
+        bugChaser.StopAllChases();
         if (gameObject.activeSelf)
         {
             gameObject.SetActive(false);
@@ -53,7 +53,7 @@ public class BugSlayer : Insect
 
     protected override void onPlayerDeath()
     {
-        bugChaser.StopChase();
+        bugChaser.StopAllChases();
         base.onPlayerDeath();
     }
 
@@ -91,7 +91,7 @@ public class BugSlayer : Insect
 
         if (bugChaser.GrubTarget != null && obj == bugChaser.GrubTarget.gameObject)
         {
-            bugChaser.StopChase();
+            bugChaser.StopAllChases();
             bugChaser.CheckNextTarget();
             movementRoutine = StartCoroutine(StartMovementRoutine());
             return;
@@ -104,7 +104,7 @@ public class BugSlayer : Insect
 
         if (obj.CompareTag("Player"))
         {
-            bugChaser.StopChase();
+            bugChaser.StopAllChases();
         }
     }
 
@@ -113,7 +113,7 @@ public class BugSlayer : Insect
         if (bugChaser.GrubTarget != null && collision.gameObject == bugChaser.GrubTarget.gameObject)
         {
             Destroy(collision.gameObject);
-            bugChaser.StopChase();
+            bugChaser.StopAllChases();
             bugChaser.CheckNextTarget();
             movementRoutine = StartCoroutine(StartMovementRoutine());
         }
@@ -121,7 +121,7 @@ public class BugSlayer : Insect
 
     void BugSlayer_OnNoTargets()
     {
-        bugChaser.StopChase();
+        bugChaser.StopAllChases();
         baseSprite.color = ColorList.colors[(int)ColorNames.Yellow];
         wasShot = true;
         if (this != null)
@@ -136,7 +136,7 @@ public class BugSlayer : Insect
         {
             if (bugChaser.GrubTarget != null && bugChaser.GrubTarget.gameObject.activeSelf == false)
             {
-                bugChaser.StopChase();
+                bugChaser.StopAllChases();
                 bugChaser.CheckNextTarget();
                 movementRoutine = StartCoroutine(StartMovementRoutine());
             }
@@ -149,7 +149,7 @@ public class BugSlayer : Insect
         {
             if (bugChaser.GrubTarget != null && bugChaser.GrubTarget.gameObject.activeSelf == false)
             {
-                bugChaser.StopChase();
+                bugChaser.StopAllChases();
                 bugChaser.CheckNextTarget();
                 movementRoutine = StartCoroutine(StartMovementRoutine());
             }

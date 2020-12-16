@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
         if (obj.CompareTag("Enemy") || obj.CompareTag("KillableEnemy") || obj.CompareTag("BugSlayer"))
         {
 			Hit();
-            if (HelperMethods.edibleBugs.Contains(collision.transform))
+            if (HelperMethods.EdibleBugs.Contains(collision.transform))
             {
                 HelperMethods.RemoveEdibleBug(collision.transform);
             }

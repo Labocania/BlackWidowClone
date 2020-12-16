@@ -40,6 +40,7 @@ public class Player : MonoBehaviour, MainActions.IPlayerActions
 		mainActions.Player.SetCallbacks(this);
 		EventList.enemyDeath += Player_OnEnemyDeath;
 		EventList.grubCollect += Player_OnGrubCollect;
+		HelperMethods.playerTransform = transform;
 	}
 
     void Start()
