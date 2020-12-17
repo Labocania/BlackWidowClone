@@ -28,6 +28,7 @@ public class Beetle : Insect
     {
         base.OnBecameInvisible();
         playerChaser.StopAllChases();
+        HelperMethods.RemoveEdibleBug(transform);
     }
 
     protected override void FixedUpdate()
@@ -51,6 +52,13 @@ public class Beetle : Insect
         {
             spawn.Spawn();
             Die();
+            return;
+        }
+
+        if (obj.CompareTag("BugSlayer") && flashing == true)
+        {
+            base.Die();
+            flashing = false;
             return;
         }
 
