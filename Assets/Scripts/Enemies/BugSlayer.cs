@@ -51,10 +51,10 @@ public class BugSlayer : Insect
         }
     }
 
-    protected override void onPlayerDeath()
+    protected override void OnPlayerDeath()
     {
         bugChaser.StopAllChases();
-        base.onPlayerDeath();
+        base.OnPlayerDeath();
     }
 
     void BugSlayerStartExit()

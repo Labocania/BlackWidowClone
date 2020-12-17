@@ -12,10 +12,6 @@ public class Mosquito : Insect
         bounceAmount = randomNumber.Next(8);
     }
 
-    protected override void OnEnable() => base.OnEnable();
-
-    protected override void OnDisable() => base.OnDisable();
-
     protected override void OnBecameInvisible()
     {
         base.OnBecameInvisible();

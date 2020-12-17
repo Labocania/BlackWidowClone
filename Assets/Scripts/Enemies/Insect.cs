@@ -40,7 +40,7 @@ public class Insect : MonoBehaviour
     protected virtual void OnEnable()
     {
         movementRoutine = StartCoroutine(StartMovementRoutine());
-        EventList.playerDeath += onPlayerDeath;
+        EventList.playerDeath += OnPlayerDeath;
     }
 
     protected virtual void OnDisable()
@@ -49,7 +49,7 @@ public class Insect : MonoBehaviour
         {
             StopCoroutine(movementRoutine);
         }
-        EventList.playerDeath -= onPlayerDeath;
+        EventList.playerDeath -= OnPlayerDeath;
     }
 
     protected virtual void OnBecameInvisible()
@@ -80,7 +80,7 @@ public class Insect : MonoBehaviour
         yield return null;
     }
 
-    protected virtual void onPlayerDeath()
+    protected virtual void OnPlayerDeath()
     {
         RunAway();
     }
@@ -101,9 +101,7 @@ public class Insect : MonoBehaviour
             animating = true;
             StopCoroutine(movementRoutine);
             Vector3 direction = transform.position - Vector3.zero;
-            Quaternion rotation = Quaternion.LookRotation(-direction);
-            Vector3 eulerAngles = rotation.eulerAngles;
-            moveComponent.TransformRotate(eulerAngles, 0.2f);
+            moveComponent.RotateTowards(-direction);
             moveComponent.MoveSpeed += 3;
         }
     }

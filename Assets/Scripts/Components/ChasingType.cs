@@ -64,6 +64,7 @@ public abstract class ChasingType : MonoBehaviour
         }
 
         PlayerTarget = null;
+        IsChasing = false;
     }
 
     public virtual void StopBugChase()

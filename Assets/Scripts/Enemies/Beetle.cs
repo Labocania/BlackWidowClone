@@ -72,13 +72,19 @@ public class Beetle : Insect
         }
     }
 
+    protected override void OnPlayerDeath()
+    {
+        playerChaser.StopAllChases();
+        base.OnPlayerDeath();
+    }
+
     void Beetle_OnBugCollect(int score)
     {
-        if (gameObject.activeSelf == true && animating == false)
+        if (this != null && animating == false)
         {
             if (playerChaser.GrubTarget != null && playerChaser.GrubTarget.gameObject.activeSelf == false)
             {
-                playerChaser.StopAllChases();
+                playerChaser.StopBugChase();
                 playerChaser.CheckNextTarget();
                 movementRoutine = StartCoroutine(StartMovementRoutine());
             }

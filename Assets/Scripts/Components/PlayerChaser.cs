@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class PlayerChaser : ChasingType
 {
@@ -8,7 +6,7 @@ public class PlayerChaser : ChasingType
     {
         base.Awake();
         PlayerTarget = HelperMethods.playerTransform;
-        PickATargetRoutine = StartCoroutine(PickTarget());
+        IsChasing = true;
     }
 
     protected override IEnumerator PickTarget()
@@ -22,5 +20,7 @@ public class PlayerChaser : ChasingType
             }
             yield return HelperMethods.GetWaitTime(0.5f);
         }
+
+        IsChasing = true;
     }
 }

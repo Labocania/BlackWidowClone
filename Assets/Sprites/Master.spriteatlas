@@ -28,6 +28,7 @@ SpriteAtlas:
       allowAlphaSplitting: 0
       enableRotation: 1
       enableTightPacking: 1
+    secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: b72ef1f51e563ce4680f4b4ec863a917, type: 3}
@@ -337,5 +338,6 @@ SpriteAtlas:
   - Web0-0
   - Web5-1
   - Web6-11
+  m_RenderDataMap: {}
   m_Tag: Master
   m_IsVariant: 0
