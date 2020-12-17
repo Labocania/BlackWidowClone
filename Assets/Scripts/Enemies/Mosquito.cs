@@ -4,12 +4,12 @@ using UnityEngine;
 public class Mosquito : Insect
 {
     public GameObject grub;
-    int bounceAmount;
+    BounceComponent bounce;
 
     protected override void Awake()
     {
         base.Awake();
-        bounceAmount = randomNumber.Next(8);
+        bounce = GetComponent<BounceComponent>();
     }
 
     protected override void OnBecameInvisible()
@@ -25,22 +25,6 @@ public class Mosquito : Insect
             yield return HelperMethods.GetRandomWaitTime(1f, 2f, 5f, 8f);
             yield return moveComponent.TransformRotate(HelperMethods.GetRandomAngle(45f, -45f, 180f, -180f), 3f);
         }
-    }
-
-    IEnumerator BounceRoutine()
-    {
-        //Snap rotate 180 degrees.
-        gameObject.transform.Rotate(HelperMethods.GetRotationAngle(180f));
-        //Pick left or right U turn
-        yield return moveComponent.TransformRotate(HelperMethods.GetRandomAngle(180f, -180f), 0.5f);
-    }
-
-    IEnumerator ResetRoutine()
-    {
-        //Snap rotate 180 degrees.
-        gameObject.transform.Rotate(HelperMethods.GetRotationAngle(180f));
-        yield return HelperMethods.GetWaitTime(1f);
-
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -69,17 +53,17 @@ public class Mosquito : Insect
                 StopCoroutine(movementRoutine);
             }
 
-            if (bounceAmount == 0)
+            if (bounce.BounceAmount == 0)
             {
-                StartCoroutine(ResetRoutine());
+                StartCoroutine(bounce.ResetRoutine());
                 //Reset amount with another random number
-                bounceAmount = randomNumber.Next(8);
+                bounce.ResetBounces(8);
                 movementRoutine = StartCoroutine(StartMovementRoutine());
                 return;
             }
 
-            StartCoroutine(BounceRoutine());
-            bounceAmount--;
+            StartCoroutine(bounce.BounceRoutine());
+            bounce.DecreaseBounce();
         }
     }
 

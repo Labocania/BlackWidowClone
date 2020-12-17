@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 9080054995492317134}
   - component: {fileID: 1228702135506289610}
   - component: {fileID: 2151610134813196080}
-  - component: {fileID: -5095389262906211994}
   - component: {fileID: 5572787111326804870}
+  - component: {fileID: 4263157407254261790}
+  - component: {fileID: -5095389262906211994}
   m_Layer: 10
   m_Name: Mosquito
   m_TagString: KillableEnemy
@@ -128,6 +129,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5572787111326804870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247838676555587249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736ef8e607b38de4ba8122ff34a35fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4263157407254261790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247838676555587249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c160b72b43c2241a4e9d5f9624bf29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-5095389262906211994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,18 +167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 1
   grub: {fileID: 1433082174496874227, guid: 56f9d5e3f57256242b9663445ffe72af, type: 3}
---- !u!114 &5572787111326804870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3247838676555587249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 736ef8e607b38de4ba8122ff34a35fbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8744004268183536575
 GameObject:
   m_ObjectHideFlags: 0

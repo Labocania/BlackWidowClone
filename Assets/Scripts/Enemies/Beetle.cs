@@ -5,11 +5,14 @@ public class Beetle : Insect
 {
     public GameObject grub;
     PlayerChaser playerChaser;
+    BounceComponent bounce;
 
     protected override void Awake()
     {
         base.Awake();
         playerChaser = GetComponent<PlayerChaser>();
+        bounce = GetComponent<BounceComponent>();
+        bounce.ResetBounces(3);
         playerChaser.moveComp = moveComponent;
 
         EventList.grubCollect += Beetle_OnBugCollect;
@@ -54,6 +57,30 @@ public class Beetle : Insect
         if (obj.CompareTag("Player"))
         {
             playerChaser.StopAllChases();
+            return;
+        }
+
+        // Edge of the sceen or Green Web
+        if (collision.enabled && gameObject.activeSelf == true)
+        {
+            if (movementRoutine != null)
+            {
+                StopCoroutine(movementRoutine);
+                playerChaser.StopAllChases();
+            }
+
+            if (bounce.BounceAmount == 0)
+            {
+                StartCoroutine(bounce.ResetRoutine());
+                //Reset amount with another random number
+                bounce.ResetBounces(3);
+                playerChaser.SetPlayerTarget();
+                playerChaser.CheckNextTarget();
+                return;
+            }
+
+            StartCoroutine(bounce.BounceRoutine());
+            bounce.DecreaseBounce();
         }
     }
 

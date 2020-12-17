@@ -81,4 +81,10 @@ public abstract class ChasingType : MonoBehaviour
     {
         PickATargetRoutine = StartCoroutine(PickTarget());
     }
+
+    public void SetPlayerTarget()
+    {
+        PlayerTarget = HelperMethods.playerTransform;
+        IsChasing = true;
+    }
 }

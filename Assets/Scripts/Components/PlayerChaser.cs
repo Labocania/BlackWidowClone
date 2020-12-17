@@ -5,8 +5,7 @@ public class PlayerChaser : ChasingType
     protected override void Awake()
     {
         base.Awake();
-        PlayerTarget = HelperMethods.playerTransform;
-        IsChasing = true;
+        SetPlayerTarget();
     }
 
     protected override IEnumerator PickTarget()

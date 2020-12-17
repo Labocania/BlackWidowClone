@@ -7,7 +7,7 @@ public static class HelperMethods
     public static Transform playerTransform;
     static Dictionary<float, Vector3> rotationAngles = new Dictionary<float, Vector3>();
     static Dictionary<float, WaitForSeconds> waitTimes = new Dictionary<float, WaitForSeconds>();
-    static System.Random rand = new System.Random();   
+    public static System.Random rand = new System.Random();   
 
     public static List<GameObject> GetChildren(this GameObject go)
     {
