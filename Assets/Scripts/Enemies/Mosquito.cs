@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class Mosquito : Insect
 {
-    public GameObject grub;
     BounceComponent bounce;
+    SpawnComponent spawn;
 
     protected override void Awake()
     {
         base.Awake();
         bounce = GetComponent<BounceComponent>();
+        spawn = GetComponent<SpawnComponent>();
+
     }
 
     protected override void OnBecameInvisible()
@@ -33,7 +35,7 @@ public class Mosquito : Insect
 
         if (obj.CompareTag("Projectile"))
         {
-            Spawn();
+            spawn.Spawn();
             base.Die();
             return;
         }
@@ -65,10 +67,5 @@ public class Mosquito : Insect
             StartCoroutine(bounce.BounceRoutine());
             bounce.DecreaseBounce();
         }
-    }
-
-    protected override void Spawn()
-    {
-        Instantiate(grub, transform.position, Quaternion.identity);
     }
 }

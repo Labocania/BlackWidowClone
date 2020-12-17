@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Beetle : Insect
 {
-    public GameObject grub;
+    SpawnComponent spawn;
     PlayerChaser playerChaser;
     BounceComponent bounce;
 
@@ -13,7 +13,7 @@ public class Beetle : Insect
         playerChaser = GetComponent<PlayerChaser>();
         bounce = GetComponent<BounceComponent>();
         bounce.ResetBounces(3);
-        playerChaser.moveComp = moveComponent;
+        spawn = GetComponent<SpawnComponent>();
 
         EventList.grubCollect += Beetle_OnBugCollect;
     }
@@ -49,7 +49,7 @@ public class Beetle : Insect
         GameObject obj = collision.gameObject;
         if (obj.CompareTag("Projectile"))
         {
-            Spawn();
+            spawn.Spawn();
             Die();
             return;
         }
@@ -116,10 +116,5 @@ public class Beetle : Insect
                 movementRoutine = StartCoroutine(StartMovementRoutine());
             }
         }
-    }
-
-    protected override void Spawn()
-    {
-        Instantiate(grub, transform.position, Quaternion.identity);
     }
 }

@@ -10,7 +10,6 @@ public class BugSlayer : Insect
         base.Awake();
         score = 1000;
         bugChaser = GetComponent<BugChaser>();
-        bugChaser.moveComp = moveComponent;
 
         EventList.noTargets += BugSlayer_OnNoTargets;
         EventList.enemyDeath += BugSlayer_OnEnemyDeath;

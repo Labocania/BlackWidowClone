@@ -6,7 +6,7 @@ public abstract class ChasingType : MonoBehaviour
     public Transform GrubTarget { get; protected set; }
     public Transform PlayerTarget { get; set; }
     [System.NonSerialized]
-    public MovementComponent moveComp;
+    protected MovementComponent moveComponent;
     public bool IsChasing { get; protected set; }
     protected Coroutine chaseRoutine;
     public Coroutine PickATargetRoutine { get; protected set; }
@@ -14,6 +14,7 @@ public abstract class ChasingType : MonoBehaviour
 
     protected virtual void Awake()
     {
+        moveComponent = GetComponent<MovementComponent>();
         waitUntilActive = new WaitUntil(() => GrubTarget.gameObject.activeSelf == true);
         IsChasing = false;
     }
@@ -40,11 +41,11 @@ public abstract class ChasingType : MonoBehaviour
     {
         if (GrubTarget != null)
         {
-            moveComp.RotateTowards(GrubTarget.position);
+            moveComponent.RotateTowards(GrubTarget.position);
         }
         else
         {
-            moveComp.RotateTowards(PlayerTarget.position);
+            moveComponent.RotateTowards(PlayerTarget.position);
         }
     }
 

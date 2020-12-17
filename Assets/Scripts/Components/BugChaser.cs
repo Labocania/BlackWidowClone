@@ -18,7 +18,7 @@ public class BugChaser : ChasingType
 
     void SpeedUp()
     {
-        moveComp.MoveSpeed += 3;
+        moveComponent.MoveSpeed += 3;
         speedUp = true;
     }
 
@@ -45,7 +45,7 @@ public class BugChaser : ChasingType
         base.StopAllChases();
         if (speedUp)
         {
-            moveComp.MoveSpeed -= 3;
+            moveComponent.MoveSpeed -= 3;
             speedUp = false;
         }
     }

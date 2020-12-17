@@ -132,6 +132,4 @@ public class Insect : MonoBehaviour
 
     protected virtual void Shoot() { }
 
-    protected virtual void Spawn() { }
-
 }
