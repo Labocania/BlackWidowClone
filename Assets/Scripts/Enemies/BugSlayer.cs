@@ -22,8 +22,7 @@ public class BugSlayer : Insect
         bugChaser.CheckNextTarget();
     }
 
-    protected override void OnDisable() => base.OnDisable();
-    protected override void OnBecameInvisible() // fix this
+    protected override void OnBecameInvisible() 
     {
         bugChaser.StopAllChases();
         if (gameObject.activeSelf)
@@ -56,12 +55,6 @@ public class BugSlayer : Insect
         base.OnPlayerDeath();
     }
 
-    void BugSlayerStartExit()
-    {
-        RunAway(true);
-    }
-
-
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
@@ -79,15 +72,10 @@ public class BugSlayer : Insect
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
+        base.OnCollisionEnter2D(collision);
         GameObject obj = collision.gameObject;
-        if (obj.CompareTag("Projectile"))
-        {
-            Die();
-            return;
-        }
-
         if (bugChaser.GrubTarget != null && obj == bugChaser.GrubTarget.gameObject)
         {
             bugChaser.StopAllChases();
@@ -121,11 +109,10 @@ public class BugSlayer : Insect
     void BugSlayer_OnNoTargets()
     {
         bugChaser.StopAllChases();
-        baseSprite.color = ColorList.colors[(int)ColorNames.Yellow];
         wasShot = true;
         if (this != null)
         {
-            BugSlayerStartExit();
+            RunAway(true);
         }
     }
 

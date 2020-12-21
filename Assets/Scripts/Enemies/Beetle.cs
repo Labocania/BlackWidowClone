@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Beetle : Insect
 {
-    SpawnComponent spawn;
     PlayerChaser playerChaser;
     BounceComponent bounce;
 
@@ -40,28 +38,10 @@ public class Beetle : Insect
         }
     }
 
-    protected override IEnumerator StartMovementRoutine()
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        return base.StartMovementRoutine(); // Implement later.
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
+        base.OnCollisionEnter2D(collision);
         GameObject obj = collision.gameObject;
-        if (obj.CompareTag("Projectile"))
-        {
-            spawn.Spawn();
-            Die();
-            return;
-        }
-
-        if (obj.CompareTag("BugSlayer") && flashing == true)
-        {
-            base.Die();
-            flashing = false;
-            return;
-        }
-
         if (obj.CompareTag("Player"))
         {
             playerChaser.StopAllChases();
@@ -80,7 +60,6 @@ public class Beetle : Insect
             if (bounce.BounceAmount == 0)
             {
                 StartCoroutine(bounce.ResetRoutine());
-                //Reset amount with another random number
                 bounce.ResetBounces(3);
                 playerChaser.SetPlayerTarget();
                 playerChaser.CheckNextTarget();
@@ -101,7 +80,6 @@ public class Beetle : Insect
                 Destroy(collision.gameObject);
                 playerChaser.StopBugChase();
                 playerChaser.CheckNextTarget();
-                //movementRoutine = StartCoroutine(StartMovementRoutine());
                 return;
             }
         }
@@ -121,7 +99,6 @@ public class Beetle : Insect
             {
                 playerChaser.StopBugChase();
                 playerChaser.CheckNextTarget();
-                movementRoutine = StartCoroutine(StartMovementRoutine());
             }
         }
     }

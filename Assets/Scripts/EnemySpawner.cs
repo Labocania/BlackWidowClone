@@ -155,7 +155,6 @@ public class EnemySpawner : MonoBehaviour
 
         if (killableEnemies == 0)
         {
-            // TO DO: Running away logic from non killable enemies.
             EventList.noTargets?.Invoke();
             isSpawing = false;
             keyList.Clear();

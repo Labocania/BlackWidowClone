@@ -5,6 +5,7 @@ public class Insect : MonoBehaviour
 {
     protected System.Random randomNumber = new System.Random();
     protected MovementComponent moveComponent;
+    protected SpawnComponent spawn;
     protected PolygonCollider2D polyCollider;
     protected SpriteRenderer baseSprite;
     protected Coroutine movementRoutine;
@@ -12,13 +13,14 @@ public class Insect : MonoBehaviour
     public float baseSpeed;
     protected int score;
     protected bool animating = false;
-    protected bool wasShot;
-    protected bool flashing;
+    protected bool wasShot = false;
+    protected bool flashing = false;
 
     protected virtual void Awake()
     {
         EventList.waveChanged += Insect_OnWaveChange;
         moveComponent = GetComponent<MovementComponent>();
+        spawn = GetComponent<SpawnComponent>();
         baseSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
         currentColor = baseSprite.color;
         polyCollider = GetComponent<PolygonCollider2D>();
@@ -68,6 +70,23 @@ public class Insect : MonoBehaviour
         wasShot = false;
     }
 
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("BugSlayer") && flashing == true)
+        {
+            Die();
+            flashing = false;
+            return;
+        }
+
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            Die();
+            spawn?.Spawn();
+            return;
+        }
+    }
+
     protected virtual void Die()
     {
         wasShot = true;
@@ -85,12 +104,13 @@ public class Insect : MonoBehaviour
         RunAway();
     }
 
-    protected void RunAway(bool bugSlayer = false)
+    protected void RunAway(bool special = false)
     {
         if (gameObject.activeSelf == true)
         {
-            if (bugSlayer)
+            if (special)
             {
+                baseSprite.color = ColorList.colors[(int)ColorNames.Yellow];
                 gameObject.layer = 16; // Special Escape.
             }
             else
@@ -131,5 +151,4 @@ public class Insect : MonoBehaviour
     }
 
     protected virtual void Shoot() { }
-
 }
