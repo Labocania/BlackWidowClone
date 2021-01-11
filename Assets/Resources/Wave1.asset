@@ -72,11 +72,9 @@ MonoBehaviour:
     _keyValues:
     - {fileID: 3491423322712598242, guid: 6cc5949c00bf77c40b44ee03b5f78b78, type: 3}
     - {fileID: 3247838676555587249, guid: 969cd9064899906418b57d1b1032e7a0, type: 3}
-    - {fileID: 3067285897765418296, guid: 141a8ced8affe1642889f5f168d92011, type: 3}
     _keys:
     - {fileID: 3491423322712598242, guid: 6cc5949c00bf77c40b44ee03b5f78b78, type: 3}
     - {fileID: 3247838676555587249, guid: 969cd9064899906418b57d1b1032e7a0, type: 3}
-    - {fileID: 3067285897765418296, guid: 141a8ced8affe1642889f5f168d92011, type: 3}
-    _values: 050000000c00000001000000
+    _values: 050000000c000000
   waveNumber: 1
   spawingSpeed: 2

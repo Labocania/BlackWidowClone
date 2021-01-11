@@ -53,8 +53,7 @@ public class MovementComponent : MonoBehaviour
 
     public void RigidBodyMove(Vector2 direction)
     {
-        //rBody.velocity = new Vector2(direction.x, direction.y) * moveSpeed;
-        rBody.AddForce(new Vector2(direction.x, direction.y) * MoveSpeed);
+        rBody.MovePosition(rBody.position + (direction * MoveSpeed) * Time.fixedDeltaTime);
 
         if (movementAnim != null)
         {
@@ -66,6 +65,13 @@ public class MovementComponent : MonoBehaviour
     {
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    public void RigidBodyRotate(Vector2 direction)
+    {
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        rBody.MoveRotation(rotation);
     }
 
     public IEnumerator TransformRotate(Vector3 direction, float timeToRotate)
