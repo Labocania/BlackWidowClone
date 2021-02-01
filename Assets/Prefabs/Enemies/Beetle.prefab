@@ -300,8 +300,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccaa6a1c9a2f6ad449798cfc3140b12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectToSpawn: {fileID: 1433082174496874227, guid: 56f9d5e3f57256242b9663445ffe72af,
+  DeathSpawn: {fileID: 1433082174496874227, guid: 56f9d5e3f57256242b9663445ffe72af,
     type: 3}
+  CaptureSpawn: {fileID: 0}
 --- !u!114 &1482130833844531144
 MonoBehaviour:
   m_ObjectHideFlags: 0

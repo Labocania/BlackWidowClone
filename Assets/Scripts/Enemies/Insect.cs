@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Insect : MonoBehaviour
 {
-    protected System.Random randomNumber = new System.Random();
     protected MovementComponent moveComponent;
     protected SpawnComponent spawn;
     protected PolygonCollider2D polyCollider;
@@ -82,7 +81,7 @@ public class Insect : MonoBehaviour
         if (collision.gameObject.CompareTag("Projectile"))
         {
             Die();
-            spawn?.Spawn();
+            spawn?.SpawnOnDeath();
             return;
         }
     }

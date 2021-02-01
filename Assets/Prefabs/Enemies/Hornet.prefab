@@ -11,6 +11,12 @@ GameObject:
   - component: {fileID: 9098345495091288662}
   - component: {fileID: 973550074262867886}
   - component: {fileID: -6290960544985525405}
+  - component: {fileID: -7988195888729904265}
+  - component: {fileID: -4510783296336670633}
+  - component: {fileID: -9039780986596168245}
+  - component: {fileID: -4247804074618997649}
+  - component: {fileID: 1594073059687871889}
+  - component: {fileID: -5029809533038894469}
   m_Layer: 10
   m_Name: Hornet
   m_TagString: KillableEnemy
@@ -104,6 +110,92 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &-7988195888729904265
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720619561426675301}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &-4510783296336670633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720619561426675301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736ef8e607b38de4ba8122ff34a35fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-9039780986596168245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720619561426675301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c160b72b43c2241a4e9d5f9624bf29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4247804074618997649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720619561426675301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eb563691dda1774a8fa26dd8dfd92b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1594073059687871889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720619561426675301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaa6a1c9a2f6ad449798cfc3140b12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeathSpawn: {fileID: 1433082174496874227, guid: 56f9d5e3f57256242b9663445ffe72af,
+    type: 3}
+  CaptureSpawn: {fileID: 6558261434144796716, guid: f36efc1cc4fd65e4cbc26de5dc60dd30,
+    type: 3}
+--- !u!114 &-5029809533038894469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720619561426675301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a732704b71bb5a14a9be817c9595edf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeed: 1
 --- !u!1 &8652448753066889656
 GameObject:
   m_ObjectHideFlags: 0

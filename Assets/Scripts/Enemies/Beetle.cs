@@ -2,8 +2,8 @@
 
 public class Beetle : Insect
 {
-    PlayerChaser playerChaser;
-    BounceComponent bounce;
+    protected PlayerChaser playerChaser;
+    protected BounceComponent bounce;
 
     protected override void Awake()
     {
